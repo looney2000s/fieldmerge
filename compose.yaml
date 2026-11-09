@@ -1,0 +1,63 @@
+name: fieldmerge
+x-postgres: &postgres
+  image: ${POSTGRES_IMAGE:-postgres:18-alpine}
+  environment:
+    POSTGRES_USER: ${POSTGRES_USER:?Run database.ps1 Setup first}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run database.ps1 Setup first}
+    POSTGRES_DB: fieldmerge
+  volumes:
+    - ./database:/database:ro
+    - ./tests/database:/tests:ro
+    - ./tmp/database-fixtures:/fixtures:ro
+  healthcheck:
+    test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d fieldmerge']
+    interval: 3s
+    timeout: 5s
+    retries: 40
+  restart: unless-stopped
+x-mongo: &mongo
+  image: ${MONGO_IMAGE:-mongo:8.0}
+  environment:
+    MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:?Run database.ps1 Setup first}
+    MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:?Run database.ps1 Setup first}
+    FM_DB: fieldmerge
+  volumes:
+    - ./database:/database:ro
+    - ./tests/database:/tests:ro
+    - ./tmp/database-fixtures:/fixtures:ro
+  healthcheck:
+    test: [CMD-SHELL, 'mongosh --quiet --eval "quit(db.adminCommand({ping:1}).ok ? 0 : 1)"']
+    interval: 3s
+    timeout: 5s
+    retries: 40
+  restart: unless-stopped
+services:
+  postgres:
+    <<: *postgres
+    ports: ['127.0.0.1:${POSTGRES_PORT:-15432}:5432']
+    volumes:
+      - pg_data:/var/lib/postgresql
+      - ./database:/database:ro
+      - ./tests/database:/tests:ro
+      - ./tmp/database-fixtures:/fixtures:ro
+  mongo:
+    <<: *mongo
+    ports: ['127.0.0.1:${MONGO_PORT:-27018}:27017']
+    volumes:
+      - mongo_data:/data/db
+      - ./database:/database:ro
+      - ./tests/database:/tests:ro
+      - ./tmp/database-fixtures:/fixtures:ro
+  postgres-test:
+    <<: *postgres
+    profiles: [test]
+    restart: 'no'
+    tmpfs: [/var/lib/postgresql]
+  mongo-test:
+    <<: *mongo
+    profiles: [test]
+    restart: 'no'
+    tmpfs: [/data/db, /data/configdb]
+volumes:
+  pg_data:
+  mongo_data:

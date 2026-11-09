@@ -1,0 +1,47 @@
+{
+  "migration_checksum": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
+  "reconciliation_output": [
+    "Output format is unaligned.",
+    "Reconciliation checks passed: 32",
+    "ROLLBACK"
+  ],
+  "reviewer_concurrency_output": [
+    "Concurrent reviewer scenarios passed: 4 (competing reviewers, identical retry, cross-tree key reuse, review versus automatic publication)."
+  ],
+  "milestone": "automatic reconciliation and reviewer decisions",
+  "concurrency_output": [
+    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
+  ],
+  "reviewer_output": [
+    "Output format is unaligned.",
+    "Reviewer decision checks passed: 34",
+    "ROLLBACK"
+  ],
+  "postgres_output": [
+    "Output format is unaligned.",
+    "PostgreSQL structural checks passed: 39",
+    "ROLLBACK"
+  ],
+  "test_database": "fieldmerge_test_8f28aee709454cb7bf613bf77cbc356c",
+  "form_registry_hashes_match": true,
+  "verified_at_utc": "2026-11-09T19:06:13.6052542Z",
+  "migration_checksums": [
+    {
+      "file": "001_structure.sql",
+      "sha256": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39"
+    },
+    {
+      "file": "002_reconciliation.sql",
+      "sha256": "AE2F62A3B4FE5C8B37EE00C1CAA198BEEFD9322D15A31664E96C159FCE9C8C11"
+    },
+    {
+      "file": "003_review_decisions.sql",
+      "sha256": "57AEDE93840BF5F3F6E33B82B4924CBFDBDCA9441B6A380B2DE9C3A78D74DB0D"
+    }
+  ],
+  "remaining": "Authenticated API/row access policies, MongoDB verification handoff, cross-store recovery and global privileged-write consistency enforcement remain.",
+  "mongo_output": [
+    "MongoDB structural checks passed: 31",
+    "Ownership and finalization transition guarantees still require the backend; validators alone do not authenticate end users."
+  ]
+}

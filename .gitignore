@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+node_modules/
+tmp/
+*.log
+
+# Local course material includes other students' personal information.
+instructions/
+
+# Local tools and editor files.
+.venv/
+__pycache__/
+.DS_Store
+Thumbs.db
