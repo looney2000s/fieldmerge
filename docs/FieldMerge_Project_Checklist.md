@@ -37,7 +37,7 @@ Status baseline: 10 November 2026. Checked means completed within the scope stat
 - [x] Create a README with database setup and verification instructions.
 - [x] Initialize the local Git repository on main.
 - [x] Make a reviewed initial commit excluding .env, generated account credentials, and local course materials.
-- [ ] Create/connect the GitHub repository and push the work.
+- [x] Connect the GitHub repository and publish the initial database milestone on main.
 - [ ] Maintain meaningful commits for the remaining implementation and individual contribution evidence.
 
 ## Step 4 Complete database design
@@ -115,40 +115,40 @@ Status baseline: 10 November 2026. Checked means completed within the scope stat
 - [ ] Add consistency enforcement ensuring every actual nonbaseline snapshot change has exactly one matching applying field-change link.
 - [ ] Validate snapshot values, submission origins, decisions, and applying links together at transaction completion.
 - [ ] Protect workflow states and terminal field outcomes against unsupported mutation outside the two trusted workflow functions.
-- [ ] Provision separate restricted backend/service login accounts; stop using database-owner/root credentials for application requests.
-- [ ] Implement database access policies/protected entry points appropriate to authenticated surveyors and reviewers.
-- [ ] Establish server-verified actor context safely within each request transaction.
-- [ ] Verify direct database bypass attempts using the actual application credentials.
+- [x] Provision separate restricted PostgreSQL/MongoDB API accounts; application requests use neither owner nor root credentials.
+- [x] Guard database entry points for authenticated surveyors/reviewers; the API role has no direct table access.
+- [x] Derive database actor identity from a revocable hashed session token inside guarded functions.
+- [x] Verify direct database bypass and wrong-role wrapper calls using actual API credentials.
 
-The existing functions check supplied identities and are inaccessible to fieldmerge_app. They are not yet connected to authenticated users. These remaining items are separate from the passing owner-driven SQL tests.
+Migration 004 connects the owner-only workflow functions to authenticated sessions through restricted, role-aware wrappers. General direct table access remains denied. Workflow-wide consistency triggers listed above remain pending.
 
 ## Step 10 Build verified source intake and cross-store recovery
 
-- [ ] Implement deterministic client-envelope canonicalization, including exact decimals and duplicate-key rejection.
-- [ ] Compute and verify request fingerprints against the stored source content.
-- [ ] Reserve SQL request identities and reject changed-content retries.
-- [ ] Insert sealed MongoDB source evidence idempotently.
-- [ ] Verify source identity, form, target/base, and content hash before marking SQL ready and storing verified_patch.
-- [ ] Connect ready intake to automatic reconciliation without duplicate effects.
+- [x] Implement deterministic canonicalization, exact decimals, duplicate-key rejection, and bounded input parsing.
+- [x] Compute/verify fingerprints and compare the stored BSON projection with the canonical source.
+- [x] Reserve SQL request identities and reject changed-content retries.
+- [x] Insert sealed MongoDB evidence idempotently with restricted insert/read credentials.
+- [x] Verify source/form identity and hashes before marking SQL ready and storing verified_patch.
+- [x] Connect verified intake to reconciliation without duplicate effects.
 - [ ] Implement bounded processing/recovery coordination across worker restarts.
-- [ ] Recover from failure before document storage, after document storage, and after SQL commit but before response.
+- [x] Test same-request recovery with injected interruptions before/after document storage and after SQL commit before response.
 - [ ] Expose incomplete/mismatched intake for operational inspection without overwriting evidence.
-- [ ] Process valid batch items independently and return per-item receipts/errors.
+- [x] Process batch items independently and return per-item receipts/errors; transport batch grouping is not yet persisted.
 - [ ] Verify all source forms, evidence-only submissions, byte limits, and timestamp/decimal conversions through real intake.
 
 ## Step 11 Build the authenticated backend
 
-- [ ] Scaffold the Next.js project with server-side PostgreSQL and MongoDB connections.
-- [ ] Validate required environment configuration and keep credentials server-only.
-- [ ] Implement password verification, login/logout, secure sessions, and inactive-account handling.
+- [x] Scaffold Next.js route handlers and restricted server-side database connections.
+- [x] Generate server-only API credentials and reject owner/root connection identities in application modules.
+- [x] Implement password verification, login/logout, revocable eight-hour sessions, and inactive-account checks.
 - [ ] Enforce roles and draft ownership on every protected operation.
 - [ ] Implement record listing, filtering, snapshot retrieval, and download endpoints.
 - [ ] Implement owner-scoped draft creation, revision-safe edit, and permitted deletion.
 - [ ] Implement immutable draft finalization with safe restart/retry behavior.
-- [ ] Implement source submission/batch upload and outcome retrieval endpoints.
-- [ ] Implement reviewer queue, current comparison, and decision endpoints.
+- [x] Implement submission/batch upload, own/reviewer outcome/source retrieval, and owner-requested recovery endpoints.
+- [x] Implement reviewer queue, current comparison, and guarded decision endpoints.
 - [ ] Implement history, provenance, aggregate, and export endpoints.
-- [ ] Map database errors into actionable responses; require reconsideration after stale approval errors.
+- [x] Map database errors to bounded HTTP responses and return a refresh-required stale-review error.
 - [ ] Record failed access/stale attempts at a logging boundary that survives rolled-back database transactions, without logging secrets.
 
 ## Step 12 Build the Next.js interface
@@ -184,6 +184,8 @@ The existing functions check supplied identities and are inaccessible to fieldme
 
 The latest saved milestone has 136 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 31 MongoDB structure), six concurrent-session scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
 
+The authenticated API milestone additionally passes five canonicalization/validation test groups, nine integration test groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. This includes owner-requested recovery, source mismatch rejection, direct SQL access denial, wrong-role calls, session revocation, and login throttling. Remaining checklist entries retain broader acceptance/browser coverage.
+
 ## Step 14 Complete the final documentation
 
 - [x] Maintain the project overview, requirements, schema models, implementation guides, and database README.
@@ -211,4 +213,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Complete the authenticated backend boundary and database access design, then verified MongoDB-to-PostgreSQL intake. This connects the tested SQL functions to real user submissions. Establish Git/GitHub tracking now as well, because it is still absent from this workspace.
+Complete owner-scoped draft APIs/finalization, remaining integrity enforcement and API acceptance coverage, then the surveyor/reviewer interface. Authenticated login → verified intake → reconciliation → reviewer decision is now exercised against a production Next.js test server. Feature work is tracked on feature/authenticated-api; main contains the earlier database milestone until that branch is merged.

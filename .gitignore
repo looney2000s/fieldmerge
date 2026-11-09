@@ -13,3 +13,5 @@ instructions/
 __pycache__/
 .DS_Store
 Thumbs.db
+.next/
+*.tsbuildinfo

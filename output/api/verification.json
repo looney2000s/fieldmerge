@@ -1,0 +1,7 @@
+{
+  "verified_at_utc": "2026-11-09T20:17:21.333Z",
+  "test_database": "fieldmerge_test_cc9444f6e4aa466fbb4f6381fdd6315e",
+  "production_server": true,
+  "output": "✔ authentication, origin checks and SQL privilege boundary (324.8495ms)\n✔ verified intake publishes once and rejects changed-content retries (141.3535ms)\n✔ reviewer flow enforces roles, stale tokens, and idempotent approval (115.6143ms)\n✔ strict JSON input rejects forged identities, duplicate keys and excess precision (20.6591ms)\n✔ evidence-only source, explicit null/zero and independent batch items (67.4136ms)\n✔ interrupted intake and lost responses recover once against real stores (249.8255ms)\n✔ tampered source evidence blocks publication (25.8849ms)\n✔ disabled account, expired session and logout revoke access (120.3565ms)\n✔ login attempts are limited persistently at the database boundary (337.6906ms)\nℹ tests 9\nℹ suites 0\nℹ pass 9\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1810.391\n",
+  "remaining": "Draft API/UI and full workflow-wide consistency enforcement remain."
+}

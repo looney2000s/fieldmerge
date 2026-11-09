@@ -84,7 +84,7 @@ function Verify-Databases {
   reviewer_output=@($reviewOutput);reviewer_concurrency_output=@($reviewRaceOutput);
   migration_checksums=@(Get-ChildItem -LiteralPath (Join-Path $taskRoot 'database/postgres/migrations') -Filter '*.sql' | Sort-Object Name | ForEach-Object { @{file=$_.Name;sha256=(Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash} });
   migration_checksum=(Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $taskRoot 'database/postgres/migrations/001_structure.sql')).Hash;
-  remaining='Authenticated API/row access policies, MongoDB verification handoff, cross-store recovery and global privileged-write consistency enforcement remain.'
+  remaining='HTTP API verification is separate in output/api/verification.json. Draft/finalization APIs, persistent recovery workers, full privileged-write consistency enforcement and UI remain.'
  }
  $report | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $reportDir 'verification.json') -Encoding utf8
  Write-Host 'Structural verification passed. Report: output/database/verification.json'
