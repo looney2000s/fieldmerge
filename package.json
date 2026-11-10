@@ -8,7 +8,7 @@
     "build": "next build --webpack",
     "start": "next start --hostname 127.0.0.1",
     "configure:backend": "node scripts/configure-backend.mjs",
-    "test:unit": "node --test tests/api/canonical.test.mjs",
+    "test:unit": "node --test tests/api/canonical.test.mjs tests/api/read-queries.test.mjs",
     "test:api": "node scripts/test-api.mjs",
     "worker": "node scripts/recovery-worker.mjs",
     "worker:once": "node scripts/recovery-worker.mjs --once"

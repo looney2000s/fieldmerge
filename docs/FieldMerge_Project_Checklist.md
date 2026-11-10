@@ -133,7 +133,7 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Implement a persistent recovery queue, bounded claims, expired-token fencing, retry budget/backoff, quarantine, and sealed-draft discovery across worker restarts.
 - [x] Test same-request recovery with injected interruptions before/after document storage and after SQL commit before response.
 - [x] Expose reviewer-only recovery job/status/event inspection and reasoned retry without overwriting evidence.
-- [x] Process batch items independently and return per-item receipts/errors; transport batch grouping is not yet persisted.
+- [x] Process batch items independently with durable manifests, memberships, per-item receipts/errors, stable retry identities, and immutable first-intake source attribution.
 - [ ] Verify all source forms, evidence-only submissions, byte limits, and timestamp/decimal conversions through real intake.
 
 ## Step 11 Build the authenticated backend
@@ -143,13 +143,13 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Implement password verification, login/logout, revocable eight-hour sessions, and inactive-account checks.
 - [x] Enforce roles and draft ownership on every currently exposed protected operation.
 - [x] Implement record listing and snapshot retrieval endpoints.
-- [ ] Add record filtering, pagination, and snapshot download endpoints.
+- [x] Add literal record filtering, bounded cursor pagination, and version-specific snapshot downloads.
 - [x] Implement owner-scoped draft creation, revision-safe edit, and permitted deletion.
 - [x] Implement immutable draft finalization with retries after injected interruptions, including a lost response after SQL commit.
 - [x] Implement submission/batch upload, own/reviewer outcome/source retrieval, and owner-requested recovery endpoints.
 - [x] Implement reviewer queue, current comparison, and guarded decision endpoints.
 - [x] Implement history and field-provenance endpoints.
-- [ ] Implement aggregate and export endpoints.
+- [x] Implement reviewer SQL/MongoDB aggregate summaries and bounded CSV/JSON accepted-record exports.
 - [x] Map database errors to bounded HTTP responses and return a refresh-required stale-review error.
 - [ ] Record failed access/stale attempts at a logging boundary that survives rolled-back database transactions, without logging secrets.
 
@@ -180,15 +180,15 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [ ] Test ownership, role bypass, injection attempts, invalid/missing inputs, and session behavior.
 - [ ] Test actual MongoDB outages, interrupted intake, worker restart, and lost responses.
 - [ ] Test browser-submitted retries and stale reviewer actions without changing intent automatically.
-- [ ] Independently reconcile SQL accepted/review totals and MongoDB evidence aggregates.
+- [x] Independently reconcile SQL accepted/workflow totals and MongoDB form/batch/observation aggregates in integrated tests.
 - [ ] Prepare meaningful DML, JOIN, nested/correlated, recursive/CTE, aggregate, GROUP BY, HAVING, and ORDER BY demonstrations where applicable.
 - [ ] Demonstrate CREATE/ALTER and safe DROP using disposable objects; preserve final evidence/history.
 - [ ] Record representative query plans and measured performance on a documented dataset.
 - [ ] Verify a clean rebuild and full test run using the final code/configuration.
 
-The latest saved database milestone has 209 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 31 MongoDB structure), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
+The latest saved database milestone has 231 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 22 query/export/batch + 31 MongoDB), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
 
-The API/draft/integrity/recovery milestone additionally passes six validation groups, twenty-four API/worker integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. This includes operational inspection/retry, immutable quarantine, worker races/fencing, and an actual killed worker followed by successful fresh-process recovery. Connection failures use an unreachable loopback port; live development database containers are not stopped. Remaining entries retain broader acceptance/browser/outage coverage.
+The milestone additionally passes ten unit groups, thirty-two API/worker/query integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. New tests verify filters/pagination, downloads, independent summaries, formula-like CSV text, 5,000/5,001-row export limits, batch replay/membership/ownership, and batched recovery. Prior worker kill/restart, connectivity failure, authorization, and integrity checks remain included. Remaining entries retain broader acceptance/browser/outage coverage.
 
 ## Step 14 Complete the final documentation
 
@@ -217,4 +217,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Implement record/reviewer filtering, snapshot downloads, aggregate/export routes and batch evidence grouping, then remaining acceptance coverage and the surveyor/reviewer interface. Automatic recovery and operational inspection are implemented on codex/recovery-worker, building on the API/draft/integrity branches. Keep pnpm worker running for unattended recovery. main contains the earlier database milestone until feature work is merged.
+Build the surveyor/reviewer Next.js interface on the completed APIs, map/close the 35 acceptance scenarios, then collect performance/query evidence and final documentation. The latest branch is codex/query-export-batches, building on the earlier backend branches. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.

@@ -8,9 +8,9 @@ Surveyors submit changes based on accepted record versions. FieldMerge combines 
 
 **Stack:** Next.js, PostgreSQL, MongoDB, and Docker Compose.
 
-**Verified database milestone:** 209 assertions, four actual COMMIT scenarios, and six concurrent-session scenarios, plus agreement of published form hashes across both databases. These results are database-level evidence, not a claim that the complete application is finished.
+**Verified database milestone:** 231 assertions, four actual COMMIT scenarios, and six concurrent-session scenarios, plus agreement of published form hashes across both databases. These results are database-level evidence, not a claim that the complete application is finished.
 
-**Verified API milestone:** six canonicalization/validation test groups, twenty-four API/worker integration groups against a production Next.js server and real isolated databases, and a successful production build. Coverage includes authentication, source verification, draft finalization, review, commit-time rollback, automatic recovery, quarantine, leases, and worker-process restart.
+**Verified API milestone:** ten validation/export unit groups, thirty-two API/worker/query integration groups against a production Next.js server and real isolated databases, and a successful production build. Coverage includes authentication, reconciliation/review, drafts, recovery, filtered queries, summaries, snapshots, CSV/JSON exports, and durable batch replay.
 
 The [complete project checklist](docs/FieldMerge_Project_Checklist.md) tracks completed and remaining work from problem selection through final submission.
 
@@ -26,9 +26,9 @@ flowchart LR
 
 ## Current milestone
 
-The development databases, automatic SQL reconciliation, reviewer decisions, and authenticated Next.js API are implemented. PostgreSQL has nine business tables, four read views, history protection, and guarded API functions. Migrations 001–003 implement database workflows; migration 004 adds internal session/rate-limit tables and session-aware access functions; migration 005 validates draft targets; migration 006 protects commit-time consistency; migration 007 adds persistent recovery jobs/events and restricted worker entry points. MongoDB has three validated collections and separate restricted API/worker credentials.
+The development databases, SQL reconciliation, reviewer decisions, and authenticated Next.js API are implemented. PostgreSQL has nine business tables, four read views, and guarded workflow/read functions. Migrations 001–007 implement core structures, sessions, drafts, integrity, and recovery; migration 008 adds filtered reads, reports/exports, and two internal transport-batch tables. There are 16 SQL tables including internal authentication/operational metadata and the migration registry. MongoDB has three validated collections and separate restricted API/worker credentials.
 
-Login, verified intake, owner-scoped drafts/finalization, batches, reviewer decisions, history, source retrieval, and [commit-time integrity](docs/FieldMerge_Workflow_Integrity.md) are implemented. The [automatic recovery worker and reviewer operations API](docs/FieldMerge_Recovery.md) now resume incomplete intake/sealed drafts with durable leases, bounded retry, quarantine, and event history. Remaining work includes richer query/export APIs, performance/query evidence, complete acceptance coverage, and the full interface. The 35 acceptance scenarios are not yet all closed. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [reconciliation](docs/FieldMerge_Reconciliation.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
+Login, verified intake, drafts/finalization, review, history, [commit-time integrity](docs/FieldMerge_Workflow_Integrity.md), and [automatic recovery](docs/FieldMerge_Recovery.md) are implemented. [Filtered queries, downloads, reports/exports, and batch inspection](docs/FieldMerge_Queries_Exports_Batches.md) are now ready for the interface. Remaining work includes the full UI, complete acceptance/browser coverage, performance/query evidence, and final deliverables. The 35 acceptance scenarios are not yet all closed. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [reconciliation](docs/FieldMerge_Reconciliation.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
 
 ## Prerequisites
 
@@ -130,4 +130,4 @@ The database suite exercises automatic reconciliation and reviewer decisions wit
 - scripts/database.ps1 — repeatable environment/schema/verification commands.
 - tests/database/ — real-database structural checks.
 
-Applied migrations are checksum-protected. Further schema changes must use a new migration instead of silently modifying an already applied file. The runner discovers ordered NNN_name.sql migrations and verifies each applied checksum; migrations 001 through 007 are currently implemented.
+Applied migrations are checksum-protected. Further schema changes must use a new migration instead of silently modifying an already applied file. The runner discovers ordered NNN_name.sql migrations and verifies each applied checksum; migrations 001 through 008 are currently implemented. Restart running API/worker processes after a code update.

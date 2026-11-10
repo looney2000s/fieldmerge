@@ -49,7 +49,7 @@ Migration 006 validates pre-existing SQL submissions before recording success. I
 
 Run .\scripts\database.ps1 Verify, then pnpm build and pnpm test:api. Setup runs the database suite before applying migrations to development.
 
-The database suite now has 209 assertions: 39 structural, 32 reconciliation, 34 review, 52 integrity, 21 recovery, and 31 MongoDB checks. It also runs four actual COMMIT scenarios and six concurrent SQL scenarios. Evidence, including migration checksums, is saved to output/database/verification.json. Migration 007 adds operational jobs/events and fenced recovery entry points without weakening these publication checks.
+This integrity suite has 52 assertions and four actual COMMIT scenarios, alongside the project's structural/workflow/recovery/query and concurrency suites. Current totals are maintained in the repository README. Evidence, including migration checksums, is saved to output/database/verification.json. Migrations 007–008 add recovery and transport metadata/entry points without weakening publication checks.
 
 The integrity tests inject mismatched snapshot fields/values/publishers, proposal/base/comparison errors, incorrect applying links/revisions, missing changes, incorrect live states/receipts, inconsistent decisions, and missing/misattributed audits. Each failure must leave its publication or review effects rolled back. The actual COMMIT tests demonstrate automatic publication, rejection/rollback of a version without its applying links, rejection/rollback of decisionless disposal, and a valid keep-current decision without a new version.
 
@@ -57,6 +57,6 @@ Fault triggers and administrative SET ROLE calls are isolated test fixtures. Pro
 
 An HTTP integration fault test corrupts a real attempted snapshot, expects 503, checks that SQL remains awaiting_document with no new accepted version, removes the fault, and retries the unchanged request to obtain one publication/audit event. The complete API evidence is in output/api/verification.json.
 
-[Persistent recovery and reviewer inspection](FieldMerge_Recovery.md) are now implemented. Query/export routes, complete acceptance mapping, performance measurements, and the full UI remain. These checks do not provide a distributed transaction with MongoDB or prove factual correctness of survey observations.
+[Recovery/inspection](FieldMerge_Recovery.md) and [queries/exports/batch grouping](FieldMerge_Queries_Exports_Batches.md) are implemented. Complete acceptance mapping, performance measurements, and the full UI remain. These checks do not provide a distributed transaction with MongoDB or prove factual correctness of survey observations.
 
 PostgreSQL documents [deferred constraint triggers](https://www.postgresql.org/docs/current/sql-createtrigger.html) and [constraint timing](https://www.postgresql.org/docs/current/sql-set-constraints.html). FieldMerge's invariants, protected execution role, and validation protocol are project design choices.

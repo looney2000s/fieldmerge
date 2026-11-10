@@ -50,7 +50,7 @@ This applies all ordered migrations to a fresh isolated test database. Automatic
 - Two actual concurrent-session scenarios: competing proposals and simultaneous retries of the same submission. The first session holds the tree lock through a deliberate test barrier; the second must wait and then observe committed state.
 - 31 MongoDB structure checks and cross-store form-definition hash agreement.
 
-The full runner also includes 34 reviewer assertions/four reviewer concurrency cases, 52 integrity assertions, 21 recovery assertions, and four actual COMMIT scenarios. Its total is 209 database assertions plus four COMMIT scenarios and six SQL concurrency scenarios. Separate API/worker tests cover authenticated intake/review/drafts, operational integrity rejection/retry, and automatic recovery.
+The full runner also includes reviewer, integrity, recovery, and query/batch assertions, plus actual COMMIT and concurrent SQL scenarios. Current suite totals are maintained in the repository README. Separate API/worker tests cover authenticated intake/review/drafts, operational integrity rejection/retry, automatic recovery, and batch attribution.
 
 The concurrency harness asserts the barrier through pg_stat_activity rather than assuming both sessions overlapped. Its extra fixtures remain only in the isolated test database. SQL assertion fixtures roll back; development seed data is preserved.
 
@@ -58,4 +58,4 @@ The last successful results are in [verification.json](../output/database/verifi
 
 ## Remaining work
 
-Richer query/export routes, full acceptance mapping, measured performance, and the Next.js interface remain. Reviewer approval, authenticated wrappers, verified MongoDB intake, drafts/finalization, [persistent recovery and operational inspection](FieldMerge_Recovery.md), and SQL consistency are implemented. PostgreSQL RLS is not used.
+Full acceptance mapping, measured performance, and the Next.js interface remain. Reviewer approval, authenticated wrappers, verified intake, drafts/finalization, [recovery](FieldMerge_Recovery.md), [queries/exports/batches](FieldMerge_Queries_Exports_Batches.md), and SQL consistency are implemented. PostgreSQL RLS is not used.

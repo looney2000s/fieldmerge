@@ -73,7 +73,7 @@ Send `$body` unchanged again to verify idempotency. A changed body with the same
 | /api/reviews | GET | Reviewer only; first 100 pending comparisons with current version/revision tokens. |
 | /api/reviews/:changeId | POST | Reviewer only; atomic terminal decision. |
 
-Batch transport IDs are not yet persisted. Pagination/filter parameters and aggregate/export routes are not exposed in this milestone. Draft list/create/read/edit/delete/finalize routes are documented in [the draft guide](FieldMerge_Drafts.md).
+Migration 008 implements [filtered pagination, historical snapshot downloads, SQL/MongoDB summaries, accepted CSV/JSON exports, and durable batch inspection](FieldMerge_Queries_Exports_Batches.md). The records/reviews routes now include next_cursor. POST batch accepts the optional stable X-FieldMerge-Batch-Id header and returns batch_id/client_batch_id alongside results. Draft routes are documented in [the draft guide](FieldMerge_Drafts.md).
 
 ## Reviewer requests
 
@@ -125,6 +125,6 @@ Coverage includes login/origin/cookie behavior, unauthorized routes and SQL acce
 
 Interruptions are deliberately injected around real database operations (before source storage, after source storage, before SQL finish, and after commit before response). This verifies resumability of those boundaries; it is not a claim that a live MongoDB process was stopped mid-request. A privileged test also corrupts source metadata to prove verification refuses to publish it.
 
-Results are saved in output/api/verification.json. Remaining work: richer data/query endpoints, the full interface, performance evidence, and full mapping/closure of all 35 acceptance scenarios. Two authentication and two recovery tables supplement the nine business entities. Migration 007 adds reviewer-only /api/operations/recovery list/detail/retry routes, documented in the recovery guide. A commit-time integrity error returns 503 workflow_integrity_failure; accepted-state effects roll back and unchanged content may be retried after the fault is resolved.
+Results are saved in output/api/verification.json. Remaining work: the full interface, performance/query evidence, and full mapping/closure of all 35 acceptance scenarios. Two authentication, two recovery, and two transport tables supplement the nine business entities. The recovery and query/export guides cover the additional endpoints. A commit-time integrity error returns 503 workflow_integrity_failure; accepted-state effects roll back and unchanged content may be retried after the fault is resolved.
 
-The verified run passes six unit groups and twenty-four API/worker integration groups with a successful production build. The database suite has 209 assertions, four actual COMMIT scenarios, and six concurrent SQL scenarios. Recovery coverage includes restricted credentials, reviewer inspection/retry, missing/tampered evidence, sealed drafts, competing workers, expiry fencing, inactive users, unreachable-service backoff, and actual worker-process kill/restart.
+The verified run passes ten unit groups and thirty-two API/worker/query integration groups with a successful production build. The database suite has 231 assertions, four actual COMMIT scenarios, and six concurrent SQL scenarios. Report tests independently count both databases, exercise literal filters, historical snapshots, safe export encoding, 5,000/5,001-row limits, stable batch manifests, ownership, first attribution, and batched recovery. Previous authorization/recovery/race checks remain included.

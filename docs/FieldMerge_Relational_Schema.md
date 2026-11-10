@@ -2,7 +2,7 @@
 
 Version 1.0 · 2 November 2026
 
-Migration 007 update: fieldmerge_ops adds recovery_jobs and immutable recovery_events, with restricted worker functions and reviewer inspection/retry wrappers. See [the recovery schema and protocol](FieldMerge_Recovery.md). There are now 14 SQL tables including nine business, two authentication, two operational, and one migration-registry table; the nine-entity business mapping below is unchanged.
+Migrations 007–008 update: fieldmerge_ops adds recovery_jobs/events and intake_batches/batch_items, with restricted recovery/read/export/transport functions. See [recovery](FieldMerge_Recovery.md) and [queries/exports/batch schema](FieldMerge_Queries_Exports_Batches.md). There are 16 SQL tables: nine business, two authentication, four operational/transport, and one migration registry. The nine-entity business mapping below is unchanged.
 
 Implementation update 10 November 2026: migrations 004–005 add authenticated SQL wrappers, two internal authentication tables, and draft-target validation. Migration 006 implements [commit-time consistency and workflow mutation protection](FieldMerge_Workflow_Integrity.md). The nine business tables below remain unchanged. These updates supersede older planning language below; row-level security is not claimed.
 
@@ -39,7 +39,7 @@ The nine relations are app_users, survey_campaigns, tree_records, accepted_versi
 | Version follows predecessor | Composite self-FK and predecessor-number constraint. |
 | Audit associations | Nullable user, record, and submission references in audit_events. |
 
-No relationship needs a separate many-to-many junction table in this design. The association entities FIELD_CHANGE and REVIEW_DECISION retain their own identities and attributes.
+The nine business entities need no extra many-to-many junction table. FIELD_CHANGE and REVIEW_DECISION retain their own identities/attributes. The later internal transport extension uses batch_items to associate upload positions with existing source submissions across batches; its separate schema is documented in the query/export/batch guide.
 
 ## 3 Relation definitions
 

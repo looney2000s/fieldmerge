@@ -33,10 +33,10 @@ try{
  }
  if(!ready)throw new Error('API server not ready');
  console.log('Testing production Next.js server against isolated databases.');
- const child=spawn(process.execPath,['--test','--test-concurrency=1','tests/api/integration.test.mjs','tests/api/recovery.test.mjs'],{cwd:root,env,stdio:['ignore','pipe','pipe'],windowsHide:true});
+ const child=spawn(process.execPath,['--test','--test-concurrency=1','tests/api/integration.test.mjs','tests/api/recovery.test.mjs','tests/api/queries-batches.test.mjs'],{cwd:root,env,stdio:['ignore','pipe','pipe'],windowsHide:true});
  const output=[];child.stdout.on('data',x=>{process.stdout.write(x);output.push(x.toString());});child.stderr.on('data',x=>{process.stderr.write(x);output.push(x.toString());});
  const code=await new Promise(resolve=>child.on('exit',resolve));
  if(code!==0)throw new Error('API integration checks failed');
- mkdirSync('output/api',{recursive:true});writeFileSync('output/api/verification.json',JSON.stringify({verified_at_utc:new Date().toISOString(),test_database:name,production_server:true,output:output.join(''),remaining:'Richer query/export APIs, full acceptance coverage, performance evidence and UI remain.'},null,2));
+ mkdirSync('output/api',{recursive:true});writeFileSync('output/api/verification.json',JSON.stringify({verified_at_utc:new Date().toISOString(),test_database:name,production_server:true,output:output.join(''),remaining:'Full acceptance/browser coverage, performance evidence and UI remain.'},null,2));
  console.log('API verification passed; evidence saved to output/api/verification.json.');
 }finally{if(server){server.kill();await new Promise(r=>{if(server.exitCode!==null)return r();server.once('exit',r);setTimeout(r,3000).unref();});}await admin.end();}

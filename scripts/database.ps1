@@ -63,6 +63,8 @@ function Verify-Databases {
  $integrityOutput | ForEach-Object { Write-Host $_ }
  $recoveryOutput=Invoke-Docker @compose exec -T postgres-test psql -X -U fieldmerge_owner -d $testName -v ON_ERROR_STOP=1 -f /tests/postgres_recovery.sql
  $recoveryOutput | ForEach-Object { Write-Host $_ }
+ $queryOutput=Invoke-Docker @compose exec -T postgres-test psql -X -U fieldmerge_owner -d $testName -v ON_ERROR_STOP=1 -f /tests/postgres_queries_batches.sql
+ $queryOutput | ForEach-Object { Write-Host $_ }
  $nodeCommand=Get-Command node -ErrorAction Stop
  $commitOutput=& $nodeCommand.Source (Join-Path $taskRoot 'tests/database/integrity_commit.mjs') $script:Docker $taskRoot $testName
  if ($LASTEXITCODE -ne 0) { throw 'Commit-time integrity checks failed.' }
@@ -84,17 +86,18 @@ function Verify-Databases {
  $reportDir=Join-Path $taskRoot 'output/database'
  New-Item -ItemType Directory -Force -Path $reportDir | Out-Null
  $report=@{
-  verified_at_utc=[DateTime]::UtcNow.ToString('o');milestone='persistent recovery queue and protected publication';
+  verified_at_utc=[DateTime]::UtcNow.ToString('o');milestone='filtered queries, exports and immutable batch tracking';
   test_database=$testName;postgres_output=@($sqlOutput);mongo_output=@($mongoOutput);
   form_registry_hashes_match=$true;
   reconciliation_output=@($workflowOutput);concurrency_output=@($raceOutput);
   reviewer_output=@($reviewOutput);reviewer_concurrency_output=@($reviewRaceOutput);
   integrity_output=@($integrityOutput);
   recovery_output=@($recoveryOutput);
+  query_output=@($queryOutput);
   commit_output=@($commitOutput);
   migration_checksums=@(Get-ChildItem -LiteralPath (Join-Path $taskRoot 'database/postgres/migrations') -Filter '*.sql' | Sort-Object Name | ForEach-Object { @{file=$_.Name;sha256=(Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash} });
   migration_checksum=(Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $taskRoot 'database/postgres/migrations/001_structure.sql')).Hash;
-  remaining='HTTP API and worker recovery verification is separate in output/api/verification.json. Richer query/export routes, full acceptance coverage, performance evidence and UI remain.'
+  remaining='HTTP API/worker/report verification is separate in output/api/verification.json. Full acceptance/browser coverage, performance evidence and UI remain.'
  }
  $report | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $reportDir 'verification.json') -Encoding utf8
  Write-Host 'Structural verification passed. Report: output/database/verification.json'
