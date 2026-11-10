@@ -2,6 +2,8 @@
 
 Version 1.0 · 2 November 2026
 
+Migration 007 update: fieldmerge_ops adds recovery_jobs and immutable recovery_events, with restricted worker functions and reviewer inspection/retry wrappers. See [the recovery schema and protocol](FieldMerge_Recovery.md). There are now 14 SQL tables including nine business, two authentication, two operational, and one migration-registry table; the nine-entity business mapping below is unchanged.
+
 Implementation update 10 November 2026: migrations 004–005 add authenticated SQL wrappers, two internal authentication tables, and draft-target validation. Migration 006 implements [commit-time consistency and workflow mutation protection](FieldMerge_Workflow_Integrity.md). The nine business tables below remain unchanged. These updates supersede older planning language below; row-level security is not claimed.
 
 Implementation update for migration 003: review_decisions now has a nullable decision_result JSONB column for the immutable original response. The trusted review_change entry point implements terminal decisions, version/revision checks, retries, and atomic publication. See [reviewer decisions](FieldMerge_Reviewer_Decisions.md). Nullable legacy owner-inserted rows are supported structurally but need a receipt backfill before API-style replay.

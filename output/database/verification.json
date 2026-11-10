@@ -1,33 +1,36 @@
 {
-  "test_database": "fieldmerge_test_a020a71f3c8f439b9dde066114ae88ed",
-  "concurrency_output": [
-    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
+  "verified_at_utc": "2026-11-10T15:00:13.6301195Z",
+  "migration_checksum": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
+  "postgres_output": [
+    "Output format is unaligned.",
+    "PostgreSQL structural checks passed: 39",
+    "ROLLBACK"
+  ],
+  "reconciliation_output": [
+    "Output format is unaligned.",
+    "Reconciliation checks passed: 32",
+    "ROLLBACK"
+  ],
+  "test_database": "fieldmerge_test_74d0aa2b95fd4199af426e66be6c905d",
+  "milestone": "persistent recovery queue and protected publication",
+  "reviewer_concurrency_output": [
+    "Concurrent reviewer scenarios passed: 4 (competing reviewers, identical retry, cross-tree key reuse, review versus automatic publication)."
   ],
   "reviewer_output": [
     "Output format is unaligned.",
     "Reviewer decision checks passed: 34",
     "ROLLBACK"
   ],
-  "commit_output": [
-    "Actual COMMIT checks passed: 4 (automatic publication, missing applying link rollback, decisionless disposal rollback, no-publication review)."
-  ],
-  "remaining": "HTTP API and draft/finalization verification is separate in output/api/verification.json. Persistent recovery workers, richer query/export routes, full acceptance coverage and UI remain.",
-  "postgres_output": [
+  "recovery_output": [
     "Output format is unaligned.",
-    "PostgreSQL structural checks passed: 39",
+    "Recovery queue checks passed: 21",
     "ROLLBACK"
   ],
-  "milestone": "deferred workflow integrity and protected publication",
+  "concurrency_output": [
+    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
+  ],
   "form_registry_hashes_match": true,
-  "integrity_output": [
-    "Output format is unaligned.",
-    "Workflow integrity checks passed: 52",
-    "ROLLBACK"
-  ],
-  "mongo_output": [
-    "MongoDB structural checks passed: 31",
-    "Ownership and finalization transition guarantees still require the backend; validators alone do not authenticate end users."
-  ],
+  "remaining": "HTTP API and worker recovery verification is separate in output/api/verification.json. Richer query/export routes, full acceptance coverage, performance evidence and UI remain.",
   "migration_checksums": [
     {
       "file": "001_structure.sql",
@@ -52,16 +55,22 @@
     {
       "file": "006_workflow_integrity.sql",
       "sha256": "0A3BBAA7358F0EF82279293080FEE7A2A45FF32D5ACC56D9D8D3E2FF7A8312F7"
+    },
+    {
+      "file": "007_recovery_jobs.sql",
+      "sha256": "09D9D4437E8EBCE9BA1AF60D9131353AB741F59BA2616EED6A5DAC46E1D8AA9B"
     }
   ],
-  "reviewer_concurrency_output": [
-    "Concurrent reviewer scenarios passed: 4 (competing reviewers, identical retry, cross-tree key reuse, review versus automatic publication)."
-  ],
-  "migration_checksum": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
-  "verified_at_utc": "2026-11-10T14:16:43.4683570Z",
-  "reconciliation_output": [
+  "integrity_output": [
     "Output format is unaligned.",
-    "Reconciliation checks passed: 32",
+    "Workflow integrity checks passed: 52",
     "ROLLBACK"
+  ],
+  "mongo_output": [
+    "MongoDB structural checks passed: 31",
+    "Ownership and finalization transition guarantees still require the backend; validators alone do not authenticate end users."
+  ],
+  "commit_output": [
+    "Actual COMMIT checks passed: 4 (automatic publication, missing applying link rollback, decisionless disposal rollback, no-publication review)."
   ]
 }

@@ -23,11 +23,13 @@ target.submission_documents.createIndex({batch_id:1,received_at:1});
 target.form_definitions.createIndex({form_version:1},{unique:true});
 target.submission_drafts.createIndex({owner_id:1,client_submission_id:1},{unique:true});
 target.submission_drafts.createIndex({owner_id:1,state:1,updated_at:1});
+target.submission_drafts.createIndex({state:1,_id:1});
 // Least-privilege service roles. End-user ownership/state policies arrive with the backend.
 for (const [role,privileges] of [
   ['fieldmerge_evidence_writer',[{resource:{db:targetName,collection:'submission_documents'},actions:['find','insert']}]],
   ['fieldmerge_evidence_reader',[{resource:{db:targetName,collection:'submission_documents'},actions:['find']},{resource:{db:targetName,collection:'form_definitions'},actions:['find']}]],
-  ['fieldmerge_draft_editor',[{resource:{db:targetName,collection:'submission_drafts'},actions:['find','insert','update','remove']}]]
+  ['fieldmerge_draft_editor',[{resource:{db:targetName,collection:'submission_drafts'},actions:['find','insert','update','remove']}]],
+  ['fieldmerge_draft_recoverer',[{resource:{db:targetName,collection:'submission_drafts'},actions:['find','update']}]]
 ]) {
   if (!target.getRole(role)) target.createRole({role,privileges,roles:[]});
   else target.updateRole(role,{privileges,roles:[]});

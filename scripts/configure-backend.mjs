@@ -10,22 +10,31 @@ const e=process.env;
 export async function configureBackend({pgDatabase=e.FM_CONFIG_DATABASE??'fieldmerge',mongoDatabase=e.FM_CONFIG_MONGO_DATABASE??'fieldmerge',save=true}={}){
 const pgPassword=e.API_POSTGRES_PASSWORD??randomBytes(24).toString('hex');
 const mongoPassword=e.API_MONGO_PASSWORD??randomBytes(24).toString('hex');
+const workerPgPassword=e.WORKER_POSTGRES_PASSWORD??randomBytes(24).toString('hex');
+const workerMongoPassword=e.WORKER_MONGO_PASSWORD??randomBytes(24).toString('hex');
 if(!/^fieldmerge(?:_test_[a-f0-9]+)?$/.test(pgDatabase)||!/^fieldmerge(?:_test_[a-f0-9]+)?$/.test(mongoDatabase))throw new Error('Unexpected target database');
 const client=new pg.Client({host:'127.0.0.1',port:Number(e.POSTGRES_PORT??15432),database:pgDatabase,user:e.POSTGRES_USER,password:e.POSTGRES_PASSWORD});
 const mongo=new MongoClient(`mongodb://${encodeURIComponent(e.MONGO_INITDB_ROOT_USERNAME)}:${encodeURIComponent(e.MONGO_INITDB_ROOT_PASSWORD)}@127.0.0.1:${e.MONGO_PORT??27018}/?authSource=admin`);
 try{
  await client.connect();
  // PostgreSQL utility statements do not accept value placeholders; quote the generated secret as a literal.
- if(!/^[a-f0-9]{48}$/.test(pgPassword)||!/^[a-f0-9]{48}$/.test(mongoPassword))throw new Error('Generated backend credentials must be 48 hexadecimal characters');
+ if(![pgPassword,mongoPassword,workerPgPassword,workerMongoPassword].every(p=>/^[a-f0-9]{48}$/.test(p)))throw new Error('Generated backend credentials must be 48 hexadecimal characters');
  await client.query(`ALTER ROLE fieldmerge_api LOGIN PASSWORD '${pgPassword}'`);
+ await client.query(`ALTER ROLE fieldmerge_worker LOGIN PASSWORD '${workerPgPassword}'`);
  await mongo.connect();const db=mongo.db(mongoDatabase);
  const roles=[{role:'fieldmerge_evidence_writer',db:mongoDatabase},{role:'fieldmerge_evidence_reader',db:mongoDatabase},{role:'fieldmerge_draft_editor',db:mongoDatabase}];
  const existing=await db.command({usersInfo:'fieldmerge_api'});
  if(existing.users.length)await db.command({updateUser:'fieldmerge_api',pwd:mongoPassword,roles});
  else await db.command({createUser:'fieldmerge_api',pwd:mongoPassword,roles});
- const values={API_POSTGRES_PASSWORD:pgPassword,API_MONGO_PASSWORD:mongoPassword,
+ const workerRoles=[{role:'fieldmerge_evidence_writer',db:mongoDatabase},{role:'fieldmerge_evidence_reader',db:mongoDatabase},{role:'fieldmerge_draft_recoverer',db:mongoDatabase}];
+ const workerExisting=await db.command({usersInfo:'fieldmerge_worker'});
+ if(workerExisting.users.length)await db.command({updateUser:'fieldmerge_worker',pwd:workerMongoPassword,roles:workerRoles});
+ else await db.command({createUser:'fieldmerge_worker',pwd:workerMongoPassword,roles:workerRoles});
+ const values={API_POSTGRES_PASSWORD:pgPassword,API_MONGO_PASSWORD:mongoPassword,WORKER_POSTGRES_PASSWORD:workerPgPassword,WORKER_MONGO_PASSWORD:workerMongoPassword,
   DATABASE_URL:`postgresql://fieldmerge_api:${pgPassword}@127.0.0.1:${e.POSTGRES_PORT??15432}/${pgDatabase}`,
   MONGODB_URI:`mongodb://fieldmerge_api:${mongoPassword}@127.0.0.1:${e.MONGO_PORT??27018}/${mongoDatabase}?authSource=${mongoDatabase}`,
+  WORKER_DATABASE_URL:`postgresql://fieldmerge_worker:${workerPgPassword}@127.0.0.1:${e.POSTGRES_PORT??15432}/${pgDatabase}`,
+  WORKER_MONGODB_URI:`mongodb://fieldmerge_worker:${workerMongoPassword}@127.0.0.1:${e.MONGO_PORT??27018}/${mongoDatabase}?authSource=${mongoDatabase}`,
   MONGODB_DATABASE:mongoDatabase,APP_ORIGIN:e.APP_ORIGIN??'http://localhost:3000'};
  if(save){
   let text=readFileSync(path.join(root,'.env'),'utf8');

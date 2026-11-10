@@ -4,7 +4,7 @@ Version 1.0 · 2 November 2026
 
 ## 1 Ownership and representation
 
-This document completes the document-database portion of the logical design. It follows [the requirements](FieldMerge_Requirements.md) and accompanies [the relational schema](FieldMerge_Relational_Schema.md). Collection validators, indexes, service roles, seeds, and live structural checks are implemented under database/mongodb and tests/database. Authentication, fingerprint recomputation, verified intake, owner-requested recovery, and owner/state enforcement in draft operations are now implemented in the [API](FieldMerge_API.md) and [draft workflow](FieldMerge_Drafts.md). Collection validators alone do not provide these guarantees; unattended recovery and aggregates remain pending.
+This document completes the document-database portion of the logical design. It follows [the requirements](FieldMerge_Requirements.md) and accompanies [the relational schema](FieldMerge_Relational_Schema.md). Collection validators, indexes, service roles, seeds, and structural checks are implemented. Authentication, fingerprint verification, intake, owner-scoped drafts, and [automatic recovery](FieldMerge_Recovery.md) are implemented in trusted server/worker code. Validators alone do not provide those guarantees. Aggregate endpoints and the full interface remain pending. The worker has evidence insert/read, form read, and draft find/update privileges, with a (state, _id) finalizing-draft discovery index; it cannot delete drafts or rewrite sealed evidence.
 
 PostgreSQL owns publication and reviewer outcomes. MongoDB owns source envelopes, immutable form definitions, and editable drafts. Never copy SQL state into a MongoDB document and then treat that copy as authoritative.
 

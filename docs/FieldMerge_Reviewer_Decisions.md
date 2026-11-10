@@ -78,4 +78,4 @@ Migration 006 additionally verifies decisions, chosen values, applying links, re
 
 ## Remaining boundary
 
-Persistent recovery coordination and operational visibility, richer query/export routes, full browser/acceptance coverage, measured performance, and Next.js screens remain. Authentication, verified source intake, owner-scoped draft finalization, requested recovery, and commit-time SQL consistency are implemented. Ordinary API roles access session-aware wrappers, with direct workflow/table access denied; PostgreSQL RLS is not claimed.
+Richer query/export routes, full browser/acceptance coverage, measured performance, and Next.js screens remain. Authentication, verified intake, drafts/finalization, [automatic recovery and reviewer operational inspection](FieldMerge_Recovery.md), and SQL consistency are implemented. API roles access session-aware wrappers; the separate worker has restricted recovery functions. Direct table/raw workflow access is denied and PostgreSQL RLS is not claimed.

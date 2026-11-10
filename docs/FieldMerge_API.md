@@ -1,6 +1,6 @@
 # Authenticated API milestone
 
-Implemented 10 November 2026 on feature/authenticated-api, extended on codex/drafts-finalization. This is a runnable Next.js App Router backend, with a minimal status home page. [Owner-scoped draft APIs and safe finalization](FieldMerge_Drafts.md) are now implemented. The complete interface and a persistent recovery worker remain separate work.
+Implemented 10 November 2026, extended through codex/recovery-worker. This is a runnable Next.js App Router backend with a minimal status home page. [Drafts/finalization](FieldMerge_Drafts.md), [automatic recovery and reviewer operational inspection](FieldMerge_Recovery.md) are implemented. The complete graphical interface remains separate work.
 
 ## Start locally
 
@@ -109,7 +109,7 @@ MongoDB stores canonical_payload_json alongside the typed BSON projection. Decim
 
 SQL first reserves a request identity. MongoDB then inserts the source once. Duplicate inserts read and verify the existing document; they never replace it. A guarded SQL function marks the verified source ready and reconciles atomically. Interrupted operations can be retried using the original request. A stored-source recovery endpoint is also available to the owner. Source mismatches produce a 503 integrity response and leave intake incomplete.
 
-No distributed transaction is claimed. No unattended queue worker is implemented yet. Recovery currently depends on an owner retry/recovery request; original re-upload is required if no source document was stored.
+No distributed transaction is claimed. A [restricted local worker](FieldMerge_Recovery.md) now resumes stored-source and frozen-draft requests automatically while pnpm worker runs. Owner retry/recovery is still supported. If no original source or sealed draft is available, original re-upload is required; the worker cannot reconstruct missing evidence from SQL scalar values.
 
 ## Verification and limitations
 
@@ -125,6 +125,6 @@ Coverage includes login/origin/cookie behavior, unauthorized routes and SQL acce
 
 Interruptions are deliberately injected around real database operations (before source storage, after source storage, before SQL finish, and after commit before response). This verifies resumability of those boundaries; it is not a claim that a live MongoDB process was stopped mid-request. A privileged test also corrupts source metadata to prove verification refuses to publish it.
 
-Results are saved in output/api/verification.json. Remaining work: persistent recovery coordination, operational visibility, richer data/query endpoints, the full interface, and full mapping/closure of all 35 acceptance scenarios. Two internal authentication tables supplement the nine core business entities; migrations 005–006 add validation and execution/consistency safeguards without new tables. A commit-time workflow integrity error returns 503 workflow_integrity_failure; accepted-state effects roll back and the original request may be retried after the fault is resolved.
+Results are saved in output/api/verification.json. Remaining work: richer data/query endpoints, the full interface, performance evidence, and full mapping/closure of all 35 acceptance scenarios. Two authentication and two recovery tables supplement the nine business entities. Migration 007 adds reviewer-only /api/operations/recovery list/detail/retry routes, documented in the recovery guide. A commit-time integrity error returns 503 workflow_integrity_failure; accepted-state effects roll back and unchanged content may be retried after the fault is resolved.
 
-The verified run passes six unit test groups and fifteen integration test groups, with a successful production build. The database suite remains separate evidence: 188 assertions, four actual COMMIT scenarios, and six concurrent-session scenarios, rerun with migration 006. The API suite also verifies that its database login cannot SET ROLE to the workflow role and that a deliberately corrupted publication produces 503, rolls back SQL effects, and succeeds once after removing the fault and retrying unchanged content.
+The verified run passes six unit groups and twenty-four API/worker integration groups with a successful production build. The database suite has 209 assertions, four actual COMMIT scenarios, and six concurrent SQL scenarios. Recovery coverage includes restricted credentials, reviewer inspection/retry, missing/tampered evidence, sealed drafts, competing workers, expiry fencing, inactive users, unreachable-service backoff, and actual worker-process kill/restart.

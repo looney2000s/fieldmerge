@@ -130,9 +130,9 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Insert sealed MongoDB evidence idempotently with restricted insert/read credentials.
 - [x] Verify source/form identity and hashes before marking SQL ready and storing verified_patch.
 - [x] Connect verified intake to reconciliation without duplicate effects.
-- [ ] Implement bounded processing/recovery coordination across worker restarts.
+- [x] Implement a persistent recovery queue, bounded claims, expired-token fencing, retry budget/backoff, quarantine, and sealed-draft discovery across worker restarts.
 - [x] Test same-request recovery with injected interruptions before/after document storage and after SQL commit before response.
-- [ ] Expose incomplete/mismatched intake for operational inspection without overwriting evidence.
+- [x] Expose reviewer-only recovery job/status/event inspection and reasoned retry without overwriting evidence.
 - [x] Process batch items independently and return per-item receipts/errors; transport batch grouping is not yet persisted.
 - [ ] Verify all source forms, evidence-only submissions, byte limits, and timestamp/decimal conversions through real intake.
 
@@ -174,6 +174,7 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Exercise six real concurrent-session scenarios and injected SQL rollback failures.
 - [x] Save verification output and migration checksums in output/database/verification.json.
 - [x] Verify injected workflow inconsistencies roll back, including actual COMMIT failures and an HTTP integrity-error/same-request retry scenario.
+- [x] Verify restricted worker credentials, missing-source waiting, quarantine, competing/expired workers, inactive authors, connection failure, and an actual worker-process kill/restart.
 - [ ] Map all 35 acceptance scenarios to integrated tests and close any coverage gaps.
 - [ ] Run the full browser → authenticated API → both databases → response workflows for both roles.
 - [ ] Test ownership, role bypass, injection attempts, invalid/missing inputs, and session behavior.
@@ -185,9 +186,9 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [ ] Record representative query plans and measured performance on a documented dataset.
 - [ ] Verify a clean rebuild and full test run using the final code/configuration.
 
-The latest saved database milestone has 188 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 31 MongoDB structure), four actual COMMIT scenarios, six concurrent-session scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
+The latest saved database milestone has 209 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 31 MongoDB structure), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
 
-The authenticated API/draft/integrity milestone additionally passes six canonicalization/validation test groups, fifteen integration test groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. This includes owner-requested recovery, source mismatch rejection, direct SQL access denial, wrong-role calls, session revocation, login throttling, owner-scoped drafts, concurrent edits/finalization, frozen-draft retries, and a commit-time integrity failure followed by an unchanged successful retry. Remaining checklist entries retain broader acceptance/browser/outage coverage.
+The API/draft/integrity/recovery milestone additionally passes six validation groups, twenty-four API/worker integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. This includes operational inspection/retry, immutable quarantine, worker races/fencing, and an actual killed worker followed by successful fresh-process recovery. Connection failures use an unreachable loopback port; live development database containers are not stopped. Remaining entries retain broader acceptance/browser/outage coverage.
 
 ## Step 14 Complete the final documentation
 
@@ -216,4 +217,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Implement persistent recovery coordination and operational visibility for incomplete intake, then richer query/export routes, remaining acceptance coverage, and the surveyor/reviewer interface. Authenticated login → own draft → verified finalization → reconciliation → reviewer decision is exercised against a production Next.js test server, with commit-time consistency protection. The latest feature branch is codex/workflow-integrity, building on the earlier API/draft branches; main contains the earlier database milestone until the feature work is merged.
+Implement record/reviewer filtering, snapshot downloads, aggregate/export routes and batch evidence grouping, then remaining acceptance coverage and the surveyor/reviewer interface. Automatic recovery and operational inspection are implemented on codex/recovery-worker, building on the API/draft/integrity branches. Keep pnpm worker running for unattended recovery. main contains the earlier database milestone until feature work is merged.

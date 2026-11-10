@@ -89,7 +89,8 @@ DECLARE t uuid;s uuid;c uuid;fault text;r jsonb; BEGIN
  PERFORM set_config('fieldmerge.workflow','false',true);
  t:=pg_temp.tree();s:=pg_temp.source(t,'{"diameter_cm":32}');
  PERFORM pg_temp.error('owner cannot claim processing directly',format('UPDATE submissions SET state=''processing'',lease_token=gen_random_uuid(),lease_expires_at=now()+interval ''1 minute'' WHERE submission_id=%L',s),'42501');
- PERFORM pg_temp.error('owner cannot delete reserved intake',format('DELETE FROM submissions WHERE submission_id=%L',s),'42501');
+ -- Recovery jobs now also reference reserved intake; their FK rejects deletion first.
+ PERFORM pg_temp.error('owner cannot delete reserved intake',format('DELETE FROM submissions WHERE submission_id=%L',s),'23503');
  FOREACH fault IN ARRAY ARRAY['extra_snapshot_field','wrong_snapshot_value','unchanged_applying_field','wrong_publisher',
   'wrong_base','wrong_proposal','wrong_comparison','wrong_applying_origin','missing_change','wrong_revision','wrong_live_state','wrong_initial_receipt','missing_audit'] LOOP
   PERFORM set_config('fieldmerge_test.fault',fault,true);
