@@ -36,6 +36,7 @@ test('authentication, origin checks and SQL privilege boundary',async()=>{
  await assert.rejects(pool().query('SELECT * FROM fieldmerge.app_users'),e=>e.code==='42501');
  await assert.rejects(pool().query("SELECT fieldmerge.review_change(NULL,NULL,NULL,1,1,'keep_current',NULL,'forged')"),e=>e.code==='42501');
  await assert.rejects(pool().query('SELECT * FROM fieldmerge_auth.sessions'),e=>e.code==='42501');
+ await assert.rejects(pool().query('SET ROLE fieldmerge_workflow'),e=>e.code==='42501');
  await assert.rejects(pool().query('SELECT fieldmerge.api_pending($1)',[sha256(surveyor.split('=')[1])]),e=>e.code==='42501');
  await assert.rejects(pool().query("SELECT fieldmerge.api_decide($1,$2,$3,1,1,'keep_current',NULL,'forged')",[sha256(surveyor.split('=')[1]),randomUUID(),randomUUID()]),e=>e.code==='42501');
 });
@@ -211,4 +212,22 @@ test('editing or deleting while finalization races has one winning transition',a
   const rows=(await admin.query('SELECT count(*) FROM fieldmerge.submissions WHERE author_id=$1 AND client_submission_id=$2',[accounts[0].user_id,d.client_submission_id])).rows[0];
   assert.equal(rows.count,finalized.status===200?'1':'0');
  }
+});
+
+test('commit-time integrity rejection is operational and retry preserves one publication',async()=>{
+ const input=await currentDraftInput(),p=envelope({species:'API integrity '+randomUUID()},{record:input.record_id,version:input.base_version_no});
+ await admin.query(`CREATE FUNCTION public.api_test_corrupt_snapshot() RETURNS trigger LANGUAGE plpgsql AS $f$ BEGIN
+  IF NEW.version_no>1 THEN NEW.health:=CASE WHEN NEW.health IS DISTINCT FROM 'Poor' THEN 'Poor' ELSE 'Good' END;END IF;RETURN NEW;END $f$;
+  CREATE TRIGGER api_test_corrupt_snapshot BEFORE INSERT ON fieldmerge.accepted_versions FOR EACH ROW EXECUTE FUNCTION public.api_test_corrupt_snapshot();`);
+ try{
+  const failed=await request('/api/submissions',{cookie:surveyor,method:'POST',value:p});assert.equal(failed.status,503);assert.equal(failed.body.error,'workflow_integrity_failure');
+  const row=(await admin.query('SELECT state,source_verified_at,reconciliation_result FROM fieldmerge.submissions WHERE author_id=$1 AND client_submission_id=$2',[accounts[0].user_id,p.client_submission_id])).rows[0];
+  assert.equal(row.state,'awaiting_document');assert.equal(row.source_verified_at,null);assert.equal(row.reconciliation_result,null);
+  assert.equal((await admin.query('SELECT max(version_no) AS n FROM fieldmerge.accepted_versions WHERE record_id=$1',[input.record_id])).rows[0].n,input.base_version_no);
+ }finally{
+  await admin.query('DROP TRIGGER api_test_corrupt_snapshot ON fieldmerge.accepted_versions;DROP FUNCTION public.api_test_corrupt_snapshot();');
+ }
+ const retried=await request('/api/submissions',{cookie:surveyor,method:'POST',value:p});assert.equal(retried.status,200);assert.equal(retried.body.state,'applied');
+ assert.equal((await admin.query("SELECT count(*) FROM fieldmerge.audit_events WHERE submission_id=$1 AND event_type='submission_reconciled'",[retried.body.submission_id])).rows[0].count,'1');
+ assert.equal((await admin.query('SELECT max(version_no) AS n FROM fieldmerge.accepted_versions WHERE record_id=$1',[input.record_id])).rows[0].n,input.base_version_no+1);
 });

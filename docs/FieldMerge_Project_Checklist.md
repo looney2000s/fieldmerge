@@ -112,15 +112,15 @@ Status baseline: 10 November 2026. Checked means completed within the scope stat
 
 ## Step 9 Finish workflow integrity and production-facing database access
 
-- [ ] Add consistency enforcement ensuring every actual nonbaseline snapshot change has exactly one matching applying field-change link.
-- [ ] Validate snapshot values, submission origins, decisions, and applying links together at transaction completion.
-- [ ] Protect workflow states and terminal field outcomes against unsupported mutation outside the two trusted workflow functions.
+- [x] Add consistency enforcement ensuring every actual nonbaseline snapshot change has exactly one matching applying field-change link.
+- [x] Validate snapshot values, submission origins, decisions, applying links, receipts, live states, and workflow audit together at transaction completion.
+- [x] Protect workflow states and terminal field outcomes outside controlled verified-intake/reconciliation/review entry points using a non-login execution role and mutation guards.
 - [x] Provision separate restricted PostgreSQL/MongoDB API accounts; application requests use neither owner nor root credentials.
 - [x] Guard database entry points for authenticated surveyors/reviewers; the API role has no direct table access.
 - [x] Derive database actor identity from a revocable hashed session token inside guarded functions.
 - [x] Verify direct database bypass and wrong-role wrapper calls using actual API credentials.
 
-Migration 004 connects the owner-only workflow functions to authenticated sessions through restricted, role-aware wrappers. General direct table access remains denied. Workflow-wide consistency triggers listed above remain pending.
+Migration 004 connects the workflow functions to authenticated sessions through restricted, role-aware wrappers. Migration 006 makes the publication functions execute as a restricted non-login role and adds deferred consistency/ordinary mutation protection. General direct table access remains denied; the API cannot assume the workflow role. See docs/FieldMerge_Workflow_Integrity.md.
 
 ## Step 10 Build verified source intake and cross-store recovery
 
@@ -173,6 +173,7 @@ Migration 004 connects the owner-only workflow functions to authenticated sessio
 - [x] Run structural and SQL workflow checks against real isolated databases.
 - [x] Exercise six real concurrent-session scenarios and injected SQL rollback failures.
 - [x] Save verification output and migration checksums in output/database/verification.json.
+- [x] Verify injected workflow inconsistencies roll back, including actual COMMIT failures and an HTTP integrity-error/same-request retry scenario.
 - [ ] Map all 35 acceptance scenarios to integrated tests and close any coverage gaps.
 - [ ] Run the full browser → authenticated API → both databases → response workflows for both roles.
 - [ ] Test ownership, role bypass, injection attempts, invalid/missing inputs, and session behavior.
@@ -184,9 +185,9 @@ Migration 004 connects the owner-only workflow functions to authenticated sessio
 - [ ] Record representative query plans and measured performance on a documented dataset.
 - [ ] Verify a clean rebuild and full test run using the final code/configuration.
 
-The latest saved milestone has 136 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 31 MongoDB structure), six concurrent-session scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
+The latest saved database milestone has 188 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 31 MongoDB structure), four actual COMMIT scenarios, six concurrent-session scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
 
-The authenticated API/draft milestone additionally passes six canonicalization/validation test groups, fourteen integration test groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. This includes owner-requested recovery, source mismatch rejection, direct SQL access denial, wrong-role calls, session revocation, login throttling, owner-scoped drafts, concurrent edits/finalization, and frozen-draft retries after interruptions. Remaining checklist entries retain broader acceptance/browser/outage coverage.
+The authenticated API/draft/integrity milestone additionally passes six canonicalization/validation test groups, fifteen integration test groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. This includes owner-requested recovery, source mismatch rejection, direct SQL access denial, wrong-role calls, session revocation, login throttling, owner-scoped drafts, concurrent edits/finalization, frozen-draft retries, and a commit-time integrity failure followed by an unchanged successful retry. Remaining checklist entries retain broader acceptance/browser/outage coverage.
 
 ## Step 14 Complete the final documentation
 
@@ -215,4 +216,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Complete the remaining workflow-wide consistency enforcement and API acceptance coverage, then persistent recovery coordination, richer query/export routes, and the surveyor/reviewer interface. Authenticated login → own draft → verified finalization → reconciliation → reviewer decision is exercised against a production Next.js test server. Draft feature work is tracked on codex/drafts-finalization, building on feature/authenticated-api; main contains the earlier database milestone until the feature work is merged.
+Implement persistent recovery coordination and operational visibility for incomplete intake, then richer query/export routes, remaining acceptance coverage, and the surveyor/reviewer interface. Authenticated login → own draft → verified finalization → reconciliation → reviewer decision is exercised against a production Next.js test server, with commit-time consistency protection. The latest feature branch is codex/workflow-integrity, building on the earlier API/draft branches; main contains the earlier database milestone until the feature work is merged.

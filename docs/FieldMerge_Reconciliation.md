@@ -10,9 +10,9 @@ Update: reviewer decisions are now implemented in migration 003. See [the review
 SELECT fieldmerge.reconcile_submission(submission_id, expected_payload_hash);
 ```
 
-The function is SECURITY INVOKER with a fixed search_path and no EXECUTE grant to PUBLIC or fieldmerge_app. It is currently an owner/trusted-worker entry point. It does not accept a caller-selected author or an arbitrary patch on each retry. Do not expose this function directly to a browser or grant ordinary users table privileges to make it work.
+Migration 006 makes this a SECURITY DEFINER entry point owned by the restricted non-login fieldmerge_workflow role, with a fixed search_path. It does not accept a caller-selected author or an arbitrary patch on each retry. API callers use session-aware wrappers; they cannot directly invoke this function or assume its execution role. Do not expose database credentials to a browser or grant ordinary users table privileges to make it work.
 
-The future intake service must verify MongoDB identity/content and canonical hash, then atomically populate submissions.verified_patch, source_verified_at, and ready state. verified_patch contains the source's raw scalar patch; normalization occurs during SQL processing. An empty verified patch is allowed for an already-validated evidence-only submission. SQL does not itself prove the presence of source observations or recompute the MongoDB canonical envelope fingerprint. The current test fixtures explicitly simulate that trusted handoff.
+The implemented intake service verifies MongoDB identity/content and canonical hash, then atomically populates submissions.verified_patch, source_verified_at, and ready state through api_finish_submission. verified_patch contains the source's raw scalar patch; normalization occurs during SQL processing. An empty verified patch is allowed for an already-validated evidence-only submission. SQL does not itself prove the presence of source observations or recompute the MongoDB canonical envelope fingerprint. Pure SQL fixtures explicitly simulate that trusted handoff; separate API integration checks exercise real cross-store intake.
 
 Once source_verified_at is set, the request identity, target/base, form, source hash, observation/receipt timestamps, verified patch, and verification time cannot be edited through normal SQL UPDATE. Initial reconciliation_result is also protected once recorded. Evidence may be corrected only through a new submission.
 
@@ -35,7 +35,7 @@ Result fields: submission_id, state, published version_no (or JSON null), compar
 
 field_value_provenance supplies one row per accepted version and canonical field. It locates the last actual value transition and joins the applying proposal and any terminal reviewer decision. Carried-forward values retain their earlier origin; baseline unknown values remain attributed to version 1. No extra provenance table or duplicated current-state row is required.
 
-The automatic function writes the expected proposal/version links. Global consistency triggers that reject arbitrary privileged writes with missing or contradictory links remain for the reviewer/integrity milestone. Database owners remain outside the ordinary application threat model.
+The automatic function writes the expected proposal/version links. Migration 006 adds [deferred consistency checks](FieldMerge_Workflow_Integrity.md) rejecting missing/contradictory links, incorrect values/origins, inconsistent receipts/states, and absent workflow audit. Database administrators deliberately bypassing role/trigger protections remain outside the ordinary application threat model.
 
 ## Reproduce verification
 
@@ -43,12 +43,14 @@ The automatic function writes the expected proposal/version links. Global consis
 .\scripts\database.ps1 Verify
 ```
 
-This applies both migrations to a fresh isolated test database. It runs:
+This applies all ordered migrations to a fresh isolated test database. Automatic-path coverage includes:
 
 - 39 existing PostgreSQL structure checks.
 - 32 reconciliation assertions: publication, partial merges, conflicts, reversal history, no-change/already-represented behavior, normalization, null/false/zero, invalid whole-patch rejection, warnings, inactive/retired prerequisites, leases, immutable verified inputs/receipt, and atomic rollback/retry.
 - Two actual concurrent-session scenarios: competing proposals and simultaneous retries of the same submission. The first session holds the tree lock through a deliberate test barrier; the second must wait and then observe committed state.
 - 31 MongoDB structure checks and cross-store form-definition hash agreement.
+
+The full runner also includes 34 reviewer assertions/four reviewer concurrency cases, 52 integrity assertions, and four actual COMMIT scenarios. Its total is 188 database assertions plus four COMMIT scenarios and six SQL concurrency scenarios. Separate API tests cover authenticated intake/review/drafts and operational integrity rejection/retry.
 
 The concurrency harness asserts the barrier through pg_stat_activity rather than assuming both sessions overlapped. Its extra fixtures remain only in the isolated test database. SQL assertion fixtures roll back; development seed data is preserved.
 
@@ -56,4 +58,4 @@ The last successful results are in [verification.json](../output/database/verifi
 
 ## Remaining work
 
-Reviewer approval with expected-version/change-revision and decision-idempotency checks; authenticated identity and row access policies; verified MongoDB intake/fingerprint calculation; draft finalization and source recovery; complete workflow-wide consistency triggers; end-to-end API tests and UI. The SQL automatic-processing tests do not establish these remaining guarantees.
+Persistent recovery coordination, operational inspection, richer query/export routes, full acceptance mapping, measured performance, and the Next.js interface. Reviewer approval, authenticated wrappers, verified MongoDB intake, owner-scoped drafts/finalization, requested recovery, and SQL workflow consistency are implemented with separate verification evidence. PostgreSQL RLS is not used.

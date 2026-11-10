@@ -1,5 +1,33 @@
 {
-  "migration_checksum": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
+  "test_database": "fieldmerge_test_a020a71f3c8f439b9dde066114ae88ed",
+  "concurrency_output": [
+    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
+  ],
+  "reviewer_output": [
+    "Output format is unaligned.",
+    "Reviewer decision checks passed: 34",
+    "ROLLBACK"
+  ],
+  "commit_output": [
+    "Actual COMMIT checks passed: 4 (automatic publication, missing applying link rollback, decisionless disposal rollback, no-publication review)."
+  ],
+  "remaining": "HTTP API and draft/finalization verification is separate in output/api/verification.json. Persistent recovery workers, richer query/export routes, full acceptance coverage and UI remain.",
+  "postgres_output": [
+    "Output format is unaligned.",
+    "PostgreSQL structural checks passed: 39",
+    "ROLLBACK"
+  ],
+  "milestone": "deferred workflow integrity and protected publication",
+  "form_registry_hashes_match": true,
+  "integrity_output": [
+    "Output format is unaligned.",
+    "Workflow integrity checks passed: 52",
+    "ROLLBACK"
+  ],
+  "mongo_output": [
+    "MongoDB structural checks passed: 31",
+    "Ownership and finalization transition guarantees still require the backend; validators alone do not authenticate end users."
+  ],
   "migration_checksums": [
     {
       "file": "001_structure.sql",
@@ -20,33 +48,17 @@
     {
       "file": "005_draft_context.sql",
       "sha256": "0969327C704F81E9DAA3B41A2C438D811292DAD20A70FEB6B533D9921080E740"
+    },
+    {
+      "file": "006_workflow_integrity.sql",
+      "sha256": "0A3BBAA7358F0EF82279293080FEE7A2A45FF32D5ACC56D9D8D3E2FF7A8312F7"
     }
   ],
-  "verified_at_utc": "2026-11-10T13:53:06.2103464Z",
   "reviewer_concurrency_output": [
     "Concurrent reviewer scenarios passed: 4 (competing reviewers, identical retry, cross-tree key reuse, review versus automatic publication)."
   ],
-  "mongo_output": [
-    "MongoDB structural checks passed: 31",
-    "Ownership and finalization transition guarantees still require the backend; validators alone do not authenticate end users."
-  ],
-  "test_database": "fieldmerge_test_23559cc23b1846feba4addb352c517b8",
-  "postgres_output": [
-    "Output format is unaligned.",
-    "PostgreSQL structural checks passed: 39",
-    "ROLLBACK"
-  ],
-  "reviewer_output": [
-    "Output format is unaligned.",
-    "Reviewer decision checks passed: 34",
-    "ROLLBACK"
-  ],
-  "milestone": "automatic reconciliation and reviewer decisions",
-  "remaining": "HTTP API and draft/finalization verification is separate in output/api/verification.json. Persistent recovery workers, full privileged-write consistency enforcement and UI remain.",
-  "form_registry_hashes_match": true,
-  "concurrency_output": [
-    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
-  ],
+  "migration_checksum": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
+  "verified_at_utc": "2026-11-10T14:16:43.4683570Z",
   "reconciliation_output": [
     "Output format is unaligned.",
     "Reconciliation checks passed: 32",

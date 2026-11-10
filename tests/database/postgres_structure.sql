@@ -62,8 +62,12 @@ SELECT pg_temp.expect_error('version origin must be same tree',$q$
  INSERT INTO accepted_versions(record_id,version_no,parent_version_no,origin_submission_id,published_by)
  VALUES('30000000-0000-4000-8000-000000000002',2,1,'80000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000001')$q$,'23503');
 
+-- Administrative role switch for row-constraint fixtures only. This deliberately
+-- incomplete graph is rolled back; commit-time workflow checks are tested separately.
+SET LOCAL ROLE fieldmerge_workflow;
 INSERT INTO field_changes(change_id,submission_id,record_id,field_name,base_value,proposed_value,compared_value,compared_version_no,classification,state,pending_reason)
 VALUES('40000000-0000-4000-8000-000000000001','80000000-0000-4000-8000-000000000001','30000000-0000-4000-8000-000000000001','diameter_cm','30','36','30',1,'compatible','pending','clock_warning');
+RESET ROLE;
 SELECT pg_temp.ok('pending view shows current accepted value',(SELECT current_value='30'::jsonb AND current_version_no=1 FROM pending_field_reviews));
 SELECT pg_temp.ok('submission outcome counts',(SELECT pending_fields=1 AND applied_fields=0 FROM submission_outcomes));
 SELECT pg_temp.expect_error('field change guard cannot name another tree',$q$
@@ -79,8 +83,10 @@ SELECT pg_temp.expect_error('applied state needs result link',$q$
 SELECT pg_temp.expect_error('surveyor cannot be reviewer',$q$
  INSERT INTO review_decisions(decision_id,change_id,record_id,reviewer_id,client_decision_id,request_hash,expected_version_no,expected_change_revision,action,chosen_value,reason)
  VALUES('a0000000-0000-4000-8000-000000000001','40000000-0000-4000-8000-000000000001','30000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000001','b0000000-0000-4000-8000-000000000001',repeat('b',64),1,1,'keep_current','30','test')$q$,'42501');
-INSERT INTO review_decisions(decision_id,change_id,record_id,reviewer_id,client_decision_id,request_hash,expected_version_no,expected_change_revision,action,chosen_value,reason)
-VALUES('a0000000-0000-4000-8000-000000000001','40000000-0000-4000-8000-000000000001','30000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000002','b0000000-0000-4000-8000-000000000001',repeat('b',64),1,1,'keep_current','30','structural fixture only');
+SET LOCAL ROLE fieldmerge_workflow;
+INSERT INTO review_decisions(decision_id,change_id,record_id,reviewer_id,client_decision_id,request_hash,expected_version_no,expected_change_revision,action,chosen_value,reason,decision_result)
+VALUES('a0000000-0000-4000-8000-000000000001','40000000-0000-4000-8000-000000000001','30000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000002','b0000000-0000-4000-8000-000000000001',repeat('b',64),1,1,'keep_current','30','structural fixture only','{"state":"awaiting_document"}');
+RESET ROLE;
 SELECT pg_temp.expect_error('one terminal decision per proposal',$q$
  INSERT INTO review_decisions SELECT 'a0000000-0000-4000-8000-000000000002',change_id,record_id,reviewer_id,'b0000000-0000-4000-8000-000000000002',request_hash,expected_version_no,expected_change_revision,action,chosen_value,reason,result_version_no,created_at FROM review_decisions$q$,'23505');
 SELECT pg_temp.expect_error('accepted history immutable',$q$ UPDATE accepted_versions SET health='Poor' $q$,'42501');

@@ -27,7 +27,7 @@ All identifiers are UUIDs; version and revision tokens are positive integers. Th
 
 Passing a replacement value with another action is rejected rather than silently ignored. SQL NULL is not a replacement value; use `'null'::jsonb` for an explicit clear. Species replacements are normalized as in automatic reconciliation; other field domains, including exact decimal precision, are validated before publication.
 
-This SECURITY INVOKER entry point currently requires a trusted owner/worker. PUBLIC and fieldmerge_app have no EXECUTE grant. A future authenticated API must derive reviewer identity from its verified session. Passing a reviewer UUID is not sufficient authentication, and this function must not be exposed directly to end users.
+Migration 006 makes this a SECURITY DEFINER entry point owned by the restricted non-login fieldmerge_workflow role. PUBLIC, fieldmerge_app, and fieldmerge_api have no raw EXECUTE grant. The implemented api_decide wrapper derives reviewer identity from its session and calls this function. Passing a reviewer UUID is not sufficient authentication, and this function must not be exposed directly to end users.
 
 ## Transaction and concurrency behavior
 
@@ -53,7 +53,7 @@ If pending fields remain, the submission stays needs_review or partially_applied
 | P0002 | Proposed field change not found. |
 | 55000 | Change already disposed, source not reviewable, retired tree, or legacy receipt missing. Refresh or use an explicit operational correction. |
 | 40001 | Current version/revision differs from the reviewer's tokens. Refresh the comparison and require a new considered decision. Do not transparently retry a stale approval with new tokens. |
-| 23514 | Inconsistent field-change identity. Treat as an operational integrity failure. |
+| 23514 | Inconsistent field-change identity or a commit-time workflow mismatch. Treat a workflow integrity failure as operational; the HTTP boundary returns 503. |
 
 The function records successful terminal decisions. Failed/stale calls raise exceptions; a surrounding rollback also rolls back any same-transaction audit write. Recording failed attempts durably will be handled by the API/operational logging boundary, not by pretending an aborted transaction persisted its audit.
 
@@ -74,6 +74,8 @@ Run `.\scripts\database.ps1 Verify` from the project root. The suite now include
 
 Other assertions cover all actions, no-op decisions, JSON null/zero/false, species normalization, stale version/revision tokens, permission checks, original reconciliation receipts, provenance, and rollback after an injected final-audit failure. These use trusted SQL fixtures, not authenticated API requests or live MongoDB intake.
 
+Migration 006 additionally verifies decisions, chosen values, applying links, receipts, live states, and workflow audit together. Its 52 assertions and four actual COMMIT scenarios are documented in [workflow integrity](FieldMerge_Workflow_Integrity.md). Separate API tests cover the authenticated reviewer path. The upgrade refuses inconsistent or receipt-less pre-existing decision graphs instead of silently backfilling history.
+
 ## Remaining boundary
 
-End-user authentication and row access policies; source fingerprint verification and MongoDB handoff; draft finalization; cross-store recovery; full privileged-write consistency enforcement; Next.js screens and end-to-end verification. Ordinary application roles intentionally remain unable to invoke unfinished owner/worker interfaces.
+Persistent recovery coordination and operational visibility, richer query/export routes, full browser/acceptance coverage, measured performance, and Next.js screens remain. Authentication, verified source intake, owner-scoped draft finalization, requested recovery, and commit-time SQL consistency are implemented. Ordinary API roles access session-aware wrappers, with direct workflow/table access denied; PostgreSQL RLS is not claimed.

@@ -62,9 +62,13 @@ BEGIN
  s:=pg_temp.submit(t,'{"health":"Fair"}');
  PERFORM pg_temp.error('sealed patch cannot be changed',format('UPDATE submissions SET verified_patch=''{}'' WHERE submission_id=%L',s),'42501');
  PERFORM pg_temp.error('verified hash cannot be changed',format('UPDATE submissions SET payload_hash=%L WHERE submission_id=%L',repeat('b',64),s),'42501');
+ SET LOCAL ROLE fieldmerge_workflow;
  UPDATE submissions SET state='processing',lease_token=gen_random_uuid(),lease_expires_at=clock_timestamp()+interval '1 hour' WHERE submission_id=s;
+ RESET ROLE;
  PERFORM pg_temp.error('active lease cannot be stolen',format('SELECT reconcile_submission(%L,%L)',s,repeat('a',64)),'55P03');
+ SET LOCAL ROLE fieldmerge_workflow;
  UPDATE submissions SET lease_expires_at=clock_timestamp()-interval '1 second' WHERE submission_id=s;
+ RESET ROLE;
  r:=reconcile_submission(s,repeat('a',64));PERFORM pg_temp.ok('expired lease recoverable',r->>'state'='applied' AND (SELECT lease_token IS NULL FROM submissions WHERE submission_id=s));
  PERFORM pg_temp.error('committed receipt immutable',format('UPDATE submissions SET reconciliation_result=''{}'' WHERE submission_id=%L',s),'42501');
  t:=pg_temp.tree(); s:=pg_temp.submit(t,'{"health":"Fair"}');
