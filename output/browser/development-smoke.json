@@ -1,0 +1,48 @@
+{
+  "verified_at_utc": "2026-11-10T17:58:04.896Z",
+  "origin": "http://localhost:3000",
+  "database": "development fieldmerge",
+  "business_data_mutated": false,
+  "checks": [
+    {
+      "role": "surveyor",
+      "route": "/api/records",
+      "status": 200
+    },
+    {
+      "role": "surveyor",
+      "route": "/api/drafts",
+      "status": 200
+    },
+    {
+      "role": "surveyor",
+      "route": "/api/submissions",
+      "status": 200
+    },
+    {
+      "role": "surveyor",
+      "route": "/api/batches",
+      "status": 200
+    },
+    {
+      "role": "reviewer",
+      "route": "/api/reviews",
+      "status": 200
+    },
+    {
+      "role": "reviewer",
+      "route": "/api/reviews/authors",
+      "status": 200
+    },
+    {
+      "role": "reviewer",
+      "route": "/api/reports/summary",
+      "status": 200
+    },
+    {
+      "role": "reviewer",
+      "route": "/api/operations/recovery",
+      "status": 200
+    }
+  ]
+}

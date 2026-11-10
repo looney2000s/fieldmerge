@@ -155,18 +155,18 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 
 ## Step 12 Build the Next.js interface
 
-- [ ] Login and role-aware navigation.
-- [ ] Accepted record list with search/filtering and details.
-- [ ] Snapshot download and clear base-version display.
-- [ ] Own drafts with field selection, explicit clear controls, and validation.
-- [ ] Delayed batch upload and per-item feedback.
-- [ ] Submission detail with source observations, warnings, and field outcomes.
-- [ ] Reviewer queue and base/current/proposed comparison.
-- [ ] Reviewer decision form with reason and stale-comparison handling.
-- [ ] Version history and field-provenance screens.
-- [ ] Role-appropriate summaries and exports.
-- [ ] Loading, empty, error, access-denied, and retry states.
-- [ ] Keyboard access, readable labels, and usable layout at common screen sizes.
+- [x] Login and role-aware navigation.
+- [x] Accepted record list with search/filtering and details.
+- [x] Snapshot download and clear base-version display.
+- [x] Own drafts with field selection, explicit clear controls, and validation.
+- [x] Delayed batch upload and per-item feedback.
+- [x] Submission detail with source observations, warnings, and field outcomes.
+- [x] Reviewer queue and base/current/proposed comparison.
+- [x] Reviewer decision form with reason and stale-comparison handling.
+- [x] Version history and field-provenance screens.
+- [x] Role-appropriate summaries and exports.
+- [x] Loading, empty, error, access-denied, and retry states.
+- [x] Keyboard access, readable labels, and usable layout at common screen sizes.
 
 ## Step 13 Complete integrated verification and query evidence
 
@@ -176,10 +176,10 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Verify injected workflow inconsistencies roll back, including actual COMMIT failures and an HTTP integrity-error/same-request retry scenario.
 - [x] Verify restricted worker credentials, missing-source waiting, quarantine, competing/expired workers, inactive authors, connection failure, and an actual worker-process kill/restart.
 - [ ] Map all 35 acceptance scenarios to integrated tests and close any coverage gaps.
-- [ ] Run the full browser → authenticated API → both databases → response workflows for both roles.
+- [x] Run representative browser → authenticated API → both databases → response workflows for both roles; the full 35-case acceptance mapping remains open.
 - [ ] Test ownership, role bypass, injection attempts, invalid/missing inputs, and session behavior.
 - [ ] Test actual MongoDB outages, interrupted intake, worker restart, and lost responses.
-- [ ] Test browser-submitted retries and stale reviewer actions without changing intent automatically.
+- [x] Test browser-submitted lost-response retries for review/finalization, review reload/resume, unchanged batch replay, and stale reviewer actions without changing intent automatically.
 - [x] Independently reconcile SQL accepted/workflow totals and MongoDB form/batch/observation aggregates in integrated tests.
 - [ ] Prepare meaningful DML, JOIN, nested/correlated, recursive/CTE, aggregate, GROUP BY, HAVING, and ORDER BY demonstrations where applicable.
 - [ ] Demonstrate CREATE/ALTER and safe DROP using disposable objects; preserve final evidence/history.
@@ -188,7 +188,7 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 
 The latest saved database milestone has 231 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 22 query/export/batch + 31 MongoDB), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
 
-The milestone additionally passes ten unit groups, thirty-two API/worker/query integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. New tests verify filters/pagination, downloads, independent summaries, formula-like CSV text, 5,000/5,001-row export limits, batch replay/membership/ownership, and batched recovery. Prior worker kill/restart, connectivity failure, authorization, and integrity checks remain included. Remaining entries retain broader acceptance/browser/outage coverage.
+The milestone additionally passes ten unit groups, thirty-three API/worker/query integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. New tests verify filters/pagination, downloads, independent summaries, formula-like CSV text, 5,000/5,001-row export limits, batch replay/membership/ownership, and batched recovery. Prior worker kill/restart, connectivity failure, authorization, and integrity checks remain included. Fifteen browser workflow checks now pass against a production Next.js server and both databases, including exact-intent retries after lost responses, stale review rejection, explicit null/false/zero, exports, role denial, keyboard focus, and mobile navigation. Nine representative axe WCAG A/AA page scans report no violations, and no browser runtime errors were recorded. Evidence and screenshots are in output/browser. Automated scans do not establish complete accessibility conformance. Remaining entries retain formal acceptance mapping and broader outage/security coverage.
 
 ## Step 14 Complete the final documentation
 
@@ -217,4 +217,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Build the surveyor/reviewer Next.js interface on the completed APIs, map/close the 35 acceptance scenarios, then collect performance/query evidence and final documentation. The latest branch is codex/query-export-batches, building on the earlier backend branches. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.
+Map/close the 35 acceptance scenarios against the implemented interface and backend, then collect performance/query evidence and final documentation. The latest branch is codex/workflow-interface, building on the earlier backend branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.

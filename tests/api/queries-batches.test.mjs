@@ -81,6 +81,23 @@ test('batch manifests replay safely, preserve first attribution, and scope membe
  assert.equal((await request('/api/batches/'+grouped.body.batch_id)).body.items[0].first_intake_batch_id,null);
 });
 
+test('interface read models preserve ownership, roles, bounded lists and current comparisons',async()=>{
+ const t=await tree(),first=await request('/api/submissions',{method:'POST',value:envelope(t,{diameter_cm:5})});assert.equal(first.status,200);
+ const conflict=await request('/api/submissions',{method:'POST',value:envelope(t,{diameter_cm:6})});assert.equal(conflict.status,200);
+ const list=await request('/api/submissions?record_id='+t.id);assert.equal(list.status,200);assert.equal(list.body.submissions.length,2);assert(list.body.submissions.every(s=>s.author_id===accounts[0].user_id&&s.source_record_id===t.source));assert.equal(list.body.submissions[0].verified_patch,undefined);
+ assert.deepEqual((await request('/api/submissions?record_id='+t.id,{cookie:other})).body.submissions,[]);
+ assert.equal((await request('/api/submissions?state=bad')).status,400);assert.equal((await request('/api/submissions?record_id=bad')).status,400);
+ const queue=await request('/api/reviews?record_id='+t.id,{cookie:reviewer}),c=queue.body.changes[0];assert.equal(c.source_record_id,t.source);
+ const comparison=await request('/api/reviews/'+c.change_id,{cookie:reviewer});assert.equal(comparison.status,200);assert.equal(comparison.body.change.base_version_no,1);assert.equal(comparison.body.change.current_value,5);assert.equal(comparison.body.change.source_record_id,t.source);assert(comparison.body.change.author_name);
+ assert.equal((await request('/api/reviews/'+c.change_id)).status,403);assert.equal((await request('/api/reviews/authors')).status,403);
+ assert((await request('/api/reviews/authors',{cookie:reviewer})).body.authors.some(a=>a.user_id===accounts[0].user_id));
+ const batch=await request('/api/submissions/batch',{method:'POST',value:[envelope(t,{species:'Interface fixture'})]});assert.equal(batch.status,207);
+ assert((await request('/api/batches')).body.batches.some(b=>b.batch_id===batch.body.batch_id));assert(!(await request('/api/batches',{cookie:other})).body.batches.some(b=>b.batch_id===batch.body.batch_id));assert((await request('/api/batches',{cookie:reviewer})).body.batches.some(b=>b.batch_id===batch.body.batch_id));
+ const draft=await request('/api/drafts',{method:'POST',value:{record_id:t.id,base_version_no:1,form_version:'tree-v2',payload:{patch:{}}}});assert.equal(draft.status,201);
+ const details=await request('/api/drafts/'+draft.body.draft.draft_id);assert.equal(details.status,200);assert.equal(details.body.base.record.version_no,1);assert.equal(details.body.base.record.source_record_id,t.source);
+ assert((await request('/api/drafts')).body.drafts.some(d=>d.draft_id===draft.body.draft.draft_id&&d.source_record_id===t.source));
+});
+
 test('SQL and MongoDB summaries match independent counts without conflating accepted state',async()=>{
  assert.equal((await request('/api/reports/summary')).status,403);
  const r=await request('/api/reports/summary',{cookie:reviewer});assert.equal(r.status,200);assert.equal(r.body.consistency,'independent_database_reads');

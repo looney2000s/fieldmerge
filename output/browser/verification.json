@@ -1,0 +1,7 @@
+{
+  "verified_at_utc": "2026-11-10T17:46:56.910Z",
+  "test_database": "fieldmerge_test_4e70558c94e54c488e745557fbfb0a3c",
+  "production_server": true,
+  "output": "PASS Authentication, literal filters, accepted snapshot and exact base download\nPASS Two stale-base drafts: compatible field publishes, conflicting field waits, repeated evidence survives in MongoDB\nPASS Explicit zero, false and unknown survive browser form, API and SQL publication\nPASS Concurrent accepted change rejects stale review; manual refresh requires a fresh reason\nPASS Lost review response, page reload, exact-intent retry: one decision and one accepted version\nPASS Mixed batch independently reports errors; unchanged file retry retains durable batch identity\nPASS Historical snapshots and reviewer-linked field provenance remain inspectable\nPASS Reviewer SQL/Mongo summaries render and downloaded exports retain false, zero and null\nPASS Recovery status and event history render without worker credentials\nPASS Both interface role gates and API role enforcement deny wrong-role operations\nPASS Editable draft deletion removes only the owner draft\nPASS Lost finalization response retries the sealed revision without duplicate publication\nPASS Keyboard skip link moves focus directly to main content\nPASS Mobile layout contains table overflow and navigation works at 390px\nPASS Sign out revokes the server session\n",
+  "remaining": "Formal acceptance mapping, broader outage/access coverage, performance evidence and final documentation remain."
+}

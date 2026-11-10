@@ -1,4 +1,15 @@
-export const metadata = {title: 'FieldMerge API', description: 'Field survey reconciliation backend'};
-export default function Layout({children}) {
-  return <html lang="en"><body style={{fontFamily:'system-ui',maxWidth:760,margin:'4rem auto',padding:'0 24px'}}>{children}</body></html>;
+import "./globals.css";
+import { SessionProvider } from "./components/session.jsx";
+export const metadata = {
+  title: { default: "FieldMerge", template: "%s · FieldMerge" },
+  description: "Traceable reconciliation for delayed field surveys",
+};
+export default function Layout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <SessionProvider>{children}</SessionProvider>
+      </body>
+    </html>
+  );
 }

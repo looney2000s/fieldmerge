@@ -1,85 +1,89 @@
 {
-  "migration_checksum": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
-  "migration_checksums": [
-    {
-      "sha256": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
-      "file": "001_structure.sql"
-    },
-    {
-      "sha256": "AE2F62A3B4FE5C8B37EE00C1CAA198BEEFD9322D15A31664E96C159FCE9C8C11",
-      "file": "002_reconciliation.sql"
-    },
-    {
-      "sha256": "57AEDE93840BF5F3F6E33B82B4924CBFDBDCA9441B6A380B2DE9C3A78D74DB0D",
-      "file": "003_review_decisions.sql"
-    },
-    {
-      "sha256": "BAF6471B647C88BE55039DF3E3F7EC001F292E39900537240965E7695BD91DE4",
-      "file": "004_authenticated_api.sql"
-    },
-    {
-      "sha256": "0969327C704F81E9DAA3B41A2C438D811292DAD20A70FEB6B533D9921080E740",
-      "file": "005_draft_context.sql"
-    },
-    {
-      "sha256": "0A3BBAA7358F0EF82279293080FEE7A2A45FF32D5ACC56D9D8D3E2FF7A8312F7",
-      "file": "006_workflow_integrity.sql"
-    },
-    {
-      "sha256": "09D9D4437E8EBCE9BA1AF60D9131353AB741F59BA2616EED6A5DAC46E1D8AA9B",
-      "file": "007_recovery_jobs.sql"
-    },
-    {
-      "sha256": "72B2A61516F3C7F04EDE94EBC6EE0070F9AC3F4EEBC1A9CD6810368497488755",
-      "file": "008_queries_exports_batches.sql"
-    }
-  ],
   "reviewer_output": [
     "Output format is unaligned.",
     "Reviewer decision checks passed: 34",
     "ROLLBACK"
   ],
-  "recovery_output": [
-    "Output format is unaligned.",
-    "Recovery queue checks passed: 21",
-    "ROLLBACK"
-  ],
-  "remaining": "HTTP API/worker/report verification is separate in output/api/verification.json. Full acceptance/browser coverage, performance evidence and UI remain.",
-  "query_output": [
-    "Output format is unaligned.",
-    "Query/export/batch checks passed: 22",
-    "ROLLBACK"
-  ],
-  "integrity_output": [
-    "Output format is unaligned.",
-    "Workflow integrity checks passed: 52",
-    "ROLLBACK"
-  ],
-  "concurrency_output": [
-    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
-  ],
-  "milestone": "filtered queries, exports and immutable batch tracking",
-  "verified_at_utc": "2026-11-10T16:28:32.3958985Z",
-  "form_registry_hashes_match": true,
-  "reviewer_concurrency_output": [
-    "Concurrent reviewer scenarios passed: 4 (competing reviewers, identical retry, cross-tree key reuse, review versus automatic publication)."
-  ],
-  "postgres_output": [
-    "Output format is unaligned.",
-    "PostgreSQL structural checks passed: 39",
-    "ROLLBACK"
+  "commit_output": [
+    "Actual COMMIT checks passed: 4 (automatic publication, missing applying link rollback, decisionless disposal rollback, no-publication review)."
   ],
   "reconciliation_output": [
     "Output format is unaligned.",
     "Reconciliation checks passed: 32",
     "ROLLBACK"
   ],
-  "test_database": "fieldmerge_test_df1b0f75247641f58d3856a33014a444",
+  "verified_at_utc": "2026-11-10T17:44:22.8219423Z",
+  "migration_checksums": [
+    {
+      "file": "001_structure.sql",
+      "sha256": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39"
+    },
+    {
+      "file": "002_reconciliation.sql",
+      "sha256": "AE2F62A3B4FE5C8B37EE00C1CAA198BEEFD9322D15A31664E96C159FCE9C8C11"
+    },
+    {
+      "file": "003_review_decisions.sql",
+      "sha256": "57AEDE93840BF5F3F6E33B82B4924CBFDBDCA9441B6A380B2DE9C3A78D74DB0D"
+    },
+    {
+      "file": "004_authenticated_api.sql",
+      "sha256": "BAF6471B647C88BE55039DF3E3F7EC001F292E39900537240965E7695BD91DE4"
+    },
+    {
+      "file": "005_draft_context.sql",
+      "sha256": "0969327C704F81E9DAA3B41A2C438D811292DAD20A70FEB6B533D9921080E740"
+    },
+    {
+      "file": "006_workflow_integrity.sql",
+      "sha256": "0A3BBAA7358F0EF82279293080FEE7A2A45FF32D5ACC56D9D8D3E2FF7A8312F7"
+    },
+    {
+      "file": "007_recovery_jobs.sql",
+      "sha256": "09D9D4437E8EBCE9BA1AF60D9131353AB741F59BA2616EED6A5DAC46E1D8AA9B"
+    },
+    {
+      "file": "008_queries_exports_batches.sql",
+      "sha256": "72B2A61516F3C7F04EDE94EBC6EE0070F9AC3F4EEBC1A9CD6810368497488755"
+    },
+    {
+      "file": "009_interface_queries.sql",
+      "sha256": "D3A8166D9F0434D9F3F3F56627DF10CAB71D2B1BD33082F8F61EC12D0DBD6113"
+    }
+  ],
+  "remaining": "API/worker/read-model verification is separate in output/api/verification.json; browser workflows are in output/browser/verification.json. Formal acceptance mapping, broader outage/security coverage, performance evidence and final deliverables remain.",
+  "test_database": "fieldmerge_test_c76f3ac58ea14f428db6efeebf5d5c46",
+  "milestone": "database checks through interface read-model migration",
+  "form_registry_hashes_match": true,
+  "migration_checksum": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
+  "integrity_output": [
+    "Output format is unaligned.",
+    "Workflow integrity checks passed: 52",
+    "ROLLBACK"
+  ],
+  "reviewer_concurrency_output": [
+    "Concurrent reviewer scenarios passed: 4 (competing reviewers, identical retry, cross-tree key reuse, review versus automatic publication)."
+  ],
+  "concurrency_output": [
+    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
+  ],
+  "recovery_output": [
+    "Output format is unaligned.",
+    "Recovery queue checks passed: 21",
+    "ROLLBACK"
+  ],
+  "postgres_output": [
+    "Output format is unaligned.",
+    "PostgreSQL structural checks passed: 39",
+    "ROLLBACK"
+  ],
   "mongo_output": [
     "MongoDB structural checks passed: 31",
     "Ownership and finalization transition guarantees still require the backend; validators alone do not authenticate end users."
   ],
-  "commit_output": [
-    "Actual COMMIT checks passed: 4 (automatic publication, missing applying link rollback, decisionless disposal rollback, no-publication review)."
+  "query_output": [
+    "Output format is unaligned.",
+    "Query/export/batch checks passed: 22",
+    "ROLLBACK"
   ]
 }

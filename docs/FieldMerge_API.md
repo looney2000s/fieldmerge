@@ -1,6 +1,6 @@
 # Authenticated API milestone
 
-Implemented 10 November 2026, extended through codex/recovery-worker. This is a runnable Next.js App Router backend with a minimal status home page. [Drafts/finalization](FieldMerge_Drafts.md), [automatic recovery and reviewer operational inspection](FieldMerge_Recovery.md) are implemented. The complete graphical interface remains separate work.
+Implemented 10 November 2026 and extended through codex/workflow-interface. The Next.js App Router API now supports a complete surveyor/reviewer workspace; see the [interface guide](FieldMerge_Interface.md) for browser usage and interface read endpoints. [Drafts/finalization](FieldMerge_Drafts.md) and [automatic recovery and reviewer operational inspection](FieldMerge_Recovery.md) remain available through the API as described here.
 
 ## Start locally
 

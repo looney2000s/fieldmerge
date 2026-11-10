@@ -4,19 +4,21 @@ Solo DBMS project for conflict-safe reconciliation of delayed urban tree survey 
 
 Repository: [looney2000s/fieldmerge](https://github.com/looney2000s/fieldmerge).
 
-Surveyors submit changes based on accepted record versions. FieldMerge combines compatible updates, holds competing values, and records reviewer decisions and value provenance. The authenticated API is implemented; the full surveyor/reviewer interface is the next major milestone.
+Surveyors submit changes based on accepted record versions. FieldMerge combines compatible updates, holds competing values, and records reviewer decisions and value provenance. The authenticated Next.js interface now supports the surveyor and reviewer workflows. See the [interface guide](docs/FieldMerge_Interface.md) for startup, usage, retries, and verification.
 
 **Stack:** Next.js, PostgreSQL, MongoDB, and Docker Compose.
 
 **Verified database milestone:** 231 assertions, four actual COMMIT scenarios, and six concurrent-session scenarios, plus agreement of published form hashes across both databases. These results are database-level evidence, not a claim that the complete application is finished.
 
-**Verified API milestone:** ten validation/export unit groups, thirty-two API/worker/query integration groups against a production Next.js server and real isolated databases, and a successful production build. Coverage includes authentication, reconciliation/review, drafts, recovery, filtered queries, summaries, snapshots, CSV/JSON exports, and durable batch replay.
+**Verified API milestone:** ten validation/export unit groups, thirty-three API/worker/query integration groups against a production Next.js server and real isolated databases, and a successful production build. Coverage includes authentication, reconciliation/review, drafts, recovery, filtered queries, summaries, snapshots, CSV/JSON exports, durable batch replay, and interface read models.
 
 The [complete project checklist](docs/FieldMerge_Project_Checklist.md) tracks completed and remaining work from problem selection through final submission.
 
+**Verified interface milestone:** fifteen browser workflow checks and nine representative axe WCAG A/AA page checks, with no reported violations or browser runtime errors. Coverage includes both roles, actual SQL/MongoDB outcomes, stale review handling, lost-response retries, exports, keyboard access, and a 390px mobile layout. See [browser results](output/browser/checks.json).
+
 ```mermaid
 flowchart LR
-    S[Surveyor] --> UI[Authenticated Next.js API]
+    S[Surveyor] --> UI[Next.js role-aware interface and API]
     R[Reviewer] --> UI
     UI --> IN[Intake and source verification]
     IN --> M[(MongoDB source evidence)]
@@ -26,9 +28,9 @@ flowchart LR
 
 ## Current milestone
 
-The development databases, SQL reconciliation, reviewer decisions, and authenticated Next.js API are implemented. PostgreSQL has nine business tables, four read views, and guarded workflow/read functions. Migrations 001–007 implement core structures, sessions, drafts, integrity, and recovery; migration 008 adds filtered reads, reports/exports, and two internal transport-batch tables. There are 16 SQL tables including internal authentication/operational metadata and the migration registry. MongoDB has three validated collections and separate restricted API/worker credentials.
+The development databases, SQL reconciliation, reviewer decisions, authenticated API, and Next.js interface are implemented. PostgreSQL has nine business tables, four read views, and guarded workflow/read functions. Migrations 001–007 implement core structures, sessions, drafts, integrity, and recovery; migration 008 adds filtered reads, reports/exports, and two internal transport-batch tables. Migration 009 adds guarded interface read models without adding tables. There are 16 SQL tables including internal authentication/operational metadata and the migration registry. MongoDB has three validated collections and separate restricted API/worker credentials.
 
-Login, verified intake, drafts/finalization, review, history, [commit-time integrity](docs/FieldMerge_Workflow_Integrity.md), and [automatic recovery](docs/FieldMerge_Recovery.md) are implemented. [Filtered queries, downloads, reports/exports, and batch inspection](docs/FieldMerge_Queries_Exports_Batches.md) are now ready for the interface. Remaining work includes the full UI, complete acceptance/browser coverage, performance/query evidence, and final deliverables. The 35 acceptance scenarios are not yet all closed. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [reconciliation](docs/FieldMerge_Reconciliation.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
+Login, accepted-record browsing, drafts/finalization, batch upload, per-field outcomes, reviewer comparisons/decisions, history/provenance, reports/exports, and recovery inspection are available in the interface. [Commit-time integrity](docs/FieldMerge_Workflow_Integrity.md) and [automatic recovery](docs/FieldMerge_Recovery.md) remain enforced by the backend. Remaining work includes formal coverage of all 35 acceptance scenarios, broader outage/security verification, performance/query evidence, and final design/report/demo deliverables. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [query/export/batch behavior](docs/FieldMerge_Queries_Exports_Batches.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
 
 ## Prerequisites
 
@@ -46,7 +48,7 @@ From the project folder in PowerShell:
 .\scripts\database.ps1 Setup
 ```
 
-Then install the API dependencies and configure its restricted connections:
+Then install the application dependencies and configure its restricted connections:
 
 ```powershell
 pnpm install --frozen-lockfile
@@ -56,7 +58,7 @@ pnpm dev
 
 For continuous automatic recovery, run pnpm worker in a separate terminal. pnpm worker:once runs one bounded cycle. The [recovery guide](docs/FieldMerge_Recovery.md) explains statuses, safe retries, and reviewer inspection. The worker must be running for unattended recovery; it is not installed as a Windows service.
 
-Open http://localhost:3000. The home page is currently a backend-status placeholder, not the final workflow interface. The API guide provides PowerShell examples. If Windows memory pressure interrupts dependency install scripts, `pnpm install --frozen-lockfile --ignore-scripts --child-concurrency=1` is the installation mode verified for this milestone; the production build was checked afterward.
+Open http://localhost:3000, matching APP_ORIGIN in .env. The home page opens the workspace and redirects unauthenticated visitors to sign in. Generated surveyor/reviewer account credentials are in the ignored `tmp/database-fixtures/demo-accounts.json`; open it privately. The [interface guide](docs/FieldMerge_Interface.md) explains a complete demonstration. The API guide also provides PowerShell examples. If Windows memory pressure interrupts dependency install scripts, `pnpm install --frozen-lockfile --ignore-scripts --child-concurrency=1` is the installation mode verified for this milestone; the production build was checked afterward.
 
 Verification commands:
 
@@ -64,9 +66,13 @@ Verification commands:
 pnpm test:unit
 pnpm build
 pnpm test:api
+# One-time browser download, into the ignored workspace directory:
+$env:PLAYWRIGHT_BROWSERS_PATH = Join-Path (Get-Location) 'tmp\playwright-browsers'
+pnpm exec playwright install chromium
+pnpm test:browser
 ```
 
-test:api starts a temporary production server on 127.0.0.1:3100 against unique isolated databases on the existing development database services. Those services must be running, and Setup must have generated the fixtures. It leaves development records untouched and stops the temporary API server afterward. It uses administrative credentials only to provision test databases, while actual HTTP requests use restricted API accounts. The latest successful API evidence is in [output/api/verification.json](output/api/verification.json).
+test:api and test:browser each start a temporary production server on 127.0.0.1:3100 against unique isolated databases on the existing development database services. Run them sequentially after building. Those services must be running, and Setup must have generated the fixtures. They leave development records untouched and stop their temporary server afterward. They use administrative credentials only to provision test databases, while actual HTTP requests use restricted API accounts. Evidence is in [output/api/verification.json](output/api/verification.json) and [output/browser/verification.json](output/browser/verification.json); workflow/accessibility details and screenshots accompany the browser report. This is representative end-to-end coverage, not closure of all 35 acceptance scenarios.
 
 Setup generates an ignored .env only if absent, with random database credentials. It generates consistent synthetic fixtures, starts local development containers, runs checks against separate test services/databases, then applies the verified migration and seed to development. Re-running Setup checks the migration checksum and preserves existing seeded records rather than resetting the database.
 

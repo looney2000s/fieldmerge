@@ -86,7 +86,7 @@ function Verify-Databases {
  $reportDir=Join-Path $taskRoot 'output/database'
  New-Item -ItemType Directory -Force -Path $reportDir | Out-Null
  $report=@{
-  verified_at_utc=[DateTime]::UtcNow.ToString('o');milestone='filtered queries, exports and immutable batch tracking';
+  verified_at_utc=[DateTime]::UtcNow.ToString('o');milestone='database checks through interface read-model migration';
   test_database=$testName;postgres_output=@($sqlOutput);mongo_output=@($mongoOutput);
   form_registry_hashes_match=$true;
   reconciliation_output=@($workflowOutput);concurrency_output=@($raceOutput);
@@ -97,7 +97,7 @@ function Verify-Databases {
   commit_output=@($commitOutput);
   migration_checksums=@(Get-ChildItem -LiteralPath (Join-Path $taskRoot 'database/postgres/migrations') -Filter '*.sql' | Sort-Object Name | ForEach-Object { @{file=$_.Name;sha256=(Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash} });
   migration_checksum=(Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $taskRoot 'database/postgres/migrations/001_structure.sql')).Hash;
-  remaining='HTTP API/worker/report verification is separate in output/api/verification.json. Full acceptance/browser coverage, performance evidence and UI remain.'
+  remaining='API/worker/read-model verification is separate in output/api/verification.json; browser workflows are in output/browser/verification.json. Formal acceptance mapping, broader outage/security coverage, performance evidence and final deliverables remain.'
  }
  $report | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $reportDir 'verification.json') -Encoding utf8
  Write-Host 'Structural verification passed. Report: output/database/verification.json'

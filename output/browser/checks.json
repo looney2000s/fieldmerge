@@ -1,0 +1,58 @@
+{
+  "checks": [
+    "Authentication, literal filters, accepted snapshot and exact base download",
+    "Two stale-base drafts: compatible field publishes, conflicting field waits, repeated evidence survives in MongoDB",
+    "Explicit zero, false and unknown survive browser form, API and SQL publication",
+    "Concurrent accepted change rejects stale review; manual refresh requires a fresh reason",
+    "Lost review response, page reload, exact-intent retry: one decision and one accepted version",
+    "Mixed batch independently reports errors; unchanged file retry retains durable batch identity",
+    "Historical snapshots and reviewer-linked field provenance remain inspectable",
+    "Reviewer SQL/Mongo summaries render and downloaded exports retain false, zero and null",
+    "Recovery status and event history render without worker credentials",
+    "Both interface role gates and API role enforcement deny wrong-role operations",
+    "Editable draft deletion removes only the owner draft",
+    "Lost finalization response retries the sealed revision without duplicate publication",
+    "Keyboard skip link moves focus directly to main content",
+    "Mobile layout contains table overflow and navigation works at 390px",
+    "Sign out revokes the server session"
+  ],
+  "accessibility": [
+    {
+      "page": "login",
+      "violations": []
+    },
+    {
+      "page": "records",
+      "violations": []
+    },
+    {
+      "page": "draft editor",
+      "violations": []
+    },
+    {
+      "page": "submission outcome",
+      "violations": []
+    },
+    {
+      "page": "review comparison",
+      "violations": []
+    },
+    {
+      "page": "batch upload",
+      "violations": []
+    },
+    {
+      "page": "reports",
+      "violations": []
+    },
+    {
+      "page": "recovery job",
+      "violations": []
+    },
+    {
+      "page": "mobile drafts",
+      "violations": []
+    }
+  ],
+  "browser_errors": []
+}
