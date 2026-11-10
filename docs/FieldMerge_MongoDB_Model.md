@@ -4,7 +4,7 @@ Version 1.0 · 2 November 2026
 
 ## 1 Ownership and representation
 
-This document completes the document-database portion of the logical design. It follows [the requirements](FieldMerge_Requirements.md) and accompanies [the relational schema](FieldMerge_Relational_Schema.md). Collection validators, indexes, service roles, seeds, and live structural checks are now implemented under database/mongodb and tests/database. Authentication of end users, owner/state enforcement in draft API operations, fingerprint recomputation, and cross-store intake recovery remain for backend implementation; collection validators alone do not provide these guarantees.
+This document completes the document-database portion of the logical design. It follows [the requirements](FieldMerge_Requirements.md) and accompanies [the relational schema](FieldMerge_Relational_Schema.md). Collection validators, indexes, service roles, seeds, and live structural checks are implemented under database/mongodb and tests/database. Authentication, fingerprint recomputation, verified intake, owner-requested recovery, and owner/state enforcement in draft operations are now implemented in the [API](FieldMerge_API.md) and [draft workflow](FieldMerge_Drafts.md). Collection validators alone do not provide these guarantees; unattended recovery and aggregates remain pending.
 
 PostgreSQL owns publication and reviewer outcomes. MongoDB owns source envelopes, immutable form definitions, and editable drafts. Never copy SQL state into a MongoDB document and then treat that copy as authoritative.
 
@@ -123,7 +123,7 @@ Drafts are owner-scoped editable documents and the normal target for MongoDB upd
 }
 ```
 
-Partial data is allowed while editable. Finalization performs full envelope validation; a partially completed draft is not a valid final submission by itself. The server creates or preserves a stable request identity for finalization, locks the draft with an atomic revision-checked update to state finalizing, and invokes ordinary idempotent SQL/document intake. Do not let edits change the body of a finalizing request under the same identity.
+Partial data is allowed while editable. API-created drafts also store canonical_payload_json, preserving the logical envelope's exact numeric/timestamp content; the example omits that duplicate string. Finalization performs full envelope validation; a partially completed draft is not a valid final submission by itself. Each successful edit assigns a new future request identity and increments revision_no. Finalization locks that revision with an atomic update to state finalizing and invokes ordinary idempotent SQL/document intake. Do not let edits change the body of a finalizing request under the same identity.
 
 On successful intake, set finalized and final_submission_id. If a response or intermediate step fails, retry the same sealed finalizing content. If validation fails before any intake reservation, return the draft to editable and explicitly start a new finalization identity after an edit. Once a SQL identity has been reserved, changing its content is prohibited; edits must become a separate request. Finalized draft metadata may remain for navigation, but final source evidence lives in submission_documents.
 

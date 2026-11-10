@@ -1,48 +1,52 @@
 {
-  "form_registry_hashes_match": true,
-  "verified_at_utc": "2026-11-09T20:00:23.1060480Z",
-  "reviewer_output": [
-    "Output format is unaligned.",
-    "Reviewer decision checks passed: 34",
-    "ROLLBACK"
-  ],
   "migration_checksum": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
-  "milestone": "automatic reconciliation and reviewer decisions",
+  "migration_checksums": [
+    {
+      "file": "001_structure.sql",
+      "sha256": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39"
+    },
+    {
+      "file": "002_reconciliation.sql",
+      "sha256": "AE2F62A3B4FE5C8B37EE00C1CAA198BEEFD9322D15A31664E96C159FCE9C8C11"
+    },
+    {
+      "file": "003_review_decisions.sql",
+      "sha256": "57AEDE93840BF5F3F6E33B82B4924CBFDBDCA9441B6A380B2DE9C3A78D74DB0D"
+    },
+    {
+      "file": "004_authenticated_api.sql",
+      "sha256": "BAF6471B647C88BE55039DF3E3F7EC001F292E39900537240965E7695BD91DE4"
+    },
+    {
+      "file": "005_draft_context.sql",
+      "sha256": "0969327C704F81E9DAA3B41A2C438D811292DAD20A70FEB6B533D9921080E740"
+    }
+  ],
+  "verified_at_utc": "2026-11-10T13:53:06.2103464Z",
   "reviewer_concurrency_output": [
     "Concurrent reviewer scenarios passed: 4 (competing reviewers, identical retry, cross-tree key reuse, review versus automatic publication)."
-  ],
-  "remaining": "Authenticated API/row access policies, MongoDB verification handoff, cross-store recovery and global privileged-write consistency enforcement remain.",
-  "concurrency_output": [
-    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
-  ],
-  "postgres_output": [
-    "Output format is unaligned.",
-    "PostgreSQL structural checks passed: 39",
-    "ROLLBACK"
   ],
   "mongo_output": [
     "MongoDB structural checks passed: 31",
     "Ownership and finalization transition guarantees still require the backend; validators alone do not authenticate end users."
   ],
-  "migration_checksums": [
-    {
-      "sha256": "66CDB51DFB526E7E3891E209A8FB7BE991B02EE32ED990A3C0C7A2B0A1574D39",
-      "file": "001_structure.sql"
-    },
-    {
-      "sha256": "AE2F62A3B4FE5C8B37EE00C1CAA198BEEFD9322D15A31664E96C159FCE9C8C11",
-      "file": "002_reconciliation.sql"
-    },
-    {
-      "sha256": "57AEDE93840BF5F3F6E33B82B4924CBFDBDCA9441B6A380B2DE9C3A78D74DB0D",
-      "file": "003_review_decisions.sql"
-    },
-    {
-      "sha256": "BAF6471B647C88BE55039DF3E3F7EC001F292E39900537240965E7695BD91DE4",
-      "file": "004_authenticated_api.sql"
-    }
+  "test_database": "fieldmerge_test_23559cc23b1846feba4addb352c517b8",
+  "postgres_output": [
+    "Output format is unaligned.",
+    "PostgreSQL structural checks passed: 39",
+    "ROLLBACK"
   ],
-  "test_database": "fieldmerge_test_f5de9fa6603240babf9bc7179cc89dd9",
+  "reviewer_output": [
+    "Output format is unaligned.",
+    "Reviewer decision checks passed: 34",
+    "ROLLBACK"
+  ],
+  "milestone": "automatic reconciliation and reviewer decisions",
+  "remaining": "HTTP API and draft/finalization verification is separate in output/api/verification.json. Persistent recovery workers, full privileged-write consistency enforcement and UI remain.",
+  "form_registry_hashes_match": true,
+  "concurrency_output": [
+    "Concurrent reconciliation scenarios passed: 2 (competing submissions and same-submission retries)."
+  ],
   "reconciliation_output": [
     "Output format is unaligned.",
     "Reconciliation checks passed: 32",

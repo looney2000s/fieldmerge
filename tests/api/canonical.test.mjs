@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {parseExact,canonical,validateSubmission,ApiError} from '../../lib/canonical.mjs';
+import {parseExact,canonical,validateSubmission,validateDraftPayload,ApiError} from '../../lib/canonical.mjs';
 test('canonicalization preserves exact decimals and ignores object order/whitespace',()=>{
  assert.equal(canonical(parseExact('{"z":0.100000000000000001,"a":1e0}')),'{"a":1,"z":0.100000000000000001}');
  assert.equal(canonical(parseExact('{ "b":2,"a":1 }')),canonical(parseExact('{"a":1.0,"b":2e0}')));
@@ -10,8 +10,17 @@ test('duplicate keys rejected at every object level',()=>{
 });
 test('strict JSON, resource bounds and special keys',()=>{
  for(const text of ['{"a":1,}','/* comment */ {}','{"a":1e999999}','['.repeat(40)+'0'+']'.repeat(40)])assert.throws(()=>parseExact(text),ApiError);
+  assert.throws(()=>parseExact('{"\\u0000":1}'),e=>e.code==='invalid_json_key');
  assert.equal(canonical(parseExact('{"__proto__":{"admin":true}}')),'{"__proto__":{"admin":true}}');
  assert.equal({}.admin,undefined);
+});
+
+test('drafts permit missing data while validating every supplied field',()=>{
+ validateDraftPayload(parseExact('{}'),'tree-v1');
+ validateDraftPayload(parseExact('{"patch":{}}'),'tree-v2');
+ validateDraftPayload(parseExact('{"observed_at":"2026-06-01T01:30:00.123456789+01:30","patch":{"diameter_cm":0,"health":null}}'),'tree-v2');
+ for(const text of ['{"patch":{"diameter_cm":0.000000000000000001}}','{"owner_id":"forged"}','{"patch":null}','{"observed_at":"2026-02-30T00:00:00Z"}'])assert.throws(()=>validateDraftPayload(parseExact(text),'tree-v2'),ApiError);
+ assert.throws(()=>validateDraftPayload(parseExact('{"observations":[]}'),'tree-v1'),ApiError);
 });
 test('arrays, strings, omission and null have distinct fingerprints',()=>{
  assert.notEqual(canonical(parseExact('[1,2]')),canonical(parseExact('[2,1]')));

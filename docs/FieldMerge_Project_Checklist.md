@@ -141,13 +141,15 @@ Migration 004 connects the owner-only workflow functions to authenticated sessio
 - [x] Scaffold Next.js route handlers and restricted server-side database connections.
 - [x] Generate server-only API credentials and reject owner/root connection identities in application modules.
 - [x] Implement password verification, login/logout, revocable eight-hour sessions, and inactive-account checks.
-- [ ] Enforce roles and draft ownership on every protected operation.
-- [ ] Implement record listing, filtering, snapshot retrieval, and download endpoints.
-- [ ] Implement owner-scoped draft creation, revision-safe edit, and permitted deletion.
-- [ ] Implement immutable draft finalization with safe restart/retry behavior.
+- [x] Enforce roles and draft ownership on every currently exposed protected operation.
+- [x] Implement record listing and snapshot retrieval endpoints.
+- [ ] Add record filtering, pagination, and snapshot download endpoints.
+- [x] Implement owner-scoped draft creation, revision-safe edit, and permitted deletion.
+- [x] Implement immutable draft finalization with retries after injected interruptions, including a lost response after SQL commit.
 - [x] Implement submission/batch upload, own/reviewer outcome/source retrieval, and owner-requested recovery endpoints.
 - [x] Implement reviewer queue, current comparison, and guarded decision endpoints.
-- [ ] Implement history, provenance, aggregate, and export endpoints.
+- [x] Implement history and field-provenance endpoints.
+- [ ] Implement aggregate and export endpoints.
 - [x] Map database errors to bounded HTTP responses and return a refresh-required stale-review error.
 - [ ] Record failed access/stale attempts at a logging boundary that survives rolled-back database transactions, without logging secrets.
 
@@ -184,7 +186,7 @@ Migration 004 connects the owner-only workflow functions to authenticated sessio
 
 The latest saved milestone has 136 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 31 MongoDB structure), six concurrent-session scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
 
-The authenticated API milestone additionally passes five canonicalization/validation test groups, nine integration test groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. This includes owner-requested recovery, source mismatch rejection, direct SQL access denial, wrong-role calls, session revocation, and login throttling. Remaining checklist entries retain broader acceptance/browser coverage.
+The authenticated API/draft milestone additionally passes six canonicalization/validation test groups, fourteen integration test groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. This includes owner-requested recovery, source mismatch rejection, direct SQL access denial, wrong-role calls, session revocation, login throttling, owner-scoped drafts, concurrent edits/finalization, and frozen-draft retries after interruptions. Remaining checklist entries retain broader acceptance/browser/outage coverage.
 
 ## Step 14 Complete the final documentation
 
@@ -213,4 +215,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Complete owner-scoped draft APIs/finalization, remaining integrity enforcement and API acceptance coverage, then the surveyor/reviewer interface. Authenticated login → verified intake → reconciliation → reviewer decision is now exercised against a production Next.js test server. Feature work is tracked on feature/authenticated-api; main contains the earlier database milestone until that branch is merged.
+Complete the remaining workflow-wide consistency enforcement and API acceptance coverage, then persistent recovery coordination, richer query/export routes, and the surveyor/reviewer interface. Authenticated login → own draft → verified finalization → reconciliation → reviewer decision is exercised against a production Next.js test server. Draft feature work is tracked on codex/drafts-finalization, building on feature/authenticated-api; main contains the earlier database milestone until the feature work is merged.

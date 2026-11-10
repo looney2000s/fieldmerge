@@ -5,6 +5,7 @@ import {readFileSync} from 'node:fs';
 import pg from 'pg';
 import {MongoClient} from 'mongodb';
 import {submit} from '../../lib/intake.mjs';
+import {createDraft,finalizeDraft} from '../../lib/drafts.mjs';
 import {parseExact,sha256} from '../../lib/canonical.mjs';
 import {closeConnections,pool} from '../../lib/database.mjs';
 const base=process.env.API_BASE;
@@ -116,4 +117,98 @@ test('login attempts are limited persistently at the database boundary',async()=
  const email=randomUUID()+'@missing.invalid';
  for(let i=0;i<10;i++)assert.equal((await request('/api/auth/login',{method:'POST',value:{email,password:'invalid'}})).status,401);
  assert.equal((await request('/api/auth/login',{method:'POST',value:{email,password:'invalid'}})).status,429);
+});
+
+async function currentDraftInput(payload={}){
+ const record='30000000-0000-4000-8000-000000000003';
+ const version=(await admin.query('SELECT max(version_no) AS n FROM fieldmerge.accepted_versions WHERE record_id=$1',[record])).rows[0].n;
+ return{record_id:record,base_version_no:version,form_version:'tree-v2',payload};
+}
+const draftPath=id=>'/api/drafts/'+id;
+test('draft CRUD enforces ownership, roles, references and explicit revisions',async()=>{
+ assert.equal((await request('/api/drafts')).status,401);
+ assert.equal((await request('/api/drafts',{cookie:reviewer})).status,403);
+ const input=await currentDraftInput();
+ for(const bad of [{...input,owner_id:accounts[1].user_id},{...input,payload:null},{...input,payload:{patch:{diameter_cm:-1}}}])assert.equal((await request('/api/drafts',{cookie:surveyor,method:'POST',value:bad})).status,400);
+ assert.equal((await request('/api/drafts',{cookie:surveyor,method:'POST',value:{...input,base_version_no:999999}})).status,409);
+ const created=await request('/api/drafts',{cookie:surveyor,method:'POST',value:input});assert.equal(created.status,201);
+ const d=created.body.draft;assert.equal(d.state,'editable');assert.equal(d.revision_no,1);
+ for(const method of ['GET','PUT','DELETE','POST']){
+  const path=draftPath(d.draft_id)+(method==='POST'?'/finalize':'');
+  const value=method==='GET'?undefined:method==='PUT'?{expected_revision_no:1,payload:{}}:{expected_revision_no:1};
+  assert.equal((await request(path,{cookie:other,method,value})).status,404);
+ }
+ // A well-shaped finalize body also hides another owner's draft.
+ assert.equal((await request(draftPath(d.draft_id)+'/finalize',{cookie:other,method:'POST',value:{expected_revision_no:1}})).status,404);
+ assert.equal((await request(draftPath(d.draft_id),{cookie:reviewer})).status,403);
+ assert.equal((await request('/api/drafts',{cookie:other})).body.drafts.some(x=>x.draft_id===d.draft_id),false);
+ assert.equal((await request(draftPath(d.draft_id)+'/finalize',{cookie:surveyor,method:'POST',value:{expected_revision_no:1}})).status,400);
+ assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor})).body.draft.state,'editable');
+ assert.equal((await admin.query('SELECT count(*) FROM fieldmerge.submissions WHERE client_submission_id=$1',[d.client_submission_id])).rows[0].count,'0');
+ const payload={observed_at:'2026-06-01T00:00:00Z',patch:{guard_damage:false,health:null}};
+ const edited=await request(draftPath(d.draft_id),{cookie:surveyor,method:'PUT',value:{expected_revision_no:1,payload}});assert.equal(edited.status,200);assert.equal(edited.body.draft.revision_no,2);
+ assert.notEqual(edited.body.draft.client_submission_id,d.client_submission_id);
+ assert.equal(JSON.parse(edited.body.draft.canonical_payload_json).patch.guard_damage,false);
+ assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor,method:'PUT',value:{expected_revision_no:1,payload:{}}})).status,409);
+ assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor,method:'DELETE',value:{expected_revision_no:1}})).status,409);
+ assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor,method:'DELETE',value:{expected_revision_no:2}})).status,200);
+ assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor})).status,404);
+ await assert.rejects(pool().query('SELECT fieldmerge.api_draft_context($1,$2,1,$3)',[sha256(reviewer.split('=')[1]),input.record_id,input.form_version]),e=>e.code==='42501');
+});
+
+test('concurrent draft edits reject lost updates',async()=>{
+ const created=await request('/api/drafts',{cookie:surveyor,method:'POST',value:await currentDraftInput()});const id=created.body.draft.draft_id;
+ const edits=await Promise.all(['Good','Poor'].map(health=>request(draftPath(id),{cookie:surveyor,method:'PUT',value:{expected_revision_no:1,payload:{patch:{health}}}})));
+ assert.deepEqual(edits.map(x=>x.status).sort(),[200,409]);
+ const saved=(await request(draftPath(id),{cookie:surveyor})).body.draft;assert.equal(saved.revision_no,2);
+ assert.equal(JSON.parse(saved.canonical_payload_json).patch.health,JSON.parse(edits.find(x=>x.status===200).body.draft.canonical_payload_json).patch.health);
+});
+
+test('concurrent finalization seals one request and publishes once',async()=>{
+ const payload={observed_at:'2026-06-01T01:30:00.123456789+01:30',patch:{species:'Finalization fixture',diameter_cm:0,guard_damage:false}};
+ const created=await request('/api/drafts',{cookie:surveyor,method:'POST',value:await currentDraftInput(payload)});const d=created.body.draft;
+ const results=await Promise.all([1,2].map(()=>request(draftPath(d.draft_id)+'/finalize',{cookie:surveyor,method:'POST',value:{expected_revision_no:1}})));
+ for(const r of results){assert.equal(r.status,200);assert.equal(r.body.draft.state,'finalized');}
+ assert.deepEqual(results[0].body.receipt,results[1].body.receipt);
+ const id=results[0].body.receipt.submission_id;
+ assert.equal((await admin.query('SELECT count(*) FROM fieldmerge.submissions WHERE author_id=$1 AND client_submission_id=$2',[accounts[0].user_id,d.client_submission_id])).rows[0].count,'1');
+ assert.equal((await admin.query("SELECT count(*) FROM fieldmerge.audit_events WHERE submission_id=$1 AND event_type='submission_reconciled'",[id])).rows[0].count,'1');
+ const source=await request('/api/submissions/'+id+'/source',{cookie:surveyor});assert.equal(source.body.canonical_payload_json,d.canonical_payload_json);
+ assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor,method:'PUT',value:{expected_revision_no:1,payload:{}}})).status,409);
+ assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor,method:'DELETE',value:{expected_revision_no:1}})).status,409);
+ assert.deepEqual((await request(draftPath(d.draft_id)+'/finalize',{cookie:surveyor,method:'POST',value:{expected_revision_no:1}})).body.receipt,results[0].body.receipt);
+});
+
+test('frozen drafts resume across interruption boundaries with the same identity',async()=>{
+ const token=sha256(surveyor.split('=')[1]);
+ const stages=[['afterFreeze',{}],['afterReserve',{intakeHooks:{afterReserve:()=>{throw new Error('injected');}}}],['afterInsert',{intakeHooks:{afterInsert:()=>{throw new Error('injected');}}}],['afterIntake',{}],['afterFinalized',{}]];
+ for(const [stage,extra]of stages){
+  const input=await currentDraftInput({observed_at:'2026-06-01T00:00:00Z',patch:{species:'Draft recovery '+stage}});
+  const d=await createDraft(token,parseExact(JSON.stringify(input)));
+  const hooks=Object.keys(extra).length?extra:{[stage]:()=>{throw new Error('injected');}};
+  await assert.rejects(finalizeDraft(token,d.draft_id,parseExact('{"expected_revision_no":1}'),hooks),/injected/);
+  const read=(await request(draftPath(d.draft_id),{cookie:surveyor})).body.draft;
+  assert.equal(read.state,stage==='afterFinalized'?'finalized':'finalizing');
+  assert.equal(read.canonical_payload_json,d.canonical_payload_json);
+  assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor,method:'PUT',value:{expected_revision_no:1,payload:{}}})).status,409);
+  assert.equal((await request(draftPath(d.draft_id),{cookie:surveyor,method:'DELETE',value:{expected_revision_no:1}})).status,409);
+  const recovered=await request(draftPath(d.draft_id)+'/finalize',{cookie:surveyor,method:'POST',value:{expected_revision_no:1}});assert.equal(recovered.status,200);
+  assert.equal(recovered.body.draft.state,'finalized');
+  const id=recovered.body.receipt.submission_id;
+  assert.equal((await admin.query('SELECT count(*) FROM fieldmerge.submissions WHERE client_submission_id=$1 AND author_id=$2',[d.client_submission_id,accounts[0].user_id])).rows[0].count,'1');
+  assert.equal((await admin.query("SELECT count(*) FROM fieldmerge.audit_events WHERE submission_id=$1 AND event_type='submission_reconciled'",[id])).rows[0].count,'1');
+ }
+});
+
+test('editing or deleting while finalization races has one winning transition',async()=>{
+ for(const method of ['PUT','DELETE']){
+  const created=await request('/api/drafts',{cookie:surveyor,method:'POST',value:await currentDraftInput({observed_at:'2026-06-01T00:00:00Z',patch:{species:'Race '+method}})});
+  const d=created.body.draft,path=draftPath(d.draft_id);
+  const value=method==='PUT'?{expected_revision_no:1,payload:{observed_at:'2026-06-01T00:00:00Z',patch:{species:'Edited race'}}}:{expected_revision_no:1};
+  const [mutation,finalized]=await Promise.all([request(path,{cookie:surveyor,method,value}),request(path+'/finalize',{cookie:surveyor,method:'POST',value:{expected_revision_no:1}})]);
+  if(finalized.status===200){assert.equal(mutation.status,409);assert.equal(finalized.body.draft.state,'finalized');}
+  else {assert.equal(mutation.status,200);assert([404,409].includes(finalized.status));}
+  const rows=(await admin.query('SELECT count(*) FROM fieldmerge.submissions WHERE author_id=$1 AND client_submission_id=$2',[accounts[0].user_id,d.client_submission_id])).rows[0];
+  assert.equal(rows.count,finalized.status===200?'1':'0');
+ }
 });

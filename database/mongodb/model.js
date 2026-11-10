@@ -84,7 +84,8 @@ const draftSchema = {
     payload:{bsonType:'object',additionalProperties:false,properties:{
       patch,observed_at:{bsonType:'date'},observations,client_metadata:{bsonType:'object'}
     }},created_at:{bsonType:'date'},updated_at:{bsonType:'date'},
-    final_submission_id:{bsonType:['string','null'],pattern:uuidPattern}
+    final_submission_id:{bsonType:['string','null'],pattern:uuidPattern},
+    canonical_payload_json:{bsonType:'string',minLength:2,maxLength:262144}
   }
 };
 const draftValidator = {$and:[{$jsonSchema:draftSchema},{$expr:{$and:[

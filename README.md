@@ -10,7 +10,7 @@ Surveyors submit changes based on accepted record versions. FieldMerge combines 
 
 **Verified database milestone:** 136 assertions and six concurrent-session scenarios, plus agreement of published form hashes across both databases. These results are database-level evidence, not a claim that the complete application is finished.
 
-**Verified API milestone:** five canonicalization/validation test groups, nine integration test groups against a production Next.js server and real isolated databases, and a successful production build. Authentication, source verification, retry/recovery, review, and access boundaries are exercised.
+**Verified API milestone:** six canonicalization/validation test groups, fourteen integration test groups against a production Next.js server and real isolated databases, and a successful production build. Authentication, source verification, draft ownership/revisions/finalization, retry/recovery, review, and access boundaries are exercised.
 
 The [complete project checklist](docs/FieldMerge_Project_Checklist.md) tracks completed and remaining work from problem selection through final submission.
 
@@ -26,9 +26,9 @@ flowchart LR
 
 ## Current milestone
 
-The development databases, automatic SQL reconciliation, reviewer decisions, and authenticated Next.js API are implemented. PostgreSQL has nine business tables, four read views, history protection, and guarded API functions. Migrations 001–003 implement database workflows; migration 004 adds internal session/rate-limit tables and session-aware access functions. MongoDB has three validated collections and restricted API credentials.
+The development databases, automatic SQL reconciliation, reviewer decisions, and authenticated Next.js API are implemented. PostgreSQL has nine business tables, four read views, history protection, and guarded API functions. Migrations 001–003 implement database workflows; migration 004 adds internal session/rate-limit tables and session-aware access functions; migration 005 validates draft targets. MongoDB has three validated collections and restricted API credentials.
 
-Login, revocable sessions, verified source intake, batch submissions, source/outcome retrieval, reviewer queues/decisions, and owner-requested recovery are connected to real databases. Role checks run in both routes and SQL wrappers. Remaining work includes draft APIs/finalization, full workflow-wide consistency enforcement, persistent recovery-worker coordination, richer query/export APIs, and the complete interface. The 35 acceptance scenarios are not yet all closed. See [the authenticated API guide](docs/FieldMerge_API.md), [automatic reconciliation](docs/FieldMerge_Reconciliation.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
+Login, revocable sessions, verified source intake, batch submissions, source/outcome retrieval, reviewer queues/decisions, and owner-requested recovery are connected to real databases. Owner-scoped draft CRUD and revision-safe, resumable finalization are also implemented. Role checks run in both routes and SQL wrappers; draft ownership/state checks run in controlled MongoDB queries. Remaining work includes full workflow-wide consistency enforcement, persistent recovery-worker coordination, richer query/export APIs, and the complete interface. The 35 acceptance scenarios are not yet all closed. See [the draft guide](docs/FieldMerge_Drafts.md), [the authenticated API guide](docs/FieldMerge_API.md), [automatic reconciliation](docs/FieldMerge_Reconciliation.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
 
 ## Prerequisites
 
@@ -128,4 +128,4 @@ The database suite exercises automatic reconciliation and reviewer decisions wit
 - scripts/database.ps1 — repeatable environment/schema/verification commands.
 - tests/database/ — real-database structural checks.
 
-Applied migrations are checksum-protected. Further schema changes must use a new migration instead of silently modifying an already applied file. The runner discovers ordered NNN_name.sql migrations and verifies each applied checksum; migrations 001 through 004 are currently implemented.
+Applied migrations are checksum-protected. Further schema changes must use a new migration instead of silently modifying an already applied file. The runner discovers ordered NNN_name.sql migrations and verifies each applied checksum; migrations 001 through 005 are currently implemented.

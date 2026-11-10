@@ -19,7 +19,7 @@ try{
  if(!/^[a-f0-9]{48}$/.test(pgPassword)||!/^[a-f0-9]{48}$/.test(mongoPassword))throw new Error('Generated backend credentials must be 48 hexadecimal characters');
  await client.query(`ALTER ROLE fieldmerge_api LOGIN PASSWORD '${pgPassword}'`);
  await mongo.connect();const db=mongo.db(mongoDatabase);
- const roles=[{role:'fieldmerge_evidence_writer',db:mongoDatabase},{role:'fieldmerge_evidence_reader',db:mongoDatabase}];
+ const roles=[{role:'fieldmerge_evidence_writer',db:mongoDatabase},{role:'fieldmerge_evidence_reader',db:mongoDatabase},{role:'fieldmerge_draft_editor',db:mongoDatabase}];
  const existing=await db.command({usersInfo:'fieldmerge_api'});
  if(existing.users.length)await db.command({updateUser:'fieldmerge_api',pwd:mongoPassword,roles});
  else await db.command({createUser:'fieldmerge_api',pwd:mongoPassword,roles});

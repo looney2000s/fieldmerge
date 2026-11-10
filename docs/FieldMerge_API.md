@@ -1,6 +1,6 @@
 # Authenticated API milestone
 
-Implemented 10 November 2026 on feature/authenticated-api. This is a runnable Next.js App Router backend, with a minimal status home page. Draft APIs, the complete interface, and a persistent recovery worker remain separate work.
+Implemented 10 November 2026 on feature/authenticated-api, extended on codex/drafts-finalization. This is a runnable Next.js App Router backend, with a minimal status home page. [Owner-scoped draft APIs and safe finalization](FieldMerge_Drafts.md) are now implemented. The complete interface and a persistent recovery worker remain separate work.
 
 ## Start locally
 
@@ -73,7 +73,7 @@ Send `$body` unchanged again to verify idempotency. A changed body with the same
 | /api/reviews | GET | Reviewer only; first 100 pending comparisons with current version/revision tokens. |
 | /api/reviews/:changeId | POST | Reviewer only; atomic terminal decision. |
 
-Batch transport IDs are not yet persisted. Pagination/filter parameters, aggregate/export routes, editable drafts, and finalization are not exposed in this milestone.
+Batch transport IDs are not yet persisted. Pagination/filter parameters and aggregate/export routes are not exposed in this milestone. Draft list/create/read/edit/delete/finalize routes are documented in [the draft guide](FieldMerge_Drafts.md).
 
 ## Reviewer requests
 
@@ -99,7 +99,7 @@ The database persists a ten-attempt/five-minute limit per normalized email finge
 
 fieldmerge_api has no direct table privileges or access to owner workflow functions. It can execute a fixed set of SECURITY DEFINER wrappers, with fixed search paths, deriving the actor from the session token hash. Authentication bootstrap functions are trusted backend entry points; the backend still owns password verification. Database/application credential compromise remains outside the end-user threat model. No PostgreSQL row-level security is claimed: denied direct table access plus session-aware wrappers is the selected database enforcement mechanism.
 
-MongoDB's API user can read forms/evidence and insert sealed evidence, but cannot update/delete source documents or change form definitions. The unfinished draft-editor role is not assigned to this API account.
+MongoDB's API user can read forms/evidence and insert sealed evidence, but cannot update/delete source documents or change form definitions. It also has the collection-limited draft-editor role; draft ownership, state, and revision predicates are supplied by the trusted server.
 
 ## Canonicalization and source verification
 
@@ -125,6 +125,6 @@ Coverage includes login/origin/cookie behavior, unauthorized routes and SQL acce
 
 Interruptions are deliberately injected around real database operations (before source storage, after source storage, before SQL finish, and after commit before response). This verifies resumability of those boundaries; it is not a claim that a live MongoDB process was stopped mid-request. A privileged test also corrupts source metadata to prove verification refuses to publish it.
 
-Results are saved in output/api/verification.json. Remaining work: owner-scoped draft APIs/finalization, persistent recovery coordination, complete privileged-write consistency triggers, richer data/query endpoints, the full interface, and full mapping/closure of all 35 acceptance scenarios. This milestone adds two internal authentication tables without changing the nine core business entities.
+Results are saved in output/api/verification.json. Remaining work: persistent recovery coordination, complete privileged-write consistency triggers, richer data/query endpoints, the full interface, and full mapping/closure of all 35 acceptance scenarios. This milestone adds two internal authentication tables without changing the nine core business entities. Migration 005 adds draft-target validation without adding a table.
 
-The verified run passes five unit test groups and nine integration test groups, with a successful production build. The earlier database suite remains separate evidence: 136 assertions and six concurrent-session scenarios.
+The verified run passes six unit test groups and fourteen integration test groups, with a successful production build. The database suite remains separate evidence: 136 assertions and six concurrent-session scenarios, rerun with migration 005 and the extended draft validator.

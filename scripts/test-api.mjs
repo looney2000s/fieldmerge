@@ -37,6 +37,6 @@ try{
  const output=[];child.stdout.on('data',x=>{process.stdout.write(x);output.push(x.toString());});child.stderr.on('data',x=>{process.stderr.write(x);output.push(x.toString());});
  const code=await new Promise(resolve=>child.on('exit',resolve));
  if(code!==0)throw new Error('API integration checks failed');
- mkdirSync('output/api',{recursive:true});writeFileSync('output/api/verification.json',JSON.stringify({verified_at_utc:new Date().toISOString(),test_database:name,production_server:true,output:output.join(''),remaining:'Draft API/UI and full workflow-wide consistency enforcement remain.'},null,2));
+ mkdirSync('output/api',{recursive:true});writeFileSync('output/api/verification.json',JSON.stringify({verified_at_utc:new Date().toISOString(),test_database:name,production_server:true,output:output.join(''),remaining:'Persistent recovery workers, full workflow-wide consistency enforcement, richer query/export APIs and UI remain.'},null,2));
  console.log('API verification passed; evidence saved to output/api/verification.json.');
 }finally{if(server){server.kill();await new Promise(r=>{if(server.exitCode!==null)return r();server.once('exit',r);setTimeout(r,3000).unref();});}await admin.end();}
