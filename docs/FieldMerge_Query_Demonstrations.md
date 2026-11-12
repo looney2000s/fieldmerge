@@ -147,4 +147,4 @@ Do not substitute the ordinary development project or delete its volumes. The de
 7. Demonstrate staging DDL/DML and owner-scoped drafts; preserve sealed evidence.
 8. Explain transaction/trigger protection and cross-store recovery using the saved acceptance evidence.
 
-Final report integration, broader transport/security boundary checks, final ER/schema reconciliation and a clean release rehearsal remain separate checklist items.
+The implementation report, catalog/schema reconciliation, targeted transport/security tests and clean-checkout verification are complete; their scopes and evidence are linked in the project checklist. Main integration is also complete. The author's live rehearsal, final packaging and assessment remain.

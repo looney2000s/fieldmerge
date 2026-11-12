@@ -57,4 +57,4 @@ The successful run started at 2026-11-12T19:00:47.118Z and finished at 2026-11-1
 
 ## Remaining release work
 
-Review and integrate the implementation branches into main, rehearse the author's demonstration/query modification, confirm instructor arrangements, and package the final report/source/evidence with the already completed ER diagram. Hosting is optional unless separately required. This run does not establish exhaustive security/accessibility, production capacity or disaster-recovery guarantees. [Procedure and limits](../../docs/FieldMerge_Release_Verification.md).
+The verified implementation is now integrated into main; see [the integration record](../../docs/FieldMerge_Main_Integration.md). Rehearse the author's demonstration/query modification, confirm instructor arrangements, and package the final report/source/evidence with the already completed ER diagram. Hosting is optional unless separately required. This run does not establish exhaustive security/accessibility, production capacity or disaster-recovery guarantees. [Procedure and limits](../../docs/FieldMerge_Release_Verification.md).
