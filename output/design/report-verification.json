@@ -1,0 +1,28 @@
+{
+  "verified_at_utc": "2026-11-12T13:03:17.212516+00:00",
+  "implementation_commit": "758877305245420092ec24b10be6f23b55bc2bcd",
+  "document": "output/documents/FieldMerge_Implementation_Report.docx",
+  "document_sha256": "2d87bf2f4dfa4657a2a2d2b20d299e46a5a9d5cfae3681b646fe115f51440b70",
+  "page_count": 25,
+  "all_17_sql_tables_and_146_columns_match_catalog": true,
+  "column_types_and_nullability_match": true,
+  "identity_generation_details": "Included in the catalog and complete Markdown dictionary; report appendix lists underlying PostgreSQL types.",
+  "original_screenshot_bytes_preserved": true,
+  "generated_credentials_absent_from_xml_and_rendered_text": true,
+  "comments_and_tracked_changes_absent": true,
+  "all_pages_visually_reviewed": true,
+  "renderer": "Microsoft Word PDF SaveAs with typed COM arguments; bundled Poppler rasterization at 110 DPI",
+  "standard_renderer_limitation": "Bundled Windows runtime has no LibreOffice executable; canonical renderer probe failed before native Word fallback. Later Word COM startup failed; report retained the successfully rendered layout, with identity-generation annotations in the companion dictionary.",
+  "conceptual_er_status": "Accepted as complete per author instruction; diagram maintained separately and not independently inspected.",
+  "source_sha256": {
+    "scripts/build-report.py": "f26612839a42e2245e4343ced8cc15b11d2b874e9a219e927af7c7647b17bd3d",
+    "scripts/export-design.mjs": "837f0bf7a9b844db59877a05ef0bac5e058cf921e38a213e56db4e47797893e8",
+    "scripts/render-design.mjs": "195b63e16553e01b1e73f1f05dab6a2e337131f8fc2ee518eddf39c059ec3f07",
+    "docs/FieldMerge_Data_Dictionary.md": "6a614c4d18a2a46f9c3661a5edc0e6853fa3dfe5b0ac58582a1356ac3c146a96",
+    "docs/FieldMerge_Implementation_Report.md": "0ba0c776d2e473196fc1db292094a00cc2bd1fd233d619d818263656d88cfb14",
+    "output/design/schema-catalog.json": "4535708e8314eaf5624285e596ab644b3f15dc628f71517edc24db32898d0991",
+    "output/design/architecture.svg": "ed7aa3635458e93f2427b4f967c6712dee490665bdf9e1f24a8595e941622194"
+  },
+  "saved_render_text_matches_final_docx_body": true,
+  "visual_review": "All 25 pages inspected; pages 4, 13, 19 and 20 re-inspected after edits; remaining page PNG hashes unchanged."
+}

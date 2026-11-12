@@ -4,6 +4,8 @@
 node_modules/
 tmp/
 logs/
+__pycache__/
+*.py[cod]
 *.log
 
 # Local course material includes other students' personal information.

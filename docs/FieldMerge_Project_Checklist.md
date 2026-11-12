@@ -38,15 +38,15 @@ Status baseline: 12 November 2026. Checked means completed within the scope stat
 - [x] Initialize the local Git repository on main.
 - [x] Make a reviewed initial commit excluding .env, generated account credentials, and local course materials.
 - [x] Connect the GitHub repository and publish the initial database milestone on main.
-- [ ] Maintain meaningful commits for the remaining implementation and individual contribution evidence.
+- [x] Publish meaningful implementation milestones and preserve the solo project contribution history; final branch integration remains separate.
 
 ## Step 4 Complete database design
 
 - [x] Choose PostgreSQL plus MongoDB and explain their responsibilities.
 - [x] Define the Chen entities, attributes, relationships, and participation constraints.
 - [x] Draw the ER diagram — reported completed by the user.
-- [ ] Inspect the actual ER diagram and reconcile it with the implemented schema.
-- [ ] Export/store the final readable ER diagram in the project deliverables.
+- [x] Accept the completed Chen diagram as correct on the author's explicit instruction; reconcile the described business mapping and actual physical catalog. Independent file inspection is waived.
+- [ ] Include the author's separately maintained completed ER diagram in the final submission package.
 - [x] Create the relational schema and data dictionary.
 - [x] Define composite identities and same-tree foreign keys.
 - [x] Document normalization decisions and deliberate redundant guard columns.
@@ -75,8 +75,8 @@ Status baseline: 12 November 2026. Checked means completed within the scope stat
 - [x] Generate two demo accounts with salted password hashes.
 - [x] Seed two form definitions with matching SQL/MongoDB hashes.
 - [x] Pass 39 PostgreSQL structural checks and 31 MongoDB structural checks.
-- [ ] Expand the demonstration fixtures with representative unresolved, partially applied, and resolved cases through supported workflows.
-- [ ] Decide whether to retain synthetic data only or also provide a documented public-data importer. Public-data import is optional; do not label synthetic data as real observations.
+- [x] Provide representative unresolved, partially applied and resolved synthetic history through guarded workflows in the disposable query/performance fixture; the demonstration guide also creates fresh UI examples without resetting existing records.
+- [x] Use explicitly synthetic fixtures for this MVP; a documented public-data importer remains an optional future enhancement.
 
 ## Step 7 Implement automatic reconciliation
 
@@ -195,23 +195,23 @@ The milestone additionally passes eighteen unit groups, thirty-three API/worker/
 ## Step 14 Complete the final documentation
 
 - [x] Maintain the project overview, requirements, schema models, implementation guides, and database README.
-- [ ] Reconcile the final ER diagram, relational schema, document model, dictionary, and implementation.
-- [ ] Add the implemented system architecture and authentication/data-flow explanation.
+- [x] Reconcile relational/document models and all 146 SQL columns with the live catalog and migration checksums; accept the separately completed ER diagram per author instruction.
+- [x] Add the implemented architecture diagram and authentication/publication/recovery data-flow explanation.
 - [x] Document important queries and explain the roles of functions, transactions, locks, constraints, triggers, views and document aggregation in the query/viva guide; integrate these into the final report separately.
-- [ ] Integrate application screenshots, test evidence, measured performance and source attribution into the final report.
-- [ ] State verified results, known limitations, conclusion, and future enhancements accurately.
-- [ ] Document final setup, demo accounts/configuration, execution, verification, and recovery instructions.
-- [ ] Finalize the report/DOCX and visually inspect its layout.
+- [x] Integrate genuine application screenshots, recorded test evidence, measured query results and public-source attribution into the implementation report.
+- [x] State verified results, limits, conclusion and concrete future enhancements without deployment, uniqueness or adoption overclaims.
+- [x] Document local setup, private demo-account location, execution, verification, recovery and demonstration instructions.
+- [x] Prepare the 25-page implementation DOCX with the full typed SQL appendix and visually verify every page; instructor-specific formatting/author identifiers remain part of final packaging.
 - [ ] Remove secrets, generated credential files, and unnecessary temporary artifacts from submission materials.
 
 ## Step 15 Rehearse and submit
 
-- [ ] Prepare a repeatable demonstration of the problem, design, both databases, and complete user workflow.
+- [x] Prepare a repeatable demonstration guide covering the problem, design, both databases, live workflow checkpoints and safe retries.
 - [ ] Demonstrate a compatible merge, conflict resolution, duplicate retry, provenance, and denied unauthorized action.
-- [ ] Prepare viva explanations for constraints, locking, transactions, triggers/functions, CTEs, document queries, and technology tradeoffs.
+- [x] Prepare viva explanations for constraints, locks, transactions, triggers/functions, CTEs, document queries, normalization and technology tradeoffs.
 - [ ] Practice modifying/explaining a query or rule and rerunning an appropriate check.
 - [ ] Rehearse setup and demonstration from the documented final revision.
-- [ ] Audit each rubric component and verify its supporting evidence.
+- [x] Map all 14 rubric components and 50 possible marks to supporting evidence; live assessment, author ER attachment and instructor conditions remain explicit. No marks are self-awarded.
 - [ ] Package and submit the required source, report, diagrams, and evidence by the confirmed deadline.
 - [ ] Complete the final demonstration/viva.
 
@@ -219,4 +219,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Reconcile final ER/schema/report deliverables and rehearse a clean release/demo. All 35 functional acceptance cases, targeted transport/security checks and safe failure logging pass, and query/performance evidence is prepared. The latest branch is codex/security-boundaries, building on the earlier backend/interface/audit branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.
+Perform a clean rebuild and sequential verification from a fresh final-revision checkout, then rehearse the demo, review/integrate the published branches and package the submission with the author's existing ER diagram. The reconciled catalog/dictionary, architecture, 25-page implementation report, demonstration guide and rubric evidence map are prepared. All 35 functional acceptance cases, targeted security checks and query/performance evidence retain their recorded successful results. The latest branch is codex/design-report, building on the earlier backend/interface/audit branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.

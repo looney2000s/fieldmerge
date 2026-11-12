@@ -1,6 +1,8 @@
 # FieldMerge MongoDB document model
 
-Version 1.0 · 2 November 2026
+Implementation reconciliation · 12 November 2026 · baseline 7588773
+
+The three live collection validators and indexes were captured in output/design/schema-catalog.json alongside the SQL catalog. The [complete dictionary](FieldMerge_Data_Dictionary.md) includes actual top-level requirements and index definitions; the [architecture](FieldMerge_Architecture.md) explains cross-store verification.
 
 ## 1 Ownership and representation
 
@@ -139,7 +141,7 @@ Use server-controlled validators with invalid-write rejection for the three coll
 
 Read: source comparison, versioned form retrieval, owner draft lists. Update: revision-safe edits to editable drafts. Delete: owner deletion of editable drafts; never sealed evidence. Aggregation: source counts by form/batch, observation categories, and percentage with optional observations. Exclude missing/null batch IDs when reporting named batch totals, or label the no-batch group explicitly. Accepted/remaining-conflict totals are queried from SQL rather than guessed from source contents.
 
-## 6 Verification required at implementation
+## 6 Implemented verification coverage
 
 1. tree-v1 and tree-v2 validators reject unknown patch fields and invalid scalar types.
 2. Missing patch field, JSON null, zero, and false remain distinct after wire/BSON/SQL conversion.

@@ -1,0 +1,16 @@
+{
+  "verified_at_utc": "2026-11-12T12:26:24.711Z",
+  "implementation_commit": "758877305245420092ec24b10be6f23b55bc2bcd",
+  "table_count": 17,
+  "column_count": 146,
+  "foreign_key_count": 29,
+  "view_count": 4,
+  "index_count": 43,
+  "explicit_trigger_count": 26,
+  "function_count": 60,
+  "collection_count": 3,
+  "all_column_meanings_present": true,
+  "applied_migration_checksums_match": true,
+  "application_rows_exported": false,
+  "scope": "Catalog/dictionary reconciliation only; existing runtime evidence remains separate."
+}

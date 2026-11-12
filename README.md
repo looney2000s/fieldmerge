@@ -14,6 +14,8 @@ Surveyors submit changes based on accepted record versions. FieldMerge combines 
 
 **Verified acceptance milestone:** all 35 requirements-baseline scenarios pass against real PostgreSQL/MongoDB services and a production Next.js API, including lock-controlled races, service unavailability, rollback/retry, both forms, re-import, and provenance. [Results and limits](docs/FieldMerge_Acceptance.md).
 
+**Design and report:** the [complete physical dictionary](docs/FieldMerge_Data_Dictionary.md) reconciles 17 tables, 146 columns and 29 foreign keys against the live catalog. Read the [architecture](docs/FieldMerge_Architecture.md), [implementation report](output/documents/FieldMerge_Implementation_Report.docx), [demonstration guide](docs/FieldMerge_Demonstration.md) and [rubric evidence map](docs/FieldMerge_Rubric_Evidence.md). The author maintains the completed Chen diagram separately.
+
 The [complete project checklist](docs/FieldMerge_Project_Checklist.md) tracks completed and remaining work from problem selection through final submission.
 
 **Verified interface milestone:** fifteen browser workflow checks and nine representative axe WCAG A/AA page checks, with no reported violations or browser runtime errors. Coverage includes both roles, actual SQL/MongoDB outcomes, stale review handling, lost-response retries, exports, keyboard access, and a 390px mobile layout. See [browser results](output/browser/checks.json).
@@ -34,7 +36,7 @@ flowchart LR
 
 The development databases, SQL reconciliation, reviewer decisions, authenticated API, and Next.js interface are implemented. PostgreSQL has nine business tables, four read views, and guarded workflow/read functions. Migrations 001–007 implement core structures, sessions, drafts, integrity, and recovery; migration 008 adds filtered reads, reports/exports, and two internal transport-batch tables. Migration 009 adds guarded interface read models without adding tables. Migration 010 adds persistent safe failure events and guarded reviewer inspection. There are 17 SQL tables: nine business, two authentication, five operational/transport, and one migration registry. MongoDB has three validated collections and separate restricted API/worker credentials.
 
-Login, accepted-record browsing, drafts/finalization, batch upload, per-field outcomes, reviewer comparisons/decisions, history/provenance, reports/exports, and recovery inspection are available in the interface. [Commit-time integrity](docs/FieldMerge_Workflow_Integrity.md) and [automatic recovery](docs/FieldMerge_Recovery.md) remain enforced by the backend. All 35 functional acceptance scenarios now pass with an explicit [evidence map](docs/FieldMerge_Acceptance.md). Query demonstrations and local measurement evidence are also prepared. Targeted transport/security coverage and independent persistent failure logging now pass 23 API groups and five additional browser checks; see the [security guide](docs/FieldMerge_Security.md). Remaining work includes final design/report integration, release rehearsal and demonstration/submission deliverables. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [query/export/batch behavior](docs/FieldMerge_Queries_Exports_Batches.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
+Login, accepted-record browsing, drafts/finalization, batch upload, per-field outcomes, reviewer comparisons/decisions, history/provenance, reports/exports, and recovery inspection are available in the interface. [Commit-time integrity](docs/FieldMerge_Workflow_Integrity.md) and [automatic recovery](docs/FieldMerge_Recovery.md) remain enforced by the backend. All 35 functional acceptance scenarios now pass with an explicit [evidence map](docs/FieldMerge_Acceptance.md). Query demonstrations and local measurement evidence are also prepared. Targeted transport/security coverage and independent persistent failure logging now pass 23 API groups and five additional browser checks; see the [security guide](docs/FieldMerge_Security.md). The reconciled dictionary, architecture and implementation report are prepared. Remaining work includes clean release rehearsal, branch integration and final demonstration/submission deliverables. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [query/export/batch behavior](docs/FieldMerge_Queries_Exports_Batches.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
 
 ## Prerequisites
 
@@ -143,7 +145,12 @@ The database suite exercises automatic reconciliation and reviewer decisions wit
 ## Repository map
 
 - docs/FieldMerge_Requirements.md — authoritative requirements and acceptance scenarios.
-- docs/FieldMerge_Relational_Schema.md — SQL mapping and outstanding workflow enforcement.
+- docs/FieldMerge_Relational_Schema.md — implemented SQL mapping and normalization choices.
+- docs/FieldMerge_Data_Dictionary.md — complete physical dictionary and constraint/index definitions.
+- output/design/schema-catalog.json — metadata-only SQL/MongoDB snapshot.
+- docs/FieldMerge_Architecture.md — trusted access, publication and recovery flow.
+- docs/FieldMerge_Demonstration.md — repeatable UI/query demonstration and viva preparation.
+- output/documents/FieldMerge_Implementation_Report.docx — implementation report and full SQL column appendix.
 - docs/FieldMerge_MongoDB_Model.md — collection model and application boundary.
 - database/postgres/migrations/001_structure.sql — transactional initial schema.
 - database/mongodb/ — strict model, initialization, and form seeds.

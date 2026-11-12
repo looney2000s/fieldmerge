@@ -16,7 +16,8 @@
     "db:evidence": "node scripts/measure-database.mjs",
     "db:evidence:summary": "node scripts/performance/summarize.mjs",
     "worker": "node scripts/recovery-worker.mjs",
-    "worker:once": "node scripts/recovery-worker.mjs --once"
+    "worker:once": "node scripts/recovery-worker.mjs --once",
+    "design:export": "node scripts/export-design.mjs && node scripts/render-design.mjs"
   },
   "engines": {
     "node": ">=22.0.0"
