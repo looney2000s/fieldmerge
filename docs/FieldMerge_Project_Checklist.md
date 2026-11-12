@@ -1,6 +1,6 @@
 # FieldMerge project checklist
 
-Status baseline: 10 November 2026. Checked means completed within the scope stated; unchecked means remaining or not yet verified. A completed database function does not imply a working API or web interface. This checklist covers FieldMerge only.
+Status baseline: 12 November 2026. Checked means completed within the scope stated; unchecked means remaining or not yet verified. A completed database function does not imply a working API or web interface. This checklist covers FieldMerge only.
 
 ## Step 0 Understand the assignment
 
@@ -134,7 +134,8 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Test same-request recovery with injected interruptions before/after document storage and after SQL commit before response.
 - [x] Expose reviewer-only recovery job/status/event inspection and reasoned retry without overwriting evidence.
 - [x] Process batch items independently with durable manifests, memberships, per-item receipts/errors, stable retry identities, and immutable first-intake source attribution.
-- [ ] Verify all source forms, evidence-only submissions, byte limits, and timestamp/decimal conversions through real intake.
+- [x] Verify both controlled source forms, evidence-only submissions, explicit null/false/zero, and timestamp/decimal behavior through real intake.
+- [ ] Close the remaining submission/batch byte-limit, malformed transport, and boundary-value intake checks.
 
 ## Step 11 Build the authenticated backend
 
@@ -175,10 +176,11 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Save verification output and migration checksums in output/database/verification.json.
 - [x] Verify injected workflow inconsistencies roll back, including actual COMMIT failures and an HTTP integrity-error/same-request retry scenario.
 - [x] Verify restricted worker credentials, missing-source waiting, quarantine, competing/expired workers, inactive authors, connection failure, and an actual worker-process kill/restart.
-- [ ] Map all 35 acceptance scenarios to integrated tests and close any coverage gaps.
-- [x] Run representative browser → authenticated API → both databases → response workflows for both roles; the full 35-case acceptance mapping remains open.
-- [ ] Test ownership, role bypass, injection attempts, invalid/missing inputs, and session behavior.
-- [ ] Test actual MongoDB outages, interrupted intake, worker restart, and lost responses.
+- [x] Map all 35 acceptance scenarios to executable tests; all 35 pass with the evidence and boundaries in docs/FieldMerge_Acceptance.md.
+- [x] Run representative browser → authenticated API → both databases → response workflows for both roles; the separate AC01–AC35 suite also passes.
+- [x] Test owner/role denial, restricted SQL/MongoDB bypass attempts, literal injection-like filters, invalid/missing inputs, and inactive/expired/revoked sessions in the existing targeted integration checks.
+- [x] Test actual MongoDB service unavailability by pausing a disposable container, interrupted intake hooks, a killed/restarted worker process, and lost browser responses; see the precise boundaries in the acceptance guide.
+- [ ] Extend transport-boundary and adversarial checks beyond the currently covered functional/security cases; do not treat targeted checks as an exhaustive security audit.
 - [x] Test browser-submitted lost-response retries for review/finalization, review reload/resume, unchanged batch replay, and stale reviewer actions without changing intent automatically.
 - [x] Independently reconcile SQL accepted/workflow totals and MongoDB form/batch/observation aggregates in integrated tests.
 - [ ] Prepare meaningful DML, JOIN, nested/correlated, recursive/CTE, aggregate, GROUP BY, HAVING, and ORDER BY demonstrations where applicable.
@@ -186,9 +188,9 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [ ] Record representative query plans and measured performance on a documented dataset.
 - [ ] Verify a clean rebuild and full test run using the final code/configuration.
 
-The latest saved database milestone has 231 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 22 query/export/batch + 31 MongoDB), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These are not equivalent to all 35 end-to-end acceptance scenarios passing.
+The latest saved database milestone has 231 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 22 query/export/batch + 31 MongoDB), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These database assertions remain separate evidence. All 35 functional acceptance scenarios additionally pass in the dedicated production-API/disposable-service suite, including actual MongoDB unavailability and rollback/retry.
 
-The milestone additionally passes ten unit groups, thirty-three API/worker/query integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. New tests verify filters/pagination, downloads, independent summaries, formula-like CSV text, 5,000/5,001-row export limits, batch replay/membership/ownership, and batched recovery. Prior worker kill/restart, connectivity failure, authorization, and integrity checks remain included. Fifteen browser workflow checks now pass against a production Next.js server and both databases, including exact-intent retries after lost responses, stale review rejection, explicit null/false/zero, exports, role denial, keyboard focus, and mobile navigation. Nine representative axe WCAG A/AA page scans report no violations, and no browser runtime errors were recorded. Evidence and screenshots are in output/browser. Automated scans do not establish complete accessibility conformance. Remaining entries retain formal acceptance mapping and broader outage/security coverage.
+The milestone additionally passes ten unit groups, thirty-three API/worker/query integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. New tests verify filters/pagination, downloads, independent summaries, formula-like CSV text, 5,000/5,001-row export limits, batch replay/membership/ownership, and batched recovery. Prior worker kill/restart, connectivity failure, authorization, and integrity checks remain included. Fifteen browser workflow checks now pass against a production Next.js server and both databases, including exact-intent retries after lost responses, stale review rejection, explicit null/false/zero, exports, role denial, keyboard focus, and mobile navigation. Nine representative axe WCAG A/AA page scans report no violations, and no browser runtime errors were recorded. Evidence and screenshots are in output/browser. Automated scans do not establish complete accessibility conformance. The AC01–AC35 mapping and recorded results are in docs/FieldMerge_Acceptance.md and output/acceptance. Remaining entries retain broader outage/security and transport coverage.
 
 ## Step 14 Complete the final documentation
 
@@ -217,4 +219,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Map/close the 35 acceptance scenarios against the implemented interface and backend, then collect performance/query evidence and final documentation. The latest branch is codex/workflow-interface, building on the earlier backend branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.
+Collect reproducible query demonstrations and measured performance evidence, then reconcile final design/report/demo deliverables. The 35 functional acceptance cases now pass. The latest branch is codex/acceptance-audit, building on the earlier backend/interface branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.

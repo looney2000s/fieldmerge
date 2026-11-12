@@ -69,7 +69,7 @@ test('strict JSON input rejects forged identities, duplicate keys and excess pre
  assert.equal((await request('/api/submissions',{cookie:surveyor,method:'POST',raw:'{"record_id":"a","record_id":"b"}'})).status,400);
  const raw=JSON.stringify(envelope({diameter_cm:30})).replace('"diameter_cm":30','"diameter_cm":30.000000000000000001');
  assert.equal((await request('/api/submissions',{cookie:surveyor,method:'POST',raw})).status,400);
- assert.equal((await request('/api/submissions',{cookie:surveyor,method:'POST',value:envelope({health:'Poor'},{version:999})})).status,409);
+ const missingBase=await request('/api/submissions',{cookie:surveyor,method:'POST',value:envelope({health:'Poor'},{version:999})});assert.equal(missingBase.status,400);assert.equal(missingBase.body.error,'base_version_not_found');
 });
 test('evidence-only source, explicit null/zero and independent batch items',async()=>{
  const p=envelope({});p.observations=[{category:'guard',note:'Unknown condition',observed_at:p.observed_at}];

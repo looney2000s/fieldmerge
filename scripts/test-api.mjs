@@ -8,7 +8,11 @@ import { configureBackend } from "./configure-backend.mjs";
 const run = promisify(execFile),
   root = process.cwd();
 const browserMode = process.argv.includes("--browser");
-if (process.argv.slice(2).some((x) => x !== "--browser"))
+const acceptanceMode = process.argv.includes("--acceptance");
+if (
+  (browserMode && acceptanceMode) ||
+  process.argv.slice(2).some((x) => !["--browser", "--acceptance"].includes(x))
+)
   throw new Error("Unknown test argument");
 const docker =
   process.env.DOCKER_EXE ??
@@ -17,15 +21,28 @@ const docker =
     "AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe",
   );
 const name = "fieldmerge_test_" + randomUUID().replaceAll("-", "");
-const args = [
+const composeArgs = [
   "compose",
   "--project-directory",
   root,
   "-f",
   path.join(root, "compose.yaml"),
-  "exec",
-  "-T",
 ];
+if (acceptanceMode) {
+  if (
+    !/^fieldmerge-acceptance-[a-f0-9]{32}$/.test(
+      process.env.FM_TEST_COMPOSE_PROJECT ?? "",
+    )
+  )
+    throw new Error("Acceptance requires a disposable project");
+  const override = path.resolve(process.env.FM_TEST_COMPOSE_OVERRIDE ?? "");
+  if (path.dirname(override) !== path.join(root, "tmp"))
+    throw new Error("Unexpected test override path");
+  composeArgs.push("-p", process.env.FM_TEST_COMPOSE_PROJECT, "-f", override);
+}
+const args = [...composeArgs, "exec", "-T"];
+const pgService = acceptanceMode ? "postgres-test" : "postgres",
+  mongoService = acceptanceMode ? "mongo-test" : "mongo";
 async function command(tail) {
   return (await run(docker, [...args, ...tail], { maxBuffer: 4 * 1024 * 1024 }))
     .stdout;
@@ -49,7 +66,7 @@ try {
       .update(readFileSync("database/postgres/migrations/" + file))
       .digest("hex");
     await command([
-      "postgres",
+      pgService,
       "psql",
       "-X",
       "-U",
@@ -65,7 +82,7 @@ try {
     ]);
   }
   await command([
-    "postgres",
+    pgService,
     "psql",
     "-X",
     "-U",
@@ -81,7 +98,7 @@ try {
     await command([
       "-e",
       "FM_DB=" + name,
-      "mongo",
+      mongoService,
       "mongosh",
       "--quiet",
       "--file",
@@ -130,15 +147,21 @@ try {
   console.log("Testing production Next.js server against isolated databases.");
   const child = spawn(
     process.execPath,
-    browserMode
-      ? ["tests/browser/workflow.mjs"]
-      : [
+    acceptanceMode
+      ? [
           "--test",
           "--test-concurrency=1",
-          "tests/api/integration.test.mjs",
-          "tests/api/recovery.test.mjs",
-          "tests/api/queries-batches.test.mjs",
-        ],
+          "tests/acceptance/scenarios.test.mjs",
+        ]
+      : browserMode
+        ? ["tests/browser/workflow.mjs"]
+        : [
+            "--test",
+            "--test-concurrency=1",
+            "tests/api/integration.test.mjs",
+            "tests/api/recovery.test.mjs",
+            "tests/api/queries-batches.test.mjs",
+          ],
     { cwd: root, env, stdio: ["ignore", "pipe", "pipe"], windowsHide: true },
   );
   const output = [];
@@ -153,11 +176,17 @@ try {
   const code = await new Promise((resolve) => child.on("exit", resolve));
   if (code !== 0)
     throw new Error(
-      browserMode
-        ? "Browser workflow checks failed"
-        : "API integration checks failed",
+      acceptanceMode
+        ? "Acceptance scenario checks failed"
+        : browserMode
+          ? "Browser workflow checks failed"
+          : "API integration checks failed",
     );
-  const destination = browserMode ? "output/browser" : "output/api";
+  const destination = acceptanceMode
+    ? "output/acceptance"
+    : browserMode
+      ? "output/browser"
+      : "output/api";
   mkdirSync(destination, { recursive: true });
   writeFileSync(
     destination + "/verification.json",
@@ -166,9 +195,15 @@ try {
         verified_at_utc: new Date().toISOString(),
         test_database: name,
         production_server: true,
+        ...(acceptanceMode
+          ? {
+              requirements: "docs/FieldMerge_Requirements.md",
+              scenario_report: "output/acceptance/scenarios.json",
+            }
+          : {}),
         output: output.join(""),
         remaining:
-          "Formal acceptance mapping, broader outage/access coverage, performance evidence and final documentation remain.",
+          "See output/acceptance for AC01–AC35 evidence. Broader outage/security coverage, performance evidence and final deliverables remain.",
       },
       null,
       2,

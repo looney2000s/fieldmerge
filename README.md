@@ -12,6 +12,8 @@ Surveyors submit changes based on accepted record versions. FieldMerge combines 
 
 **Verified API milestone:** ten validation/export unit groups, thirty-three API/worker/query integration groups against a production Next.js server and real isolated databases, and a successful production build. Coverage includes authentication, reconciliation/review, drafts, recovery, filtered queries, summaries, snapshots, CSV/JSON exports, durable batch replay, and interface read models.
 
+**Verified acceptance milestone:** all 35 requirements-baseline scenarios pass against real PostgreSQL/MongoDB services and a production Next.js API, including lock-controlled races, service unavailability, rollback/retry, both forms, re-import, and provenance. [Results and limits](docs/FieldMerge_Acceptance.md).
+
 The [complete project checklist](docs/FieldMerge_Project_Checklist.md) tracks completed and remaining work from problem selection through final submission.
 
 **Verified interface milestone:** fifteen browser workflow checks and nine representative axe WCAG A/AA page checks, with no reported violations or browser runtime errors. Coverage includes both roles, actual SQL/MongoDB outcomes, stale review handling, lost-response retries, exports, keyboard access, and a 390px mobile layout. See [browser results](output/browser/checks.json).
@@ -30,7 +32,7 @@ flowchart LR
 
 The development databases, SQL reconciliation, reviewer decisions, authenticated API, and Next.js interface are implemented. PostgreSQL has nine business tables, four read views, and guarded workflow/read functions. Migrations 001–007 implement core structures, sessions, drafts, integrity, and recovery; migration 008 adds filtered reads, reports/exports, and two internal transport-batch tables. Migration 009 adds guarded interface read models without adding tables. There are 16 SQL tables including internal authentication/operational metadata and the migration registry. MongoDB has three validated collections and separate restricted API/worker credentials.
 
-Login, accepted-record browsing, drafts/finalization, batch upload, per-field outcomes, reviewer comparisons/decisions, history/provenance, reports/exports, and recovery inspection are available in the interface. [Commit-time integrity](docs/FieldMerge_Workflow_Integrity.md) and [automatic recovery](docs/FieldMerge_Recovery.md) remain enforced by the backend. Remaining work includes formal coverage of all 35 acceptance scenarios, broader outage/security verification, performance/query evidence, and final design/report/demo deliverables. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [query/export/batch behavior](docs/FieldMerge_Queries_Exports_Batches.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
+Login, accepted-record browsing, drafts/finalization, batch upload, per-field outcomes, reviewer comparisons/decisions, history/provenance, reports/exports, and recovery inspection are available in the interface. [Commit-time integrity](docs/FieldMerge_Workflow_Integrity.md) and [automatic recovery](docs/FieldMerge_Recovery.md) remain enforced by the backend. All 35 functional acceptance scenarios now pass with an explicit [evidence map](docs/FieldMerge_Acceptance.md). Remaining work includes transport/security hardening coverage, performance/query evidence, and final design/report/demo deliverables. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [query/export/batch behavior](docs/FieldMerge_Queries_Exports_Batches.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
 
 ## Prerequisites
 
@@ -66,13 +68,14 @@ Verification commands:
 pnpm test:unit
 pnpm build
 pnpm test:api
+pnpm test:acceptance
 # One-time browser download, into the ignored workspace directory:
 $env:PLAYWRIGHT_BROWSERS_PATH = Join-Path (Get-Location) 'tmp\playwright-browsers'
 pnpm exec playwright install chromium
 pnpm test:browser
 ```
 
-test:api and test:browser each start a temporary production server on 127.0.0.1:3100 against unique isolated databases on the existing development database services. Run them sequentially after building. Those services must be running, and Setup must have generated the fixtures. They leave development records untouched and stop their temporary server afterward. They use administrative credentials only to provision test databases, while actual HTTP requests use restricted API accounts. Evidence is in [output/api/verification.json](output/api/verification.json) and [output/browser/verification.json](output/browser/verification.json); workflow/accessibility details and screenshots accompany the browser report. This is representative end-to-end coverage, not closure of all 35 acceptance scenarios.
+test:api and test:browser each start a temporary production server on 127.0.0.1:3100 against unique isolated databases on the existing development database services. Run them sequentially after building. Those services must be running, and Setup must have generated the fixtures. They leave development records untouched and stop their temporary server afterward. They use administrative credentials only to provision test databases, while actual HTTP requests use restricted API accounts. Evidence is in [output/api/verification.json](output/api/verification.json) and [output/browser/verification.json](output/browser/verification.json); workflow/accessibility details and screenshots accompany the browser report. These remain representative browser/API checks. The separate pnpm test:acceptance suite closes AC01–AC35 on disposable services, including an actual MongoDB service-unavailability check; see the [acceptance guide](docs/FieldMerge_Acceptance.md).
 
 Setup generates an ignored .env only if absent, with random database credentials. It generates consistent synthetic fixtures, starts local development containers, runs checks against separate test services/databases, then applies the verified migration and seed to development. Re-running Setup checks the migration checksum and preserves existing seeded records rather than resetting the database.
 
