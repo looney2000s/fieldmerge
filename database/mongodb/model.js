@@ -7,7 +7,7 @@ const patch = {
   properties: {
     species: {bsonType: ['string', 'null'], minLength: 1, maxLength: 120, pattern: '.*\\S.*'},
     health: {enum: ['Good', 'Fair', 'Poor', null]},
-    diameter_cm: {bsonType: ['decimal', 'null'], minimum: 0, maximum: 999999.99},
+    diameter_cm: {bsonType: ['decimal', 'null'], minimum: Decimal128('0'), maximum: Decimal128('999999.99')},
     guard_damage: {bsonType: ['bool', 'null']}
   }
 };

@@ -3,6 +3,7 @@
 !.env.example
 node_modules/
 tmp/
+logs/
 *.log
 
 # Local course material includes other students' personal information.

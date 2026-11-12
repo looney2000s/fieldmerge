@@ -11,6 +11,7 @@ test('duplicate keys rejected at every object level',()=>{
 test('strict JSON, resource bounds and special keys',()=>{
  for(const text of ['{"a":1,}','/* comment */ {}','{"a":1e999999}','['.repeat(40)+'0'+']'.repeat(40)])assert.throws(()=>parseExact(text),ApiError);
   assert.throws(()=>parseExact('{"\\u0000":1}'),e=>e.code==='invalid_json_key');
+ assert.throws(()=>parseExact('['.repeat(5000)+'0'+']'.repeat(5000)),e=>e.code==='json_too_deep');
  assert.equal(canonical(parseExact('{"__proto__":{"admin":true}}')),'{"__proto__":{"admin":true}}');
  assert.equal({}.admin,undefined);
 });

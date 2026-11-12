@@ -135,7 +135,7 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Expose reviewer-only recovery job/status/event inspection and reasoned retry without overwriting evidence.
 - [x] Process batch items independently with durable manifests, memberships, per-item receipts/errors, stable retry identities, and immutable first-intake source attribution.
 - [x] Verify both controlled source forms, evidence-only submissions, explicit null/false/zero, and timestamp/decimal behavior through real intake.
-- [ ] Close the remaining submission/batch byte-limit, malformed transport, and boundary-value intake checks.
+- [x] Verify submission/batch byte limits, malformed transport, and selected boundary values through S01–S17/S23; see docs/FieldMerge_Security.md for the tested scope.
 
 ## Step 11 Build the authenticated backend
 
@@ -152,7 +152,7 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Implement history and field-provenance endpoints.
 - [x] Implement reviewer SQL/MongoDB aggregate summaries and bounded CSV/JSON accepted-record exports.
 - [x] Map database errors to bounded HTTP responses and return a refresh-required stale-review error.
-- [ ] Record failed access/stale attempts at a logging boundary that survives rolled-back database transactions, without logging secrets.
+- [x] Record handled failed access/stale attempts through an independent SQL transaction with safe persistent file fallback; verify rollback survival, reviewer access, redaction, and logger failure.
 
 ## Step 12 Build the Next.js interface
 
@@ -180,7 +180,7 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Run representative browser → authenticated API → both databases → response workflows for both roles; the separate AC01–AC35 suite also passes.
 - [x] Test owner/role denial, restricted SQL/MongoDB bypass attempts, literal injection-like filters, invalid/missing inputs, and inactive/expired/revoked sessions in the existing targeted integration checks.
 - [x] Test actual MongoDB service unavailability by pausing a disposable container, interrupted intake hooks, a killed/restarted worker process, and lost browser responses; see the precise boundaries in the acceptance guide.
-- [ ] Extend transport-boundary and adversarial checks beyond the currently covered functional/security cases; do not treat targeted checks as an exhaustive security audit.
+- [x] Extend transport/adversarial coverage with 23 security API groups and five browser checks; these targeted checks are not an exhaustive security audit.
 - [x] Test browser-submitted lost-response retries for review/finalization, review reload/resume, unchanged batch replay, and stale reviewer actions without changing intent automatically.
 - [x] Independently reconcile SQL accepted/workflow totals and MongoDB form/batch/observation aggregates in integrated tests.
 - [x] Prepare and execute meaningful DML, JOIN, nested/correlated, recursive/CTE, window, aggregate, GROUP BY, HAVING, and ORDER BY demonstrations, plus MongoDB evidence queries/aggregations.
@@ -190,7 +190,7 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 
 The latest saved database milestone has 231 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 22 query/export/batch + 31 MongoDB), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These database assertions remain separate evidence. All 35 functional acceptance scenarios additionally pass in the dedicated production-API/disposable-service suite, including actual MongoDB unavailability and rollback/retry.
 
-The milestone additionally passes ten unit groups, thirty-three API/worker/query integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. New tests verify filters/pagination, downloads, independent summaries, formula-like CSV text, 5,000/5,001-row export limits, batch replay/membership/ownership, and batched recovery. Prior worker kill/restart, connectivity failure, authorization, and integrity checks remain included. Fifteen browser workflow checks now pass against a production Next.js server and both databases, including exact-intent retries after lost responses, stale review rejection, explicit null/false/zero, exports, role denial, keyboard focus, and mobile navigation. Nine representative axe WCAG A/AA page scans report no violations, and no browser runtime errors were recorded. Evidence and screenshots are in output/browser. Automated scans do not establish complete accessibility conformance. The AC01–AC35 mapping and recorded results are in docs/FieldMerge_Acceptance.md and output/acceptance. Remaining entries retain broader outage/security and transport coverage.
+The milestone additionally passes eighteen unit groups, thirty-three API/worker/query integration groups against a production Next.js server and both databases, and a production build. Evidence is in output/api/verification.json. New tests verify filters/pagination, downloads, independent summaries, formula-like CSV text, 5,000/5,001-row export limits, batch replay/membership/ownership, and batched recovery. Prior worker kill/restart, connectivity failure, authorization, and integrity checks remain included. Fifteen browser workflow checks now pass against a production Next.js server and both databases, including exact-intent retries after lost responses, stale review rejection, explicit null/false/zero, exports, role denial, keyboard focus, and mobile navigation. Nine representative axe WCAG A/AA page scans report no violations, and no browser runtime errors were recorded. Evidence and screenshots are in output/browser. Automated scans do not establish complete accessibility conformance. The AC01–AC35 mapping and recorded results are in docs/FieldMerge_Acceptance.md and output/acceptance. The separate security suite passes 23 transport/security groups and five browser checks. Eight added unit groups verify logger isolation, persistence/redaction, bounded capacity, and stream-byte handling. See docs/FieldMerge_Security.md for coverage and operational limits.
 
 ## Step 14 Complete the final documentation
 
@@ -219,4 +219,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Complete the remaining transport/security boundary checks and safe failed-attempt logging, then reconcile final ER/schema/report deliverables and rehearse a clean release/demo. All 35 functional acceptance cases pass, and query/performance evidence is prepared. The latest branch is codex/query-performance, building on the earlier backend/interface/audit branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.
+Reconcile final ER/schema/report deliverables and rehearse a clean release/demo. All 35 functional acceptance cases, targeted transport/security checks and safe failure logging pass, and query/performance evidence is prepared. The latest branch is codex/security-boundaries, building on the earlier backend/interface/audit branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.

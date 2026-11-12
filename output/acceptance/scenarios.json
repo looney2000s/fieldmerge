@@ -1,5 +1,5 @@
 {
-  "verified_at_utc": "2026-11-12T04:11:47.941Z",
+  "verified_at_utc": "2026-11-12T07:06:55.158Z",
   "total": 35,
   "passed": 35,
   "scenarios": [
@@ -11,7 +11,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 96
+      "duration_ms": 99
     },
     {
       "id": "AC02",
@@ -21,7 +21,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 54
+      "duration_ms": 52
     },
     {
       "id": "AC03",
@@ -31,7 +31,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 66
+      "duration_ms": 71
     },
     {
       "id": "AC04",
@@ -41,7 +41,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 66
+      "duration_ms": 57
     },
     {
       "id": "AC05",
@@ -51,7 +51,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 51
+      "duration_ms": 49
     },
     {
       "id": "AC06",
@@ -61,7 +61,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 68
+      "duration_ms": 61
     },
     {
       "id": "AC07",
@@ -82,7 +82,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 36
+      "duration_ms": 31
     },
     {
       "id": "AC09",
@@ -92,7 +92,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 14
+      "duration_ms": 17
     },
     {
       "id": "AC10",
@@ -102,7 +102,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 27
+      "duration_ms": 28
     },
     {
       "id": "AC11",
@@ -112,7 +112,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 15
+      "duration_ms": 17
     },
     {
       "id": "AC12",
@@ -132,7 +132,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 39
+      "duration_ms": 41
     },
     {
       "id": "AC14",
@@ -143,7 +143,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 79
+      "duration_ms": 91
     },
     {
       "id": "AC15",
@@ -154,7 +154,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 96
+      "duration_ms": 110
     },
     {
       "id": "AC16",
@@ -164,7 +164,7 @@
         "SQL concurrency"
       ],
       "status": "passed",
-      "duration_ms": 104
+      "duration_ms": 101
     },
     {
       "id": "AC17",
@@ -174,7 +174,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 90
+      "duration_ms": 105
     },
     {
       "id": "AC18",
@@ -184,7 +184,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 67
+      "duration_ms": 68
     },
     {
       "id": "AC19",
@@ -194,7 +194,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 76
+      "duration_ms": 69
     },
     {
       "id": "AC20",
@@ -204,7 +204,7 @@
         "SQL concurrency"
       ],
       "status": "passed",
-      "duration_ms": 118
+      "duration_ms": 142
     },
     {
       "id": "AC21",
@@ -214,7 +214,7 @@
         "HTTP retry"
       ],
       "status": "passed",
-      "duration_ms": 92
+      "duration_ms": 99
     },
     {
       "id": "AC22",
@@ -226,7 +226,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 12780
+      "duration_ms": 12734
     },
     {
       "id": "AC23",
@@ -238,7 +238,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 83
+      "duration_ms": 87
     },
     {
       "id": "AC24",
@@ -250,7 +250,7 @@
         "SQL"
       ],
       "status": "passed",
-      "duration_ms": 130
+      "duration_ms": 147
     },
     {
       "id": "AC25",
@@ -260,7 +260,7 @@
         "SQL permissions"
       ],
       "status": "passed",
-      "duration_ms": 84
+      "duration_ms": 111
     },
     {
       "id": "AC26",
@@ -270,7 +270,7 @@
         "Restricted MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 73
+      "duration_ms": 79
     },
     {
       "id": "AC27",
@@ -281,7 +281,7 @@
         "MongoDB aggregation"
       ],
       "status": "passed",
-      "duration_ms": 37
+      "duration_ms": 40
     },
     {
       "id": "AC28",
@@ -292,7 +292,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 84
+      "duration_ms": 95
     },
     {
       "id": "AC29",
@@ -303,7 +303,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 31
+      "duration_ms": 36
     },
     {
       "id": "AC30",
@@ -314,7 +314,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 56
+      "duration_ms": 77
     },
     {
       "id": "AC31",
@@ -324,7 +324,7 @@
         "SQL provenance"
       ],
       "status": "passed",
-      "duration_ms": 52
+      "duration_ms": 72
     },
     {
       "id": "AC32",
@@ -335,7 +335,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 26
+      "duration_ms": 33
     },
     {
       "id": "AC33",
@@ -346,7 +346,7 @@
         "MongoDB"
       ],
       "status": "passed",
-      "duration_ms": 73
+      "duration_ms": 92
     },
     {
       "id": "AC34",
@@ -356,7 +356,7 @@
         "SQL import"
       ],
       "status": "passed",
-      "duration_ms": 225
+      "duration_ms": 213
     },
     {
       "id": "AC35",
@@ -367,7 +367,7 @@
         "HTTP recovery"
       ],
       "status": "passed",
-      "duration_ms": 100
+      "duration_ms": 563
     }
   ]
 }

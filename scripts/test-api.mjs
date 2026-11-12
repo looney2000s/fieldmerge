@@ -1,6 +1,6 @@
 import { spawn, execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { randomUUID } from "node:crypto";
+import { randomUUID, createHash } from "node:crypto";
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
 import path from "node:path";
 import pg from "pg";
@@ -9,9 +9,12 @@ const run = promisify(execFile),
   root = process.cwd();
 const browserMode = process.argv.includes("--browser");
 const acceptanceMode = process.argv.includes("--acceptance");
+const securityMode = process.argv.includes("--security");
 if (
-  (browserMode && acceptanceMode) ||
-  process.argv.slice(2).some((x) => !["--browser", "--acceptance"].includes(x))
+  [browserMode, acceptanceMode, securityMode].filter(Boolean).length > 1 ||
+  process.argv
+    .slice(2)
+    .some((x) => !["--browser", "--acceptance", "--security"].includes(x))
 )
   throw new Error("Unknown test argument");
 const docker =
@@ -117,6 +120,7 @@ try {
     FM_TEST_DATABASE: name,
     NEXT_TELEMETRY_DISABLED: "1",
     PLAYWRIGHT_BROWSERS_PATH: path.join(root, "tmp/playwright-browsers"),
+    SECURITY_LOG_DIR: path.join(root, "tmp/security-events", name),
   };
   const log = [];
   server = spawn(
@@ -147,21 +151,23 @@ try {
   console.log("Testing production Next.js server against isolated databases.");
   const child = spawn(
     process.execPath,
-    acceptanceMode
-      ? [
-          "--test",
-          "--test-concurrency=1",
-          "tests/acceptance/scenarios.test.mjs",
-        ]
-      : browserMode
-        ? ["tests/browser/workflow.mjs"]
-        : [
+    securityMode
+      ? ["tests/security/run.mjs"]
+      : acceptanceMode
+        ? [
             "--test",
             "--test-concurrency=1",
-            "tests/api/integration.test.mjs",
-            "tests/api/recovery.test.mjs",
-            "tests/api/queries-batches.test.mjs",
-          ],
+            "tests/acceptance/scenarios.test.mjs",
+          ]
+        : browserMode
+          ? ["tests/browser/workflow.mjs"]
+          : [
+              "--test",
+              "--test-concurrency=1",
+              "tests/api/integration.test.mjs",
+              "tests/api/recovery.test.mjs",
+              "tests/api/queries-batches.test.mjs",
+            ],
     { cwd: root, env, stdio: ["ignore", "pipe", "pipe"], windowsHide: true },
   );
   const output = [];
@@ -176,18 +182,46 @@ try {
   const code = await new Promise((resolve) => child.on("exit", resolve));
   if (code !== 0)
     throw new Error(
-      acceptanceMode
-        ? "Acceptance scenario checks failed"
-        : browserMode
-          ? "Browser workflow checks failed"
-          : "API integration checks failed",
+      securityMode
+        ? "Security boundary checks failed"
+        : acceptanceMode
+          ? "Acceptance scenario checks failed"
+          : browserMode
+            ? "Browser workflow checks failed"
+            : "API integration checks failed",
     );
-  const destination = acceptanceMode
-    ? "output/acceptance"
-    : browserMode
-      ? "output/browser"
-      : "output/api";
+  const destination = securityMode
+    ? "output/security"
+    : acceptanceMode
+      ? "output/acceptance"
+      : browserMode
+        ? "output/browser"
+        : "output/api";
   mkdirSync(destination, { recursive: true });
+  if (securityMode) {
+    const files = [
+      "scripts/test-api.mjs",
+      "tests/security/run.mjs",
+      "tests/security/transport.test.mjs",
+      "tests/security/browser.mjs",
+      "tests/api/security-events.test.mjs",
+      "lib/security-events.mjs",
+      "lib/http.mjs",
+      "lib/auth.mjs",
+      "lib/envelope.mjs",
+      "database/mongodb/model.js",
+      "app/api/operations/security-events/route.js",
+      ...readdirSync("database/postgres/migrations")
+        .sort()
+        .map((x) => "database/postgres/migrations/" + x),
+    ];
+    writeFileSync(
+      destination + "/source-checksums.json",
+      JSON.stringify(Object.fromEntries(files.map((file) => [
+        file, createHash("sha256").update(readFileSync(file)).digest("hex"),
+      ])), null, 2) + "\n",
+    );
+  }
   writeFileSync(
     destination + "/verification.json",
     JSON.stringify(
@@ -203,7 +237,7 @@ try {
           : {}),
         output: output.join(""),
         remaining:
-          "See output/acceptance for AC01–AC35 evidence. Broader outage/security coverage, performance evidence and final deliverables remain.",
+          "Final ER/schema/report reconciliation, clean release rehearsal and submission deliverables remain; see docs/FieldMerge_Project_Checklist.md for current scope.",
       },
       null,
       2,

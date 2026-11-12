@@ -1,0 +1,11 @@
+{
+  "verified_at_utc": "2026-11-12T07:06:11.293Z",
+  "checks": [
+    "Session cookie is HttpOnly/SameSite Strict and absent from document.cookie",
+    "surveyor source evidence renders stored markup as text",
+    "reviewer source evidence renders stored markup as text",
+    "Accepted species markup remains escaped in record details",
+    "Signing out revokes protected reads"
+  ],
+  "runtime_errors": []
+}
