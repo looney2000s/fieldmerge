@@ -1,6 +1,6 @@
 # FieldMerge project checklist
 
-Status baseline: 12 November 2026. Checked means completed within the scope stated; unchecked means remaining or not yet verified. A completed database function does not imply a working API or web interface. This checklist covers FieldMerge only.
+Status baseline: 13 November 2026. Checked means completed within the scope stated; unchecked means remaining or not yet verified. A completed database function does not imply a working API or web interface. This checklist covers FieldMerge only.
 
 ## Step 0 Understand the assignment
 
@@ -186,7 +186,7 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [x] Prepare and execute meaningful DML, JOIN, nested/correlated, recursive/CTE, window, aggregate, GROUP BY, HAVING, and ORDER BY demonstrations, plus MongoDB evidence queries/aggregations.
 - [x] Demonstrate CREATE/ALTER, INSERT/UPDATE/DELETE and explicit DROP using disposable staging objects; preserve accepted history and sealed evidence.
 - [x] Record full query plans, raw samples and index comparisons on 10,003 synthetic records, 14,308 snapshots and 4,504 source documents, with environment/method/limits documented in output/performance and docs/FieldMerge_Query_Demonstrations.md.
-- [ ] Verify a clean rebuild and full test run using the final code/configuration.
+- [x] Verify a clean GitHub checkout of published commit 62236a2 with a frozen install, fresh production build, all database/application/query suites, fresh credentials and isolated Docker volumes; see output/release/README.md.
 
 The latest saved database milestone has 231 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 22 query/export/batch + 31 MongoDB), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These database assertions remain separate evidence. All 35 functional acceptance scenarios additionally pass in the dedicated production-API/disposable-service suite, including actual MongoDB unavailability and rollback/retry.
 
@@ -219,4 +219,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Perform a clean rebuild and sequential verification from a fresh final-revision checkout, then rehearse the demo, review/integrate the published branches and package the submission with the author's existing ER diagram. The reconciled catalog/dictionary, architecture, 25-page implementation report, demonstration guide and rubric evidence map are prepared. All 35 functional acceptance cases, targeted security checks and query/performance evidence retain their recorded successful results. The latest branch is codex/design-report, building on the earlier backend/interface/audit branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.
+Review/integrate the published implementation branches into main, rehearse the author's demonstration/query explanation and package the submission with the existing ER diagram. A clean GitHub checkout of 62236a2 passed all 17 release-verification stages; fresh runtime evidence and cleanup results are in output/release. The reconciled catalog/dictionary, architecture, 25-page implementation report, demonstration guide and rubric evidence map are prepared. All 35 functional acceptance cases, targeted security checks and query/performance evidence retain their recorded successful results. The latest branch is codex/release-verification, building on the earlier backend/interface/audit branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.

@@ -1,0 +1,12 @@
+{
+  "scripts/measure-database.mjs": "60eaae980618400aa47ec0c6d66e794a313a47743e704a3ba13a4a00d1a5e43e",
+  "scripts/performance/run.mjs": "5a2e9255cfbb99b5d90554bb7d9b44a581ad20bf14d155d43f0d0f9fdfdfe6cd",
+  "database/demonstrations/postgres.sql": "7b41108b159d79c5ddcf12075e2390ef472771c62be63631d41aea1d9d06a5cd",
+  "database/demonstrations/sandbox-ddl.sql": "6680dece3fe6a1f3f922daa52062afdf4fd4f11ef4220dc5380731f23c45655b",
+  "database/demonstrations/mongodb.mjs": "68a028bc6f9e9443556b57c1ca52cd19e66175deaeee64e986daf5b3caadc9f1",
+  "lib/intake.mjs": "4476ec5d761998bb8a32a5db86c3db38a0ee84ca64dc3bce4edeb51597b31f45",
+  "lib/reports.mjs": "fdf48c24954c47eb88befd7595ba63f078be1a4a758f4aa168d3a371e301170e",
+  "lib/drafts.mjs": "e55e24a4446f4c871bc420e24c936acabb989d1cb9cc481b844f313f99cd394d",
+  "compose.yaml": "cababcb066159c3fc7fd0652784a655b3de9b5a99b9657370934ea7b8c5b4c48",
+  "pnpm-lock.yaml": "b3ae01146673cc7b353d6f26f10191b6ac6f133226a947d2c0bf2a04b3fb9444"
+}

@@ -1,0 +1,242 @@
+{
+  "started_at_utc": "2026-11-12T19:00:47.118Z",
+  "status": "passed",
+  "repository": "https://github.com/looney2000s/fieldmerge.git",
+  "requested_ref": "codex/design-report",
+  "expected_commit": "62236a28927ae8e02b8c4adf651621cdea71be5f",
+  "compose_project": "fieldmerge-release-fdde51db4c494cdba5f14a2d81774b9b",
+  "private_checkout": "tmp/fieldmerge-release-fdde51db4c494cdba5f14a2d81774b9b/checkout",
+  "fresh_credentials": true,
+  "development_env_loaded": false,
+  "development_project_targeted": false,
+  "steps": [
+    {
+      "name": "docker_ready",
+      "started_at_utc": "2026-11-12T19:00:47.120Z",
+      "status": "passed",
+      "elapsed_ms": 147,
+      "finished_at_utc": "2026-11-12T19:00:47.267Z"
+    },
+    {
+      "name": "clone_published_revision",
+      "started_at_utc": "2026-11-12T19:00:47.267Z",
+      "status": "passed",
+      "result": {
+        "commit": "62236a28927ae8e02b8c4adf651621cdea71be5f"
+      },
+      "elapsed_ms": 2444,
+      "finished_at_utc": "2026-11-12T19:00:49.711Z"
+    },
+    {
+      "name": "install_frozen_dependencies",
+      "started_at_utc": "2026-11-12T19:00:49.711Z",
+      "status": "passed",
+      "result": {
+        "lockfile_unchanged": true,
+        "project_node_modules_reused": false
+      },
+      "elapsed_ms": 4168,
+      "finished_at_utc": "2026-11-12T19:00:53.879Z"
+    },
+    {
+      "name": "generate_private_configuration",
+      "started_at_utc": "2026-11-12T19:00:53.880Z",
+      "status": "passed",
+      "elapsed_ms": 320,
+      "finished_at_utc": "2026-11-12T19:00:54.200Z"
+    },
+    {
+      "name": "database_setup_and_verification",
+      "started_at_utc": "2026-11-12T19:00:54.200Z",
+      "status": "passed",
+      "result": {
+        "assertions": 231,
+        "actual_commit_cases": 4,
+        "concurrent_sql_cases": 6,
+        "form_hashes_match": true
+      },
+      "elapsed_ms": 48058,
+      "finished_at_utc": "2026-11-12T19:01:42.258Z"
+    },
+    {
+      "name": "restricted_backend_configuration",
+      "started_at_utc": "2026-11-12T19:01:42.258Z",
+      "status": "passed",
+      "result": {
+        "new_restricted_api_and_worker_credentials": true
+      },
+      "elapsed_ms": 892,
+      "finished_at_utc": "2026-11-12T19:01:43.150Z"
+    },
+    {
+      "name": "unit_tests",
+      "started_at_utc": "2026-11-12T19:01:43.151Z",
+      "status": "passed",
+      "result": {
+        "groups": 18
+      },
+      "elapsed_ms": 778,
+      "finished_at_utc": "2026-11-12T19:01:43.929Z"
+    },
+    {
+      "name": "production_build",
+      "started_at_utc": "2026-11-12T19:01:43.930Z",
+      "status": "passed",
+      "result": {
+        "build_id": "m1_2YF-bZLTfDZLGV6ik6"
+      },
+      "elapsed_ms": 28421,
+      "finished_at_utc": "2026-11-12T19:02:12.351Z"
+    },
+    {
+      "name": "install_chromium",
+      "started_at_utc": "2026-11-12T19:02:12.351Z",
+      "status": "passed",
+      "result": {
+        "browser_cache_from_development_reused": false
+      },
+      "elapsed_ms": 47762,
+      "finished_at_utc": "2026-11-12T19:03:00.113Z"
+    },
+    {
+      "name": "api_integration",
+      "started_at_utc": "2026-11-12T19:03:00.114Z",
+      "status": "passed",
+      "result": {
+        "groups": 33
+      },
+      "elapsed_ms": 20836,
+      "finished_at_utc": "2026-11-12T19:03:20.950Z"
+    },
+    {
+      "name": "functional_acceptance",
+      "started_at_utc": "2026-11-12T19:03:20.951Z",
+      "status": "passed",
+      "result": {
+        "scenarios": 35,
+        "disposable_cleanup": true
+      },
+      "elapsed_ms": 27785,
+      "finished_at_utc": "2026-11-12T19:03:48.736Z"
+    },
+    {
+      "name": "transport_and_security",
+      "started_at_utc": "2026-11-12T19:03:48.738Z",
+      "status": "passed",
+      "result": {
+        "api_groups": 23,
+        "browser_checks": 5
+      },
+      "elapsed_ms": 13712,
+      "finished_at_utc": "2026-11-12T19:04:02.450Z"
+    },
+    {
+      "name": "browser_workflows",
+      "started_at_utc": "2026-11-12T19:04:02.451Z",
+      "status": "passed",
+      "result": {
+        "workflows": 15,
+        "representative_accessibility_pages": 9,
+        "reported_violations": 0
+      },
+      "elapsed_ms": 21264,
+      "finished_at_utc": "2026-11-12T19:04:23.715Z"
+    },
+    {
+      "name": "query_and_performance_evidence",
+      "started_at_utc": "2026-11-12T19:04:23.716Z",
+      "status": "passed",
+      "result": {
+        "status": "passed",
+        "disposable_cleanup": true
+      },
+      "elapsed_ms": 42694,
+      "finished_at_utc": "2026-11-12T19:05:06.410Z"
+    },
+    {
+      "name": "schema_dictionary_reconciliation",
+      "started_at_utc": "2026-11-12T19:05:06.412Z",
+      "status": "passed",
+      "result": {
+        "sql_tables": 17,
+        "columns": 146,
+        "foreign_keys": 29,
+        "mongodb_collections": 3
+      },
+      "elapsed_ms": 949,
+      "finished_at_utc": "2026-11-12T19:05:07.361Z"
+    },
+    {
+      "name": "source_integrity_and_public_evidence",
+      "started_at_utc": "2026-11-12T19:05:07.362Z",
+      "status": "passed",
+      "result": {
+        "artifacts": 44,
+        "generated_secret_scan": "passed"
+      },
+      "elapsed_ms": 430,
+      "finished_at_utc": "2026-11-12T19:05:07.792Z"
+    },
+    {
+      "name": "isolated_environment_cleanup",
+      "started_at_utc": "2026-11-12T19:05:07.793Z",
+      "status": "passed",
+      "result": {
+        "new_release_volumes_removed": true,
+        "development_project_preserved": true
+      },
+      "elapsed_ms": 1588,
+      "finished_at_utc": "2026-11-12T19:05:09.381Z"
+    }
+  ],
+  "cleanup_completed": true,
+  "orchestrator_sha256": "091197aac7cbff4add913e4bae7f54bb2f06721db36f9f6bf275f302d7a2b763",
+  "environment": {
+    "platform": "win32",
+    "os_release": "10.0.26200",
+    "node": "v26.13.0",
+    "docker": "29.9.2",
+    "pnpm": "11.28.11",
+    "next": "16.4.5",
+    "playwright": "1.65.0"
+  },
+  "original_development_container_ids": [
+    "027de8bb73f0",
+    "07ff2f43b405",
+    "a15a3fd86d7d",
+    "bfe0c11a2871"
+  ],
+  "tested_commit": "62236a28927ae8e02b8c4adf651621cdea71be5f",
+  "initial_checkout_clean": true,
+  "initial_build_and_private_inputs_absent": true,
+  "lockfile_sha256": "b3ae01146673cc7b353d6f26f10191b6ac6f133226a947d2c0bf2a04b3fb9444",
+  "database_ports": {
+    "postgres": 54986,
+    "mongodb": 54987
+  },
+  "compose_isolation_validated": true,
+  "implementation_source_unchanged": true,
+  "lockfile_unchanged": true,
+  "original_development_container_ids_unchanged": true,
+  "finished_at_utc": "2026-11-12T19:05:09.382Z",
+  "public_artifact_path_redaction": {
+    "artifacts_updated": 1,
+    "meaning": "Absolute workstation/checkout paths normalized in published text; test outcomes unchanged."
+  },
+  "public_artifact_formatting": {
+    "line_endings": "LF",
+    "utf8_bom": false,
+    "terminal_log_trailing_whitespace_removed": true,
+    "artifacts_updated": 3,
+    "meaning": "Publication formatting only; test result values are unchanged."
+  },
+  "publication_selection": {
+    "published_artifacts": 43,
+    "excluded_inherited_artifacts": [
+      {
+        "path": "evidence/browser/development-smoke.json",
+        "reason": "Committed development smoke evidence was not reexecuted; current browser evidence is checks.json and verification.json."
+      }
+    ]
+  }
+}

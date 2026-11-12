@@ -1,0 +1,6249 @@
+{
+  "captured_at_utc": "2026-11-12T19:05:07.245Z",
+  "implementation_commit": "62236a28927ae8e02b8c4adf651621cdea71be5f",
+  "scope": "Schema metadata only from development databases after migrations 001–010; no application data.",
+  "tables": [
+    {
+      "schema": "fieldmerge",
+      "name": "accepted_versions",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "app_users",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "audit_events",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "field_changes",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "form_versions",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "review_decisions",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "submissions",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "survey_campaigns",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "tree_records",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "name": "login_attempts",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "name": "sessions",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "name": "migrations",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "name": "batch_items",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "name": "intake_batches",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "name": "recovery_events",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "name": "recovery_jobs",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "name": "security_events",
+      "description": null
+    }
+  ],
+  "columns": [
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 1,
+      "name": "record_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 2,
+      "name": "version_no",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 3,
+      "name": "parent_version_no",
+      "type": "integer",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 4,
+      "name": "species",
+      "type": "character varying(120)",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 5,
+      "name": "health",
+      "type": "text",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 6,
+      "name": "diameter_cm",
+      "type": "numeric",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 7,
+      "name": "guard_damage",
+      "type": "boolean",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 8,
+      "name": "origin_submission_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 9,
+      "name": "published_by",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "position": 10,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "position": 1,
+      "name": "user_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "position": 2,
+      "name": "email",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "position": 3,
+      "name": "password_hash",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "position": 4,
+      "name": "display_name",
+      "type": "character varying(120)",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "position": 5,
+      "name": "role",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "position": 6,
+      "name": "is_active",
+      "type": "boolean",
+      "nullable": false,
+      "default_expression": "true",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "position": 7,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "position": 1,
+      "name": "event_id",
+      "type": "bigint",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": "ALWAYS",
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "position": 2,
+      "name": "actor_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "position": 3,
+      "name": "record_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "position": 4,
+      "name": "submission_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "position": 5,
+      "name": "event_type",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "position": 6,
+      "name": "event_data",
+      "type": "jsonb",
+      "nullable": false,
+      "default_expression": "'{}'::jsonb",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "position": 7,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 1,
+      "name": "change_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 2,
+      "name": "submission_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 3,
+      "name": "record_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 4,
+      "name": "field_name",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 5,
+      "name": "base_value",
+      "type": "jsonb",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 6,
+      "name": "proposed_value",
+      "type": "jsonb",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 7,
+      "name": "compared_value",
+      "type": "jsonb",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 8,
+      "name": "compared_version_no",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 9,
+      "name": "classification",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 10,
+      "name": "state",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 11,
+      "name": "pending_reason",
+      "type": "text",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 12,
+      "name": "revision_no",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": "1",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 13,
+      "name": "applied_version_no",
+      "type": "integer",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "position": 14,
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "position": 1,
+      "name": "form_version",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "position": 2,
+      "name": "definition_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "position": 3,
+      "name": "schema_hash",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "position": 4,
+      "name": "is_supported",
+      "type": "boolean",
+      "nullable": false,
+      "default_expression": "true",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "position": 5,
+      "name": "published_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 1,
+      "name": "decision_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 2,
+      "name": "change_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 3,
+      "name": "record_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 4,
+      "name": "reviewer_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 5,
+      "name": "client_decision_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 6,
+      "name": "request_hash",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 7,
+      "name": "expected_version_no",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 8,
+      "name": "expected_change_revision",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 9,
+      "name": "action",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 10,
+      "name": "chosen_value",
+      "type": "jsonb",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 11,
+      "name": "reason",
+      "type": "character varying(2000)",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 12,
+      "name": "result_version_no",
+      "type": "integer",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 13,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "position": 14,
+      "name": "decision_result",
+      "type": "jsonb",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 1,
+      "name": "submission_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 2,
+      "name": "author_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 3,
+      "name": "client_submission_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 4,
+      "name": "record_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 5,
+      "name": "base_version_no",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 6,
+      "name": "form_version",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 7,
+      "name": "payload_hash",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 8,
+      "name": "batch_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 9,
+      "name": "observed_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 10,
+      "name": "received_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 11,
+      "name": "state",
+      "type": "text",
+      "nullable": false,
+      "default_expression": "'awaiting_document'::text",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 12,
+      "name": "source_verified_at",
+      "type": "timestamp with time zone",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 13,
+      "name": "requires_review",
+      "type": "boolean",
+      "nullable": false,
+      "default_expression": "false",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 14,
+      "name": "warnings",
+      "type": "jsonb",
+      "nullable": false,
+      "default_expression": "'[]'::jsonb",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 15,
+      "name": "rejection_reason",
+      "type": "text",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 16,
+      "name": "lease_token",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 17,
+      "name": "lease_expires_at",
+      "type": "timestamp with time zone",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 18,
+      "name": "last_error",
+      "type": "character varying(2000)",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 19,
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 20,
+      "name": "verified_patch",
+      "type": "jsonb",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "position": 21,
+      "name": "reconciliation_result",
+      "type": "jsonb",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "position": 1,
+      "name": "campaign_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "position": 2,
+      "name": "name",
+      "type": "character varying(160)",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "position": 3,
+      "name": "starts_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "position": 4,
+      "name": "ends_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "position": 5,
+      "name": "source_dataset_id",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "position": 6,
+      "name": "source_url",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "position": 7,
+      "name": "import_mapping_version",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "position": 8,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "position": 1,
+      "name": "record_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "position": 2,
+      "name": "campaign_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "position": 3,
+      "name": "source_record_id",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "position": 4,
+      "name": "imported_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "position": 5,
+      "name": "is_active",
+      "type": "boolean",
+      "nullable": false,
+      "default_expression": "true",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "position": 6,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "login_attempts",
+      "position": 1,
+      "name": "attempt_key",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "login_attempts",
+      "position": 2,
+      "name": "window_start",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "login_attempts",
+      "position": 3,
+      "name": "attempts",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "position": 1,
+      "name": "token_hash",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "position": 2,
+      "name": "user_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "position": 3,
+      "name": "expires_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "position": 4,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "clock_timestamp()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "relation": "migrations",
+      "position": 1,
+      "name": "version",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "relation": "migrations",
+      "position": 2,
+      "name": "checksum",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "relation": "migrations",
+      "position": 3,
+      "name": "applied_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "now()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "position": 1,
+      "name": "batch_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "position": 2,
+      "name": "item_index",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "position": 3,
+      "name": "content_hash",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "position": 4,
+      "name": "submission_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "position": 5,
+      "name": "error_code",
+      "type": "character varying(80)",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "position": 6,
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "clock_timestamp()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "position": 1,
+      "name": "batch_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": "gen_random_uuid()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "position": 2,
+      "name": "owner_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "position": 3,
+      "name": "client_batch_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "position": 4,
+      "name": "manifest_hash",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "position": 5,
+      "name": "item_count",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "position": 6,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "clock_timestamp()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "position": 1,
+      "name": "event_id",
+      "type": "bigint",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": "ALWAYS",
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "position": 2,
+      "name": "job_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "position": 3,
+      "name": "event_type",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "position": 4,
+      "name": "actor_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "position": 5,
+      "name": "event_data",
+      "type": "jsonb",
+      "nullable": false,
+      "default_expression": "'{}'::jsonb",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "position": 6,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "clock_timestamp()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 1,
+      "name": "job_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": "gen_random_uuid()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 2,
+      "name": "job_kind",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 3,
+      "name": "target_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 4,
+      "name": "owner_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 5,
+      "name": "submission_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 6,
+      "name": "status",
+      "type": "text",
+      "nullable": false,
+      "default_expression": "'queued'::text",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 7,
+      "name": "attempts",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": "0",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 8,
+      "name": "failure_count",
+      "type": "integer",
+      "nullable": false,
+      "default_expression": "0",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 9,
+      "name": "next_attempt_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "clock_timestamp()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 10,
+      "name": "lease_token",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 11,
+      "name": "lease_expires_at",
+      "type": "timestamp with time zone",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 12,
+      "name": "claimed_by",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 13,
+      "name": "last_error_code",
+      "type": "character varying(80)",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 14,
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "clock_timestamp()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 15,
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "clock_timestamp()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "position": 16,
+      "name": "completed_at",
+      "type": "timestamp with time zone",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 1,
+      "name": "request_id",
+      "type": "uuid",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 2,
+      "name": "occurred_at",
+      "type": "timestamp with time zone",
+      "nullable": false,
+      "default_expression": "clock_timestamp()",
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 3,
+      "name": "actor_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 4,
+      "name": "actor_role",
+      "type": "text",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 5,
+      "name": "method",
+      "type": "text",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 6,
+      "name": "route_template",
+      "type": "character varying(100)",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 7,
+      "name": "target_id",
+      "type": "uuid",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 8,
+      "name": "http_status",
+      "type": "smallint",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 9,
+      "name": "error_code",
+      "type": "character varying(80)",
+      "nullable": false,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "position": 10,
+      "name": "sqlstate",
+      "type": "character varying(5)",
+      "nullable": true,
+      "default_expression": null,
+      "identity_generation": null,
+      "generated_kind": "",
+      "description": null
+    }
+  ],
+  "constraints": [
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_check",
+      "kind": "c",
+      "definition": "CHECK (version_no = 1 AND parent_version_no IS NULL AND origin_submission_id IS NULL OR version_no > 1 AND parent_version_no IS NOT NULL AND parent_version_no = (version_no - 1) AND origin_submission_id IS NOT NULL)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{version_no,parent_version_no,origin_submission_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_diameter_cm_check",
+      "kind": "c",
+      "definition": "CHECK (diameter_cm IS NULL OR diameter_cm >= 0::numeric AND diameter_cm <= 999999.99 AND diameter_cm = trunc(diameter_cm, 2))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{diameter_cm}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_health_check",
+      "kind": "c",
+      "definition": "CHECK (health IS NULL OR (health = ANY (ARRAY['Good'::text, 'Fair'::text, 'Poor'::text])))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{health}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (record_id, version_no)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id,version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_published_by_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (published_by) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{published_by}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_published_by_not_null",
+      "kind": "n",
+      "definition": "NOT NULL published_by",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{published_by}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_record_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id) REFERENCES fieldmerge.tree_records(record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.tree_records",
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_record_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL record_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_record_id_parent_version_no_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id, parent_version_no) REFERENCES fieldmerge.accepted_versions(record_id, version_no)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.accepted_versions",
+      "columns": "{record_id,parent_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_species_check",
+      "kind": "c",
+      "definition": "CHECK (species IS NULL OR fieldmerge.valid_scalar('species'::text, to_jsonb(species)))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{species}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_version_no_check",
+      "kind": "c",
+      "definition": "CHECK (version_no > 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_version_no_not_null",
+      "kind": "n",
+      "definition": "NOT NULL version_no",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "consistent_version",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "version_origin_same_record",
+      "kind": "f",
+      "definition": "FOREIGN KEY (origin_submission_id, record_id) REFERENCES fieldmerge.submissions(submission_id, record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.submissions",
+      "columns": "{origin_submission_id,record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_display_name_check",
+      "kind": "c",
+      "definition": "CHECK (display_name::text = btrim(display_name::text) AND display_name::text <> ''::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{display_name}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_display_name_not_null",
+      "kind": "n",
+      "definition": "NOT NULL display_name",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{display_name}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_email_check",
+      "kind": "c",
+      "definition": "CHECK (email = lower(btrim(email)) AND email <> ''::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{email}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_email_key",
+      "kind": "u",
+      "definition": "UNIQUE (email)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{email}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_email_not_null",
+      "kind": "n",
+      "definition": "NOT NULL email",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{email}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_is_active_not_null",
+      "kind": "n",
+      "definition": "NOT NULL is_active",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{is_active}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_password_hash_check",
+      "kind": "c",
+      "definition": "CHECK (length(btrim(password_hash)) > 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{password_hash}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_password_hash_not_null",
+      "kind": "n",
+      "definition": "NOT NULL password_hash",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{password_hash}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{user_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_role_check",
+      "kind": "c",
+      "definition": "CHECK (role = ANY (ARRAY['surveyor'::text, 'reviewer'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{role}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_role_not_null",
+      "kind": "n",
+      "definition": "NOT NULL role",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{role}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_user_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL user_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{user_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_actor_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (actor_id) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{actor_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_event_data_check",
+      "kind": "c",
+      "definition": "CHECK (jsonb_typeof(event_data) = 'object'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_data}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_event_data_not_null",
+      "kind": "n",
+      "definition": "NOT NULL event_data",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_data}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_event_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL event_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_event_type_check",
+      "kind": "c",
+      "definition": "CHECK (length(btrim(event_type)) > 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_type}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_event_type_not_null",
+      "kind": "n",
+      "definition": "NOT NULL event_type",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_type}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (event_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_record_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id) REFERENCES fieldmerge.tree_records(record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.tree_records",
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_submission_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (submission_id) REFERENCES fieldmerge.submissions(submission_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.submissions",
+      "columns": "{submission_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "consistent_workflow_audit",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "consistent_change",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_base_value_not_null",
+      "kind": "n",
+      "definition": "NOT NULL base_value",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{base_value}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_change_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL change_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{change_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_change_id_record_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (change_id, record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{change_id,record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_check",
+      "kind": "c",
+      "definition": "CHECK ((state = 'applied'::text) = (applied_version_no IS NOT NULL))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state,applied_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_check1",
+      "kind": "c",
+      "definition": "CHECK ((state = 'pending'::text) = (pending_reason IS NOT NULL))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state,pending_reason}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_check2",
+      "kind": "c",
+      "definition": "CHECK (fieldmerge.valid_scalar(field_name, base_value) AND fieldmerge.valid_scalar(field_name, proposed_value) AND fieldmerge.valid_scalar(field_name, compared_value))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{field_name,base_value,proposed_value,compared_value}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_classification_check",
+      "kind": "c",
+      "definition": "CHECK (classification = ANY (ARRAY['no_change'::text, 'compatible'::text, 'already_represented'::text, 'conflict'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{classification}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_classification_not_null",
+      "kind": "n",
+      "definition": "NOT NULL classification",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{classification}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_compared_value_not_null",
+      "kind": "n",
+      "definition": "NOT NULL compared_value",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{compared_value}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_compared_version_no_not_null",
+      "kind": "n",
+      "definition": "NOT NULL compared_version_no",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{compared_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_field_name_check",
+      "kind": "c",
+      "definition": "CHECK (field_name = ANY (ARRAY['species'::text, 'health'::text, 'diameter_cm'::text, 'guard_damage'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{field_name}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_field_name_not_null",
+      "kind": "n",
+      "definition": "NOT NULL field_name",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{field_name}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_pending_reason_check",
+      "kind": "c",
+      "definition": "CHECK (pending_reason = ANY (ARRAY['value_conflict'::text, 'intervening_edit'::text, 'clock_warning'::text, 'campaign_warning'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{pending_reason}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (change_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{change_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_proposed_value_not_null",
+      "kind": "n",
+      "definition": "NOT NULL proposed_value",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{proposed_value}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_record_id_applied_version_no_field_name_key",
+      "kind": "u",
+      "definition": "UNIQUE (record_id, applied_version_no, field_name)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id,applied_version_no,field_name}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_record_id_applied_version_no_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id, applied_version_no) REFERENCES fieldmerge.accepted_versions(record_id, version_no)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.accepted_versions",
+      "columns": "{record_id,applied_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_record_id_compared_version_no_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id, compared_version_no) REFERENCES fieldmerge.accepted_versions(record_id, version_no)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.accepted_versions",
+      "columns": "{record_id,compared_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_record_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL record_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_revision_no_check",
+      "kind": "c",
+      "definition": "CHECK (revision_no > 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{revision_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_revision_no_not_null",
+      "kind": "n",
+      "definition": "NOT NULL revision_no",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{revision_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_state_check",
+      "kind": "c",
+      "definition": "CHECK (state = ANY (ARRAY['pending'::text, 'applied'::text, 'rejected'::text, 'no_change'::text, 'already_represented'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_state_not_null",
+      "kind": "n",
+      "definition": "NOT NULL state",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_submission_id_field_name_key",
+      "kind": "u",
+      "definition": "UNIQUE (submission_id, field_name)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{submission_id,field_name}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_submission_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL submission_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{submission_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_submission_id_record_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (submission_id, record_id) REFERENCES fieldmerge.submissions(submission_id, record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.submissions",
+      "columns": "{submission_id,record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_updated_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL updated_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{updated_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_definition_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (definition_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{definition_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_definition_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL definition_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{definition_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_form_version_not_null",
+      "kind": "n",
+      "definition": "NOT NULL form_version",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{form_version}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_is_supported_not_null",
+      "kind": "n",
+      "definition": "NOT NULL is_supported",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{is_supported}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (form_version)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{form_version}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_published_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL published_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{published_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_schema_hash_check",
+      "kind": "c",
+      "definition": "CHECK (schema_hash ~ '^[a-f0-9]{64}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{schema_hash}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_schema_hash_not_null",
+      "kind": "n",
+      "definition": "NOT NULL schema_hash",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{schema_hash}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "consistent_decision",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_action_check",
+      "kind": "c",
+      "definition": "CHECK (action = ANY (ARRAY['accept_proposal'::text, 'keep_current'::text, 'replace'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{action}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_action_not_null",
+      "kind": "n",
+      "definition": "NOT NULL action",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{action}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_change_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (change_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{change_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_change_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL change_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{change_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_change_id_record_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (change_id, record_id) REFERENCES fieldmerge.field_changes(change_id, record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.field_changes",
+      "columns": "{change_id,record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_check",
+      "kind": "c",
+      "definition": "CHECK (action <> 'keep_current'::text OR result_version_no IS NULL)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{action,result_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_check1",
+      "kind": "c",
+      "definition": "CHECK (result_version_no IS NULL OR result_version_no = (expected_version_no + 1))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{result_version_no,expected_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_chosen_value_not_null",
+      "kind": "n",
+      "definition": "NOT NULL chosen_value",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{chosen_value}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_client_decision_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL client_decision_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{client_decision_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_decision_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL decision_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{decision_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_expected_change_revision_check",
+      "kind": "c",
+      "definition": "CHECK (expected_change_revision > 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{expected_change_revision}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_expected_change_revision_not_null",
+      "kind": "n",
+      "definition": "NOT NULL expected_change_revision",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{expected_change_revision}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_expected_version_no_not_null",
+      "kind": "n",
+      "definition": "NOT NULL expected_version_no",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{expected_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (decision_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{decision_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_reason_check",
+      "kind": "c",
+      "definition": "CHECK (length(btrim(reason::text)) > 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{reason}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_reason_not_null",
+      "kind": "n",
+      "definition": "NOT NULL reason",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{reason}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_record_id_expected_version_no_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id, expected_version_no) REFERENCES fieldmerge.accepted_versions(record_id, version_no)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.accepted_versions",
+      "columns": "{record_id,expected_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_record_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL record_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_record_id_result_version_no_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id, result_version_no) REFERENCES fieldmerge.accepted_versions(record_id, version_no)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.accepted_versions",
+      "columns": "{record_id,result_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_record_id_result_version_no_key",
+      "kind": "u",
+      "definition": "UNIQUE (record_id, result_version_no)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id,result_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_request_hash_check",
+      "kind": "c",
+      "definition": "CHECK (request_hash ~ '^[a-f0-9]{64}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{request_hash}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_request_hash_not_null",
+      "kind": "n",
+      "definition": "NOT NULL request_hash",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{request_hash}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_reviewer_id_client_decision_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (reviewer_id, client_decision_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{reviewer_id,client_decision_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_reviewer_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{reviewer_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_reviewer_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL reviewer_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{reviewer_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "consistent_submission",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "consistent_submission_batch",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submission_first_batch_fk",
+      "kind": "f",
+      "definition": "FOREIGN KEY (batch_id) REFERENCES fieldmerge_ops.intake_batches(batch_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge_ops.intake_batches",
+      "columns": "{batch_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_author_id_client_submission_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (author_id, client_submission_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{author_id,client_submission_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_author_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (author_id) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{author_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_author_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL author_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{author_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_base_version_no_not_null",
+      "kind": "n",
+      "definition": "NOT NULL base_version_no",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{base_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_check",
+      "kind": "c",
+      "definition": "CHECK ((state = ANY (ARRAY['awaiting_document'::text, 'rejected'::text])) OR source_verified_at IS NOT NULL)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state,source_verified_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_check1",
+      "kind": "c",
+      "definition": "CHECK ((lease_token IS NULL) = (lease_expires_at IS NULL))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{lease_token,lease_expires_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_check2",
+      "kind": "c",
+      "definition": "CHECK ((state = 'processing'::text) = (lease_token IS NOT NULL))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state,lease_token}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_check3",
+      "kind": "c",
+      "definition": "CHECK (state <> 'rejected'::text OR length(btrim(rejection_reason)) > 0 AND rejection_reason IS NOT NULL)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state,rejection_reason}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_client_submission_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL client_submission_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{client_submission_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_form_version_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (form_version) REFERENCES fieldmerge.form_versions(form_version)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.form_versions",
+      "columns": "{form_version}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_form_version_not_null",
+      "kind": "n",
+      "definition": "NOT NULL form_version",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{form_version}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_observed_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL observed_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{observed_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_payload_hash_check",
+      "kind": "c",
+      "definition": "CHECK (payload_hash ~ '^[a-f0-9]{64}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{payload_hash}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_payload_hash_not_null",
+      "kind": "n",
+      "definition": "NOT NULL payload_hash",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{payload_hash}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (submission_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{submission_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_received_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL received_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{received_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_record_id_base_version_no_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id, base_version_no) REFERENCES fieldmerge.accepted_versions(record_id, version_no)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.accepted_versions",
+      "columns": "{record_id,base_version_no}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_record_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (record_id) REFERENCES fieldmerge.tree_records(record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.tree_records",
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_record_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL record_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_requires_review_not_null",
+      "kind": "n",
+      "definition": "NOT NULL requires_review",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{requires_review}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_state_check",
+      "kind": "c",
+      "definition": "CHECK (state = ANY (ARRAY['awaiting_document'::text, 'ready'::text, 'processing'::text, 'needs_review'::text, 'partially_applied'::text, 'applied'::text, 'no_change'::text, 'resolved'::text, 'rejected'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_state_not_null",
+      "kind": "n",
+      "definition": "NOT NULL state",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{state}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_submission_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL submission_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{submission_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_submission_id_record_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (submission_id, record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{submission_id,record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_updated_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL updated_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{updated_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_warnings_check",
+      "kind": "c",
+      "definition": "CHECK (jsonb_typeof(warnings) = 'array'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{warnings}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_warnings_not_null",
+      "kind": "n",
+      "definition": "NOT NULL warnings",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{warnings}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_campaign_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL campaign_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{campaign_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_check",
+      "kind": "c",
+      "definition": "CHECK (ends_at >= starts_at)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{ends_at,starts_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_ends_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL ends_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{ends_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_import_mapping_version_not_null",
+      "kind": "n",
+      "definition": "NOT NULL import_mapping_version",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{import_mapping_version}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_name_check",
+      "kind": "c",
+      "definition": "CHECK (length(btrim(name::text)) > 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{name}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_name_not_null",
+      "kind": "n",
+      "definition": "NOT NULL name",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{name}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (campaign_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{campaign_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_source_dataset_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL source_dataset_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{source_dataset_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_source_url_not_null",
+      "kind": "n",
+      "definition": "NOT NULL source_url",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{source_url}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_starts_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL starts_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{starts_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_initial_version",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_campaign_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (campaign_id) REFERENCES fieldmerge.survey_campaigns(campaign_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.survey_campaigns",
+      "columns": "{campaign_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_campaign_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL campaign_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{campaign_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_campaign_id_source_record_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (campaign_id, source_record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{campaign_id,source_record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_imported_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL imported_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{imported_at}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_is_active_not_null",
+      "kind": "n",
+      "definition": "NOT NULL is_active",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{is_active}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (record_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_record_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL record_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_source_record_id_check",
+      "kind": "c",
+      "definition": "CHECK (length(btrim(source_record_id)) > 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{source_record_id}"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_source_record_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL source_record_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{source_record_id}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "login_attempts",
+      "name": "login_attempts_attempt_key_not_null",
+      "kind": "n",
+      "definition": "NOT NULL attempt_key",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{attempt_key}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "login_attempts",
+      "name": "login_attempts_attempts_not_null",
+      "kind": "n",
+      "definition": "NOT NULL attempts",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{attempts}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "login_attempts",
+      "name": "login_attempts_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (attempt_key)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{attempt_key}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "login_attempts",
+      "name": "login_attempts_window_start_not_null",
+      "kind": "n",
+      "definition": "NOT NULL window_start",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{window_start}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_expires_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL expires_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{expires_at}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (token_hash)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{token_hash}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_token_hash_check",
+      "kind": "c",
+      "definition": "CHECK (token_hash ~ '^[a-f0-9]{64}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{token_hash}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_token_hash_not_null",
+      "kind": "n",
+      "definition": "NOT NULL token_hash",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{token_hash}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_user_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{user_id}"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_user_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL user_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{user_id}"
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "relation": "migrations",
+      "name": "migrations_applied_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL applied_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{applied_at}"
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "relation": "migrations",
+      "name": "migrations_checksum_not_null",
+      "kind": "n",
+      "definition": "NOT NULL checksum",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{checksum}"
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "relation": "migrations",
+      "name": "migrations_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (version)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{version}"
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "relation": "migrations",
+      "name": "migrations_version_not_null",
+      "kind": "n",
+      "definition": "NOT NULL version",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{version}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_batch_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (batch_id) REFERENCES fieldmerge_ops.intake_batches(batch_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge_ops.intake_batches",
+      "columns": "{batch_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_batch_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL batch_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{batch_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_content_hash_check",
+      "kind": "c",
+      "definition": "CHECK (content_hash ~ '^[a-f0-9]{64}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{content_hash}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_content_hash_not_null",
+      "kind": "n",
+      "definition": "NOT NULL content_hash",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{content_hash}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_error_code_check",
+      "kind": "c",
+      "definition": "CHECK (error_code IS NULL OR error_code::text ~ '^[a-z_]{1,80}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{error_code}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_item_index_check",
+      "kind": "c",
+      "definition": "CHECK (item_index >= 0 AND item_index <= 99)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{item_index}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_item_index_not_null",
+      "kind": "n",
+      "definition": "NOT NULL item_index",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{item_index}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (batch_id, item_index)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{batch_id,item_index}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_submission_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (submission_id) REFERENCES fieldmerge.submissions(submission_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.submissions",
+      "columns": "{submission_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_updated_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL updated_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{updated_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "consistent_batch_item",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "consistent_intake_batch",
+      "kind": "t",
+      "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+      "deferrable": true,
+      "initially_deferred": true,
+      "referenced_relation": null,
+      "columns": "{}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_batch_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL batch_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{batch_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_client_batch_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL client_batch_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{client_batch_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_item_count_check",
+      "kind": "c",
+      "definition": "CHECK (item_count >= 1 AND item_count <= 100)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{item_count}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_item_count_not_null",
+      "kind": "n",
+      "definition": "NOT NULL item_count",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{item_count}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_manifest_hash_check",
+      "kind": "c",
+      "definition": "CHECK (manifest_hash ~ '^[a-f0-9]{64}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{manifest_hash}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_manifest_hash_not_null",
+      "kind": "n",
+      "definition": "NOT NULL manifest_hash",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{manifest_hash}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_owner_id_client_batch_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (owner_id, client_batch_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{owner_id,client_batch_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_owner_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (owner_id) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{owner_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_owner_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL owner_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{owner_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (batch_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{batch_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_actor_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (actor_id) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{actor_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_event_data_check",
+      "kind": "c",
+      "definition": "CHECK (jsonb_typeof(event_data) = 'object'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_data}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_event_data_not_null",
+      "kind": "n",
+      "definition": "NOT NULL event_data",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_data}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_event_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL event_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_event_type_check",
+      "kind": "c",
+      "definition": "CHECK (event_type = ANY (ARRAY['queued'::text, 'claimed'::text, 'failure'::text, 'retry_requested'::text, 'completed'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_type}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_event_type_not_null",
+      "kind": "n",
+      "definition": "NOT NULL event_type",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_type}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_job_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (job_id) REFERENCES fieldmerge_ops.recovery_jobs(job_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge_ops.recovery_jobs",
+      "columns": "{job_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_job_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL job_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{job_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (event_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{event_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_attempts_check",
+      "kind": "c",
+      "definition": "CHECK (attempts >= 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{attempts}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_attempts_not_null",
+      "kind": "n",
+      "definition": "NOT NULL attempts",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{attempts}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_check",
+      "kind": "c",
+      "definition": "CHECK (job_kind <> 'submission'::text OR submission_id IS NOT NULL AND submission_id = target_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{job_kind,submission_id,target_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_check1",
+      "kind": "c",
+      "definition": "CHECK ((status = 'leased'::text) = (lease_token IS NOT NULL))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{status,lease_token}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_check2",
+      "kind": "c",
+      "definition": "CHECK ((lease_token IS NULL) = (lease_expires_at IS NULL))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{lease_token,lease_expires_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_check3",
+      "kind": "c",
+      "definition": "CHECK ((status = 'completed'::text) = (completed_at IS NOT NULL))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{status,completed_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_created_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL created_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{created_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_failure_count_check",
+      "kind": "c",
+      "definition": "CHECK (failure_count >= 0)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{failure_count}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_failure_count_not_null",
+      "kind": "n",
+      "definition": "NOT NULL failure_count",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{failure_count}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_job_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL job_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{job_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_job_kind_check",
+      "kind": "c",
+      "definition": "CHECK (job_kind = ANY (ARRAY['submission'::text, 'draft'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{job_kind}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_job_kind_not_null",
+      "kind": "n",
+      "definition": "NOT NULL job_kind",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{job_kind}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_job_kind_target_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (job_kind, target_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{job_kind,target_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_next_attempt_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL next_attempt_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{next_attempt_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_owner_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (owner_id) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{owner_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_owner_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL owner_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{owner_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (job_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{job_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_status_check",
+      "kind": "c",
+      "definition": "CHECK (status = ANY (ARRAY['queued'::text, 'leased'::text, 'retry'::text, 'waiting_source'::text, 'blocked'::text, 'quarantined'::text, 'completed'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{status}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_status_not_null",
+      "kind": "n",
+      "definition": "NOT NULL status",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{status}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_submission_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (submission_id) REFERENCES fieldmerge.submissions(submission_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.submissions",
+      "columns": "{submission_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_target_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL target_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{target_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_updated_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL updated_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{updated_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_actor_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (actor_id) REFERENCES fieldmerge.app_users(user_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": "fieldmerge.app_users",
+      "columns": "{actor_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_actor_role_check",
+      "kind": "c",
+      "definition": "CHECK (actor_role = ANY (ARRAY['surveyor'::text, 'reviewer'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{actor_role}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_check",
+      "kind": "c",
+      "definition": "CHECK ((actor_id IS NULL) = (actor_role IS NULL))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{actor_id,actor_role}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_error_code_check",
+      "kind": "c",
+      "definition": "CHECK (error_code::text ~ '^[a-z][a-z0-9_]{0,79}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{error_code}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_error_code_not_null",
+      "kind": "n",
+      "definition": "NOT NULL error_code",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{error_code}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_http_status_check",
+      "kind": "c",
+      "definition": "CHECK (http_status >= 400 AND http_status <= 599)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{http_status}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_http_status_not_null",
+      "kind": "n",
+      "definition": "NOT NULL http_status",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{http_status}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_method_check",
+      "kind": "c",
+      "definition": "CHECK (method = ANY (ARRAY['GET'::text, 'POST'::text, 'PUT'::text, 'DELETE'::text, 'HEAD'::text, 'OPTIONS'::text, 'OTHER'::text]))",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{method}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_method_not_null",
+      "kind": "n",
+      "definition": "NOT NULL method",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{method}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_occurred_at_not_null",
+      "kind": "n",
+      "definition": "NOT NULL occurred_at",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{occurred_at}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (request_id)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{request_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_request_id_not_null",
+      "kind": "n",
+      "definition": "NOT NULL request_id",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{request_id}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_route_template_check",
+      "kind": "c",
+      "definition": "CHECK (route_template::text ~ '^/api/[a-z/:._-]+$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{route_template}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_route_template_not_null",
+      "kind": "n",
+      "definition": "NOT NULL route_template",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{route_template}"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_sqlstate_check",
+      "kind": "c",
+      "definition": "CHECK (sqlstate::text ~ '^[A-Z0-9]{5}$'::text)",
+      "deferrable": false,
+      "initially_deferred": false,
+      "referenced_relation": null,
+      "columns": "{sqlstate}"
+    }
+  ],
+  "indexes": [
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "accepted_versions_pkey",
+      "definition": "CREATE UNIQUE INDEX accepted_versions_pkey ON fieldmerge.accepted_versions USING btree (record_id, version_no)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_email_key",
+      "definition": "CREATE UNIQUE INDEX app_users_email_key ON fieldmerge.app_users USING btree (email)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "app_users",
+      "name": "app_users_pkey",
+      "definition": "CREATE UNIQUE INDEX app_users_pkey ON fieldmerge.app_users USING btree (user_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_events_pkey",
+      "definition": "CREATE UNIQUE INDEX audit_events_pkey ON fieldmerge.audit_events USING btree (event_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_record_created",
+      "definition": "CREATE INDEX audit_record_created ON fieldmerge.audit_events USING btree (record_id, created_at)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_submission_created",
+      "definition": "CREATE INDEX audit_submission_created ON fieldmerge.audit_events USING btree (submission_id, created_at)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_change_id_record_id_key",
+      "definition": "CREATE UNIQUE INDEX field_changes_change_id_record_id_key ON fieldmerge.field_changes USING btree (change_id, record_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_pkey",
+      "definition": "CREATE UNIQUE INDEX field_changes_pkey ON fieldmerge.field_changes USING btree (change_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_record_id_applied_version_no_field_name_key",
+      "definition": "CREATE UNIQUE INDEX field_changes_record_id_applied_version_no_field_name_key ON fieldmerge.field_changes USING btree (record_id, applied_version_no, field_name)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "field_changes_submission_id_field_name_key",
+      "definition": "CREATE UNIQUE INDEX field_changes_submission_id_field_name_key ON fieldmerge.field_changes USING btree (submission_id, field_name)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "pending_changes",
+      "definition": "CREATE INDEX pending_changes ON fieldmerge.field_changes USING btree (record_id, updated_at) WHERE (state = 'pending'::text)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_definition_id_key",
+      "definition": "CREATE UNIQUE INDEX form_versions_definition_id_key ON fieldmerge.form_versions USING btree (definition_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "form_versions",
+      "name": "form_versions_pkey",
+      "definition": "CREATE UNIQUE INDEX form_versions_pkey ON fieldmerge.form_versions USING btree (form_version)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "decisions_reviewer_created",
+      "definition": "CREATE INDEX decisions_reviewer_created ON fieldmerge.review_decisions USING btree (reviewer_id, created_at)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_change_id_key",
+      "definition": "CREATE UNIQUE INDEX review_decisions_change_id_key ON fieldmerge.review_decisions USING btree (change_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_pkey",
+      "definition": "CREATE UNIQUE INDEX review_decisions_pkey ON fieldmerge.review_decisions USING btree (decision_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_record_id_result_version_no_key",
+      "definition": "CREATE UNIQUE INDEX review_decisions_record_id_result_version_no_key ON fieldmerge.review_decisions USING btree (record_id, result_version_no)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "review_decisions_reviewer_id_client_decision_id_key",
+      "definition": "CREATE UNIQUE INDEX review_decisions_reviewer_id_client_decision_id_key ON fieldmerge.review_decisions USING btree (reviewer_id, client_decision_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_author_id_client_submission_id_key",
+      "definition": "CREATE UNIQUE INDEX submissions_author_id_client_submission_id_key ON fieldmerge.submissions USING btree (author_id, client_submission_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_author_received",
+      "definition": "CREATE INDEX submissions_author_received ON fieldmerge.submissions USING btree (author_id, received_at)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_first_batch",
+      "definition": "CREATE INDEX submissions_first_batch ON fieldmerge.submissions USING btree (batch_id) WHERE (batch_id IS NOT NULL)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_pkey",
+      "definition": "CREATE UNIQUE INDEX submissions_pkey ON fieldmerge.submissions USING btree (submission_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_processing",
+      "definition": "CREATE INDEX submissions_processing ON fieldmerge.submissions USING btree (state, lease_expires_at)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_record_received",
+      "definition": "CREATE INDEX submissions_record_received ON fieldmerge.submissions USING btree (record_id, received_at)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "submissions_submission_id_record_id_key",
+      "definition": "CREATE UNIQUE INDEX submissions_submission_id_record_id_key ON fieldmerge.submissions USING btree (submission_id, record_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "survey_campaigns",
+      "name": "survey_campaigns_pkey",
+      "definition": "CREATE UNIQUE INDEX survey_campaigns_pkey ON fieldmerge.survey_campaigns USING btree (campaign_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_campaign_id_source_record_id_key",
+      "definition": "CREATE UNIQUE INDEX tree_records_campaign_id_source_record_id_key ON fieldmerge.tree_records USING btree (campaign_id, source_record_id)"
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_records_pkey",
+      "definition": "CREATE UNIQUE INDEX tree_records_pkey ON fieldmerge.tree_records USING btree (record_id)"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "login_attempts",
+      "name": "login_attempts_pkey",
+      "definition": "CREATE UNIQUE INDEX login_attempts_pkey ON fieldmerge_auth.login_attempts USING btree (attempt_key)"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_pkey",
+      "definition": "CREATE UNIQUE INDEX sessions_pkey ON fieldmerge_auth.sessions USING btree (token_hash)"
+    },
+    {
+      "schema": "fieldmerge_auth",
+      "relation": "sessions",
+      "name": "sessions_user",
+      "definition": "CREATE INDEX sessions_user ON fieldmerge_auth.sessions USING btree (user_id)"
+    },
+    {
+      "schema": "fieldmerge_meta",
+      "relation": "migrations",
+      "name": "migrations_pkey",
+      "definition": "CREATE UNIQUE INDEX migrations_pkey ON fieldmerge_meta.migrations USING btree (version)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_pkey",
+      "definition": "CREATE UNIQUE INDEX batch_items_pkey ON fieldmerge_ops.batch_items USING btree (batch_id, item_index)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "batch_items_submission",
+      "definition": "CREATE INDEX batch_items_submission ON fieldmerge_ops.batch_items USING btree (submission_id) WHERE (submission_id IS NOT NULL)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_owner_id_client_batch_id_key",
+      "definition": "CREATE UNIQUE INDEX intake_batches_owner_id_client_batch_id_key ON fieldmerge_ops.intake_batches USING btree (owner_id, client_batch_id)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "intake_batches_pkey",
+      "definition": "CREATE UNIQUE INDEX intake_batches_pkey ON fieldmerge_ops.intake_batches USING btree (batch_id)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_event_job",
+      "definition": "CREATE INDEX recovery_event_job ON fieldmerge_ops.recovery_events USING btree (job_id, event_id)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "recovery_events_pkey",
+      "definition": "CREATE UNIQUE INDEX recovery_events_pkey ON fieldmerge_ops.recovery_events USING btree (event_id)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_due",
+      "definition": "CREATE INDEX recovery_due ON fieldmerge_ops.recovery_jobs USING btree (next_attempt_at, created_at) WHERE (status = ANY (ARRAY['queued'::text, 'retry'::text, 'waiting_source'::text, 'leased'::text]))"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_job_kind_target_id_key",
+      "definition": "CREATE UNIQUE INDEX recovery_jobs_job_kind_target_id_key ON fieldmerge_ops.recovery_jobs USING btree (job_kind, target_id)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_jobs",
+      "name": "recovery_jobs_pkey",
+      "definition": "CREATE UNIQUE INDEX recovery_jobs_pkey ON fieldmerge_ops.recovery_jobs USING btree (job_id)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_pkey",
+      "definition": "CREATE UNIQUE INDEX security_events_pkey ON fieldmerge_ops.security_events USING btree (request_id)"
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "security_events_recent",
+      "definition": "CREATE INDEX security_events_recent ON fieldmerge_ops.security_events USING btree (occurred_at DESC, request_id DESC)"
+    }
+  ],
+  "views": [
+    {
+      "schema": "fieldmerge",
+      "name": "field_value_provenance",
+      "definition": " WITH values_at_version AS (\n         SELECT v.record_id,\n            v.version_no,\n            v.origin_submission_id,\n            v.published_by,\n            v.created_at,\n            f_1.field_name,\n            COALESCE((to_jsonb(v.*) -> f_1.field_name), 'null'::jsonb) AS value,\n            COALESCE((to_jsonb(prev.*) -> f_1.field_name), 'null'::jsonb) AS previous_value\n           FROM ((fieldmerge.accepted_versions v\n             LEFT JOIN fieldmerge.accepted_versions prev ON (((prev.record_id = v.record_id) AND (prev.version_no = v.parent_version_no))))\n             CROSS JOIN ( VALUES ('species'::text), ('health'::text), ('diameter_cm'::text), ('guard_damage'::text)) f_1(field_name))\n        ), actual_changes AS (\n         SELECT values_at_version.record_id,\n            values_at_version.version_no,\n            values_at_version.origin_submission_id,\n            values_at_version.published_by,\n            values_at_version.created_at,\n            values_at_version.field_name,\n            values_at_version.value,\n            values_at_version.previous_value\n           FROM values_at_version\n          WHERE ((values_at_version.version_no = 1) OR (values_at_version.value IS DISTINCT FROM values_at_version.previous_value))\n        )\n SELECT target.record_id,\n    target.version_no,\n    f.field_name,\n    origin.version_no AS origin_version_no,\n    origin.value,\n    origin.published_by,\n    origin.created_at,\n    origin.origin_submission_id,\n    c.change_id,\n    d.decision_id,\n    d.reviewer_id,\n    d.reason\n   FROM ((((fieldmerge.accepted_versions target\n     CROSS JOIN ( VALUES ('species'::text), ('health'::text), ('diameter_cm'::text), ('guard_damage'::text)) f(field_name))\n     JOIN LATERAL ( SELECT a.record_id,\n            a.version_no,\n            a.origin_submission_id,\n            a.published_by,\n            a.created_at,\n            a.field_name,\n            a.value,\n            a.previous_value\n           FROM actual_changes a\n          WHERE ((a.record_id = target.record_id) AND (a.field_name = f.field_name) AND (a.version_no <= target.version_no))\n          ORDER BY a.version_no DESC\n         LIMIT 1) origin ON (true))\n     LEFT JOIN fieldmerge.field_changes c ON (((c.record_id = origin.record_id) AND (c.applied_version_no = origin.version_no) AND (c.field_name = f.field_name))))\n     LEFT JOIN fieldmerge.review_decisions d ON ((d.change_id = c.change_id)));"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "latest_accepted_records",
+      "definition": " SELECT DISTINCT ON (v.record_id) r.campaign_id,\n    r.source_record_id,\n    r.is_active,\n    v.record_id,\n    v.version_no,\n    v.parent_version_no,\n    v.species,\n    v.health,\n    v.diameter_cm,\n    v.guard_damage,\n    v.origin_submission_id,\n    v.published_by,\n    v.created_at\n   FROM (fieldmerge.accepted_versions v\n     JOIN fieldmerge.tree_records r USING (record_id))\n  ORDER BY v.record_id, v.version_no DESC;"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "pending_field_reviews",
+      "definition": " SELECT c.change_id,\n    c.submission_id,\n    c.record_id,\n    c.field_name,\n    c.base_value,\n    c.proposed_value,\n    c.compared_value,\n    c.compared_version_no,\n    c.classification,\n    c.state,\n    c.pending_reason,\n    c.revision_no,\n    c.applied_version_no,\n    c.updated_at,\n    s.author_id,\n    s.observed_at,\n    s.received_at,\n    v.version_no AS current_version_no,\n        CASE c.field_name\n            WHEN 'species'::text THEN COALESCE(to_jsonb(v.species), 'null'::jsonb)\n            WHEN 'health'::text THEN COALESCE(to_jsonb(v.health), 'null'::jsonb)\n            WHEN 'diameter_cm'::text THEN COALESCE(to_jsonb(v.diameter_cm), 'null'::jsonb)\n            ELSE COALESCE(to_jsonb(v.guard_damage), 'null'::jsonb)\n        END AS current_value\n   FROM ((fieldmerge.field_changes c\n     JOIN fieldmerge.submissions s USING (submission_id))\n     JOIN fieldmerge.latest_accepted_records v ON ((v.record_id = c.record_id)))\n  WHERE (c.state = 'pending'::text);"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "submission_outcomes",
+      "definition": " SELECT s.submission_id,\n    s.author_id,\n    s.record_id,\n    s.state,\n    count(c.change_id) AS proposed_fields,\n    count(c.change_id) FILTER (WHERE (c.state = 'pending'::text)) AS pending_fields,\n    count(c.change_id) FILTER (WHERE (c.state = 'applied'::text)) AS applied_fields\n   FROM (fieldmerge.submissions s\n     LEFT JOIN fieldmerge.field_changes c USING (submission_id))\n  GROUP BY s.submission_id;"
+    }
+  ],
+  "triggers": [
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "consistent_version",
+      "definition": "CREATE CONSTRAINT TRIGGER consistent_version AFTER INSERT ON fieldmerge.accepted_versions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION fieldmerge.check_workflow_consistency()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "immutable_versions",
+      "definition": "CREATE TRIGGER immutable_versions BEFORE DELETE OR UPDATE ON fieldmerge.accepted_versions FOR EACH ROW EXECUTE FUNCTION fieldmerge.block_history_mutation()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "accepted_versions",
+      "name": "zz_workflow_versions",
+      "definition": "CREATE TRIGGER zz_workflow_versions AFTER INSERT ON fieldmerge.accepted_versions FOR EACH ROW EXECUTE FUNCTION fieldmerge.guard_workflow_write()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "audit_same_record",
+      "definition": "CREATE TRIGGER audit_same_record BEFORE INSERT ON fieldmerge.audit_events FOR EACH ROW EXECUTE FUNCTION fieldmerge.check_audit_record()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "consistent_workflow_audit",
+      "definition": "CREATE CONSTRAINT TRIGGER consistent_workflow_audit AFTER INSERT ON fieldmerge.audit_events DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION fieldmerge.check_workflow_consistency()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "immutable_audit",
+      "definition": "CREATE TRIGGER immutable_audit BEFORE DELETE OR UPDATE ON fieldmerge.audit_events FOR EACH ROW EXECUTE FUNCTION fieldmerge.block_history_mutation()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "audit_events",
+      "name": "zz_workflow_audit",
+      "definition": "CREATE TRIGGER zz_workflow_audit AFTER INSERT ON fieldmerge.audit_events FOR EACH ROW EXECUTE FUNCTION fieldmerge.guard_workflow_write()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "consistent_change",
+      "definition": "CREATE CONSTRAINT TRIGGER consistent_change AFTER INSERT OR UPDATE ON fieldmerge.field_changes DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION fieldmerge.check_workflow_consistency()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "field_changes",
+      "name": "zz_workflow_changes",
+      "definition": "CREATE TRIGGER zz_workflow_changes AFTER INSERT OR DELETE OR UPDATE ON fieldmerge.field_changes FOR EACH ROW EXECUTE FUNCTION fieldmerge.guard_workflow_write()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "consistent_decision",
+      "definition": "CREATE CONSTRAINT TRIGGER consistent_decision AFTER INSERT ON fieldmerge.review_decisions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION fieldmerge.check_workflow_consistency()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "decision_actor_value",
+      "definition": "CREATE TRIGGER decision_actor_value BEFORE INSERT ON fieldmerge.review_decisions FOR EACH ROW EXECUTE FUNCTION fieldmerge.validate_review_actor_and_value()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "immutable_decisions",
+      "definition": "CREATE TRIGGER immutable_decisions BEFORE DELETE OR UPDATE ON fieldmerge.review_decisions FOR EACH ROW EXECUTE FUNCTION fieldmerge.block_history_mutation()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "review_decisions",
+      "name": "zz_workflow_decisions",
+      "definition": "CREATE TRIGGER zz_workflow_decisions AFTER INSERT ON fieldmerge.review_decisions FOR EACH ROW EXECUTE FUNCTION fieldmerge.guard_workflow_write()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "consistent_submission",
+      "definition": "CREATE CONSTRAINT TRIGGER consistent_submission AFTER INSERT OR UPDATE ON fieldmerge.submissions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION fieldmerge.check_workflow_consistency()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "consistent_submission_batch",
+      "definition": "CREATE CONSTRAINT TRIGGER consistent_submission_batch AFTER INSERT OR UPDATE ON fieldmerge.submissions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW WHEN (new.batch_id IS NOT NULL) EXECUTE FUNCTION fieldmerge.check_batch_graph()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "immutable_first_batch",
+      "definition": "CREATE TRIGGER immutable_first_batch BEFORE UPDATE ON fieldmerge.submissions FOR EACH ROW EXECUTE FUNCTION fieldmerge.guard_batch_identity()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "immutable_verified_submission",
+      "definition": "CREATE TRIGGER immutable_verified_submission BEFORE UPDATE ON fieldmerge.submissions FOR EACH ROW EXECUTE FUNCTION fieldmerge.protect_verified_submission()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "zz_workflow_submissions",
+      "definition": "CREATE TRIGGER zz_workflow_submissions AFTER INSERT OR DELETE OR UPDATE ON fieldmerge.submissions FOR EACH ROW EXECUTE FUNCTION fieldmerge.guard_workflow_write()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "submissions",
+      "name": "zzz_submission_recovery",
+      "definition": "CREATE TRIGGER zzz_submission_recovery AFTER INSERT OR UPDATE ON fieldmerge.submissions FOR EACH ROW EXECUTE FUNCTION fieldmerge.queue_submission_recovery()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge",
+      "relation": "tree_records",
+      "name": "tree_initial_version",
+      "definition": "CREATE CONSTRAINT TRIGGER tree_initial_version AFTER INSERT ON fieldmerge.tree_records DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION fieldmerge.require_initial_version()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "consistent_batch_item",
+      "definition": "CREATE CONSTRAINT TRIGGER consistent_batch_item AFTER INSERT OR UPDATE ON fieldmerge_ops.batch_items DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION fieldmerge.check_batch_graph()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "batch_items",
+      "name": "immutable_batch_item",
+      "definition": "CREATE TRIGGER immutable_batch_item BEFORE DELETE OR UPDATE ON fieldmerge_ops.batch_items FOR EACH ROW EXECUTE FUNCTION fieldmerge.guard_batch_identity()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "consistent_intake_batch",
+      "definition": "CREATE CONSTRAINT TRIGGER consistent_intake_batch AFTER INSERT ON fieldmerge_ops.intake_batches DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION fieldmerge.check_batch_graph()",
+      "deferrable": true,
+      "initially_deferred": true
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "intake_batches",
+      "name": "immutable_intake_batches",
+      "definition": "CREATE TRIGGER immutable_intake_batches BEFORE DELETE OR UPDATE ON fieldmerge_ops.intake_batches FOR EACH ROW EXECUTE FUNCTION fieldmerge.block_history_mutation()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "recovery_events",
+      "name": "immutable_recovery_events",
+      "definition": "CREATE TRIGGER immutable_recovery_events BEFORE DELETE OR UPDATE ON fieldmerge_ops.recovery_events FOR EACH ROW EXECUTE FUNCTION fieldmerge.block_history_mutation()",
+      "deferrable": false,
+      "initially_deferred": false
+    },
+    {
+      "schema": "fieldmerge_ops",
+      "relation": "security_events",
+      "name": "immutable_security_events",
+      "definition": "CREATE TRIGGER immutable_security_events BEFORE DELETE OR UPDATE ON fieldmerge_ops.security_events FOR EACH ROW EXECUTE FUNCTION fieldmerge.block_history_mutation()",
+      "deferrable": false,
+      "initially_deferred": false
+    }
+  ],
+  "functions": [
+    {
+      "schema": "fieldmerge",
+      "name": "_accepted_selection",
+      "arguments": "p_source text, p_species text, p_health text, p_active boolean, p_after uuid, p_cap integer",
+      "result": "SETOF fieldmerge.latest_accepted_records",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "_api_actor",
+      "arguments": "p_hash text, p_role text",
+      "result": "uuid",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "_recovery_lease",
+      "arguments": "p_job uuid, p_token uuid",
+      "result": "fieldmerge_ops.recovery_jobs",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "_reserve_for_author",
+      "arguments": "actor uuid, p_client uuid, p_record uuid, p_base integer, p_form text, p_hash text, p_observed timestamp with time zone",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_workflow"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_accepted_export",
+      "arguments": "p_token text, p_source text, p_species text, p_health text, p_active boolean",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_batch_detail",
+      "arguments": "p_token text, p_batch uuid",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_batch_error",
+      "arguments": "p_token text, p_batch uuid, p_index integer, p_code text",
+      "result": "void",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_batch_list",
+      "arguments": "p_token text, p_limit integer",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_create_session",
+      "arguments": "p_user uuid, p_hash text",
+      "result": "void",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_credentials",
+      "arguments": "p_email text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_decide",
+      "arguments": "p_token text, p_key uuid, p_change uuid, p_version integer, p_revision integer, p_action text, p_chosen jsonb, p_reason text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_draft_context",
+      "arguments": "p_token text, p_record uuid, p_base integer, p_form text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_finish_submission",
+      "arguments": "p_token text, p_submission uuid, p_hash text, p_patch jsonb",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_workflow"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_form",
+      "arguments": "p_token text, p_form text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_history",
+      "arguments": "p_hash text, p_record uuid",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_login_allowed",
+      "arguments": "p_key text",
+      "result": "boolean",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_logout",
+      "arguments": "p_hash text",
+      "result": "void",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_me",
+      "arguments": "p_hash text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_pending",
+      "arguments": "p_token text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_record_labels",
+      "arguments": "p_token text, p_ids uuid[]",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_record_security_event",
+      "arguments": "p_request uuid, p_session text, p_method text, p_route text, p_target uuid, p_status integer, p_code text, p_sqlstate text",
+      "result": "void",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_records",
+      "arguments": "p_hash text, p_limit integer",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_records_page",
+      "arguments": "p_token text, p_source text, p_species text, p_health text, p_active boolean, p_after uuid, p_limit integer",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_recovery_detail",
+      "arguments": "p_token text, p_job uuid",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_recovery_jobs",
+      "arguments": "p_token text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_recovery_retry",
+      "arguments": "p_token text, p_job uuid, p_reason text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_register_batch",
+      "arguments": "p_token text, p_client uuid, p_hashes jsonb",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_reserve_batch_item",
+      "arguments": "p_token text, p_batch uuid, p_index integer, p_client uuid, p_record uuid, p_base integer, p_form text, p_hash text, p_observed timestamp with time zone",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_workflow"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_reserve_submission",
+      "arguments": "p_token text, p_client uuid, p_record uuid, p_base integer, p_form text, p_hash text, p_observed timestamp with time zone",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_review_authors",
+      "arguments": "p_token text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_review_comparison",
+      "arguments": "p_token text, p_change uuid",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_reviews_page",
+      "arguments": "p_token text, p_record uuid, p_field text, p_author uuid, p_from timestamp with time zone, p_to timestamp with time zone, p_after uuid, p_limit integer",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_security_events",
+      "arguments": "p_session text, p_limit integer",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_snapshot",
+      "arguments": "p_hash text, p_record uuid",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_snapshot_download",
+      "arguments": "p_token text, p_record uuid, p_version integer",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_sql_summary",
+      "arguments": "p_token text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_submission",
+      "arguments": "p_token text, p_submission uuid",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "api_submission_list",
+      "arguments": "p_token text, p_record uuid, p_state text, p_limit integer",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "assert_submission_consistent",
+      "arguments": "p_id uuid",
+      "result": "void",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "block_history_mutation",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "check_audit_record",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "check_batch_graph",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "check_workflow_consistency",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "guard_batch_identity",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "guard_workflow_write",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "protect_verified_submission",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "queue_submission_recovery",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "reconcile_submission",
+      "arguments": "p_submission_id uuid, p_expected_hash text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_workflow"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "require_initial_version",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "review_change",
+      "arguments": "p_reviewer_id uuid, p_client_decision_id uuid, p_change_id uuid, p_expected_version_no integer, p_expected_change_revision integer, p_action text, p_chosen_value jsonb, p_reason text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_workflow"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "valid_scalar",
+      "arguments": "field_name text, value jsonb",
+      "result": "boolean",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "validate_review_actor_and_value",
+      "arguments": "",
+      "result": "trigger",
+      "security_definer": false,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "worker_claim",
+      "arguments": "p_worker uuid",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "worker_complete",
+      "arguments": "p_job uuid, p_token uuid",
+      "result": "boolean",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "worker_context",
+      "arguments": "p_job uuid, p_token uuid",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "worker_fail",
+      "arguments": "p_job uuid, p_token uuid, p_code text",
+      "result": "boolean",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "worker_finish_submission",
+      "arguments": "p_job uuid, p_token uuid, p_hash text, p_patch jsonb",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_workflow"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "worker_form",
+      "arguments": "p_form text",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "worker_register_draft",
+      "arguments": "p_id uuid, p_owner uuid",
+      "result": "uuid",
+      "security_definer": true,
+      "owner": "fieldmerge_owner"
+    },
+    {
+      "schema": "fieldmerge",
+      "name": "worker_reserve_draft",
+      "arguments": "p_job uuid, p_token uuid, p_client uuid, p_record uuid, p_base integer, p_form text, p_hash text, p_observed timestamp with time zone",
+      "result": "jsonb",
+      "security_definer": true,
+      "owner": "fieldmerge_workflow"
+    }
+  ],
+  "migrations": [
+    {
+      "version": "001",
+      "checksum": "66cdb51dfb526e7e3891e209a8fb7be991b02ee32ed990a3c0c7a2b0a1574d39"
+    },
+    {
+      "version": "002",
+      "checksum": "ae2f62a3b4fe5c8b37ee00c1caa198beefd9322d15a31664e96c159fce9c8c11"
+    },
+    {
+      "version": "003",
+      "checksum": "57aede93840bf5f3f6e33b82b4924cbfdbdca9441b6a380b2de9c3a78d74db0d"
+    },
+    {
+      "version": "004",
+      "checksum": "baf6471b647c88be55039df3e3f7ec001f292e39900537240965e7695bd91de4"
+    },
+    {
+      "version": "005",
+      "checksum": "0969327c704f81e9daa3b41a2c438d811292dad20a70feb6b533d9921080e740"
+    },
+    {
+      "version": "006",
+      "checksum": "0a3bbaa7358f0ef82279293080fee7a2a45ff32d5acc56d9d8d3e2ff7a8312f7"
+    },
+    {
+      "version": "007",
+      "checksum": "09d9d4437e8ebce9ba1af60d9131353ab741f59ba2616eed6a5dac46e1d8aa9b"
+    },
+    {
+      "version": "008",
+      "checksum": "72b2a61516f3c7f04ede94ebc6ee0070f9ac3f4eebc1a9cd6810368497488755"
+    },
+    {
+      "version": "009",
+      "checksum": "d3a8166d9f0434d9f3f3f56627df10cab71d2b1bd33082f8f61ec12d0dbd6113"
+    },
+    {
+      "version": "010",
+      "checksum": "56d950f0ca8895aa7c24ab1a7c0c510c3b7d8d5575a4e1a46bfce5e33ac3e5bf"
+    }
+  ],
+  "collections": [
+    {
+      "name": "form_definitions",
+      "validator": {
+        "$jsonSchema": {
+          "bsonType": "object",
+          "additionalProperties": false,
+          "required": [
+            "_id",
+            "form_version",
+            "schema_hash",
+            "published_at",
+            "canonical_fields",
+            "optional_sections"
+          ],
+          "properties": {
+            "_id": {
+              "bsonType": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            "form_version": {
+              "enum": [
+                "tree-v1",
+                "tree-v2"
+              ]
+            },
+            "schema_hash": {
+              "bsonType": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "published_at": {
+              "bsonType": "date"
+            },
+            "canonical_fields": {
+              "bsonType": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "bsonType": "object",
+                "required": [
+                  "name",
+                  "type",
+                  "nullable"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "enum": [
+                      "species",
+                      "health",
+                      "diameter_cm",
+                      "guard_damage"
+                    ]
+                  },
+                  "type": {
+                    "enum": [
+                      "string",
+                      "enum",
+                      "decimal",
+                      "boolean"
+                    ]
+                  },
+                  "nullable": {
+                    "enum": [
+                      true
+                    ]
+                  },
+                  "max_length": {
+                    "bsonType": "int"
+                  },
+                  "values": {
+                    "bsonType": "array",
+                    "items": {
+                      "bsonType": "string"
+                    }
+                  },
+                  "unit": {
+                    "enum": [
+                      "cm"
+                    ]
+                  },
+                  "scale": {
+                    "enum": [
+                      2
+                    ]
+                  },
+                  "minimum": {
+                    "bsonType": "decimal"
+                  },
+                  "maximum": {
+                    "bsonType": "decimal"
+                  }
+                }
+              }
+            },
+            "optional_sections": {
+              "bsonType": "object",
+              "additionalProperties": false,
+              "properties": {
+                "observations": {
+                  "bsonType": "object",
+                  "required": [
+                    "max_items",
+                    "categories",
+                    "max_note_length"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "max_items": {
+                      "enum": [
+                        20
+                      ]
+                    },
+                    "categories": {
+                      "bsonType": "array",
+                      "items": {
+                        "enum": [
+                          "guard",
+                          "trunk",
+                          "root",
+                          "branch",
+                          "other"
+                        ]
+                      }
+                    },
+                    "max_note_length": {
+                      "enum": [
+                        500
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "validationLevel": "strict",
+      "validationAction": "error",
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "form_version": 1
+          },
+          "name": "form_version_1",
+          "unique": true
+        }
+      ]
+    },
+    {
+      "name": "submission_documents",
+      "validator": {
+        "$and": [
+          {
+            "$jsonSchema": {
+              "bsonType": "object",
+              "additionalProperties": false,
+              "required": [
+                "_id",
+                "author_id",
+                "client_submission_id",
+                "record_id",
+                "form_version",
+                "received_at",
+                "payload_hash",
+                "payload",
+                "canonical_payload_json"
+              ],
+              "properties": {
+                "_id": {
+                  "bsonType": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "author_id": {
+                  "bsonType": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "client_submission_id": {
+                  "bsonType": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "record_id": {
+                  "bsonType": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "form_version": {
+                  "enum": [
+                    "tree-v1",
+                    "tree-v2"
+                  ]
+                },
+                "batch_id": {
+                  "bsonType": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "received_at": {
+                  "bsonType": "date"
+                },
+                "payload_hash": {
+                  "bsonType": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "payload": {
+                  "bsonType": "object",
+                  "required": [
+                    "client_submission_id",
+                    "record_id",
+                    "base_version_no",
+                    "form_version",
+                    "observed_at",
+                    "patch"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "client_submission_id": {
+                      "bsonType": "string",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                    },
+                    "record_id": {
+                      "bsonType": "string",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                    },
+                    "base_version_no": {
+                      "bsonType": "int",
+                      "minimum": 1
+                    },
+                    "form_version": {
+                      "enum": [
+                        "tree-v1",
+                        "tree-v2"
+                      ]
+                    },
+                    "observed_at": {
+                      "bsonType": "date"
+                    },
+                    "patch": {
+                      "bsonType": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "species": {
+                          "bsonType": [
+                            "string",
+                            "null"
+                          ],
+                          "minLength": 1,
+                          "maxLength": 120,
+                          "pattern": ".*\\S.*"
+                        },
+                        "health": {
+                          "enum": [
+                            "Good",
+                            "Fair",
+                            "Poor",
+                            null
+                          ]
+                        },
+                        "diameter_cm": {
+                          "bsonType": [
+                            "decimal",
+                            "null"
+                          ],
+                          "minimum": {
+                            "$numberDecimal": "0"
+                          },
+                          "maximum": {
+                            "$numberDecimal": "999999.99"
+                          }
+                        },
+                        "guard_damage": {
+                          "bsonType": [
+                            "bool",
+                            "null"
+                          ]
+                        }
+                      }
+                    },
+                    "observations": {
+                      "bsonType": "array",
+                      "maxItems": 20,
+                      "items": {
+                        "bsonType": "object",
+                        "required": [
+                          "category",
+                          "note",
+                          "observed_at"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "category": {
+                            "enum": [
+                              "guard",
+                              "trunk",
+                              "root",
+                              "branch",
+                              "other"
+                            ]
+                          },
+                          "note": {
+                            "bsonType": "string",
+                            "minLength": 1,
+                            "maxLength": 500,
+                            "pattern": ".*\\S.*"
+                          },
+                          "observed_at": {
+                            "bsonType": "date"
+                          }
+                        }
+                      }
+                    },
+                    "client_metadata": {
+                      "bsonType": "object"
+                    }
+                  }
+                },
+                "canonical_payload_json": {
+                  "bsonType": "string",
+                  "minLength": 2,
+                  "maxLength": 262144
+                }
+              }
+            }
+          },
+          {
+            "$expr": {
+              "$and": [
+                {
+                  "$eq": [
+                    "$client_submission_id",
+                    "$payload.client_submission_id"
+                  ]
+                },
+                {
+                  "$eq": [
+                    "$record_id",
+                    "$payload.record_id"
+                  ]
+                },
+                {
+                  "$eq": [
+                    "$form_version",
+                    "$payload.form_version"
+                  ]
+                },
+                {
+                  "$cond": [
+                    {
+                      "$eq": [
+                        {
+                          "$type": "$payload.patch.diameter_cm"
+                        },
+                        "decimal"
+                      ]
+                    },
+                    {
+                      "$eq": [
+                        "$payload.patch.diameter_cm",
+                        {
+                          "$trunc": [
+                            "$payload.patch.diameter_cm",
+                            2
+                          ]
+                        }
+                      ]
+                    },
+                    true
+                  ]
+                },
+                {
+                  "$or": [
+                    {
+                      "$ne": [
+                        "$form_version",
+                        "tree-v1"
+                      ]
+                    },
+                    {
+                      "$eq": [
+                        {
+                          "$type": "$payload.observations"
+                        },
+                        "missing"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$or": [
+                    {
+                      "$gt": [
+                        {
+                          "$size": {
+                            "$objectToArray": {
+                              "$ifNull": [
+                                "$payload.patch",
+                                {}
+                              ]
+                            }
+                          }
+                        },
+                        0
+                      ]
+                    },
+                    {
+                      "$gt": [
+                        {
+                          "$size": {
+                            "$ifNull": [
+                              "$payload.observations",
+                              []
+                            ]
+                          }
+                        },
+                        0
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "validationLevel": "strict",
+      "validationAction": "error",
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "author_id": 1,
+            "client_submission_id": 1
+          },
+          "name": "author_id_1_client_submission_id_1",
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "record_id": 1,
+            "received_at": 1
+          },
+          "name": "record_id_1_received_at_1"
+        },
+        {
+          "v": 2,
+          "key": {
+            "form_version": 1,
+            "received_at": 1
+          },
+          "name": "form_version_1_received_at_1"
+        },
+        {
+          "v": 2,
+          "key": {
+            "batch_id": 1,
+            "received_at": 1
+          },
+          "name": "batch_id_1_received_at_1"
+        }
+      ]
+    },
+    {
+      "name": "submission_drafts",
+      "validator": {
+        "$and": [
+          {
+            "$jsonSchema": {
+              "bsonType": "object",
+              "additionalProperties": false,
+              "required": [
+                "_id",
+                "owner_id",
+                "client_submission_id",
+                "record_id",
+                "base_version_no",
+                "form_version",
+                "revision_no",
+                "state",
+                "payload",
+                "created_at",
+                "updated_at",
+                "final_submission_id"
+              ],
+              "properties": {
+                "_id": {
+                  "bsonType": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "owner_id": {
+                  "bsonType": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "client_submission_id": {
+                  "bsonType": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "record_id": {
+                  "bsonType": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "base_version_no": {
+                  "bsonType": "int",
+                  "minimum": 1
+                },
+                "form_version": {
+                  "enum": [
+                    "tree-v1",
+                    "tree-v2"
+                  ]
+                },
+                "revision_no": {
+                  "bsonType": "int",
+                  "minimum": 1
+                },
+                "state": {
+                  "enum": [
+                    "editable",
+                    "finalizing",
+                    "finalized"
+                  ]
+                },
+                "payload": {
+                  "bsonType": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "patch": {
+                      "bsonType": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "species": {
+                          "bsonType": [
+                            "string",
+                            "null"
+                          ],
+                          "minLength": 1,
+                          "maxLength": 120,
+                          "pattern": ".*\\S.*"
+                        },
+                        "health": {
+                          "enum": [
+                            "Good",
+                            "Fair",
+                            "Poor",
+                            null
+                          ]
+                        },
+                        "diameter_cm": {
+                          "bsonType": [
+                            "decimal",
+                            "null"
+                          ],
+                          "minimum": {
+                            "$numberDecimal": "0"
+                          },
+                          "maximum": {
+                            "$numberDecimal": "999999.99"
+                          }
+                        },
+                        "guard_damage": {
+                          "bsonType": [
+                            "bool",
+                            "null"
+                          ]
+                        }
+                      }
+                    },
+                    "observed_at": {
+                      "bsonType": "date"
+                    },
+                    "observations": {
+                      "bsonType": "array",
+                      "maxItems": 20,
+                      "items": {
+                        "bsonType": "object",
+                        "required": [
+                          "category",
+                          "note",
+                          "observed_at"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "category": {
+                            "enum": [
+                              "guard",
+                              "trunk",
+                              "root",
+                              "branch",
+                              "other"
+                            ]
+                          },
+                          "note": {
+                            "bsonType": "string",
+                            "minLength": 1,
+                            "maxLength": 500,
+                            "pattern": ".*\\S.*"
+                          },
+                          "observed_at": {
+                            "bsonType": "date"
+                          }
+                        }
+                      }
+                    },
+                    "client_metadata": {
+                      "bsonType": "object"
+                    }
+                  }
+                },
+                "created_at": {
+                  "bsonType": "date"
+                },
+                "updated_at": {
+                  "bsonType": "date"
+                },
+                "final_submission_id": {
+                  "bsonType": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "canonical_payload_json": {
+                  "bsonType": "string",
+                  "minLength": 2,
+                  "maxLength": 262144
+                }
+              }
+            }
+          },
+          {
+            "$expr": {
+              "$and": [
+                {
+                  "$cond": [
+                    {
+                      "$eq": [
+                        {
+                          "$type": "$payload.patch.diameter_cm"
+                        },
+                        "decimal"
+                      ]
+                    },
+                    {
+                      "$eq": [
+                        "$payload.patch.diameter_cm",
+                        {
+                          "$trunc": [
+                            "$payload.patch.diameter_cm",
+                            2
+                          ]
+                        }
+                      ]
+                    },
+                    true
+                  ]
+                },
+                {
+                  "$cond": [
+                    {
+                      "$eq": [
+                        "$state",
+                        "finalized"
+                      ]
+                    },
+                    {
+                      "$ne": [
+                        "$final_submission_id",
+                        null
+                      ]
+                    },
+                    {
+                      "$eq": [
+                        "$final_submission_id",
+                        null
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$or": [
+                    {
+                      "$ne": [
+                        "$form_version",
+                        "tree-v1"
+                      ]
+                    },
+                    {
+                      "$eq": [
+                        {
+                          "$type": "$payload.observations"
+                        },
+                        "missing"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "validationLevel": "strict",
+      "validationAction": "error",
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "owner_id": 1,
+            "client_submission_id": 1
+          },
+          "name": "owner_id_1_client_submission_id_1",
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "owner_id": 1,
+            "state": 1,
+            "updated_at": 1
+          },
+          "name": "owner_id_1_state_1_updated_at_1"
+        },
+        {
+          "v": 2,
+          "key": {
+            "state": 1,
+            "_id": 1
+          },
+          "name": "state_1__id_1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "started_at_utc": "2026-11-12T18:38:19.456Z",
+  "status": "failed",
+  "repository": "https://github.com/looney2000s/fieldmerge.git",
+  "requested_ref": "codex/design-report",
+  "expected_commit": "62236a28927ae8e02b8c4adf651621cdea71be5f",
+  "compose_project": "fieldmerge-release-8f6d117ec35e445f8da1f32171a544b7",
+  "private_checkout": "tmp/fieldmerge-release-8f6d117ec35e445f8da1f32171a544b7/checkout",
+  "fresh_credentials": true,
+  "development_env_loaded": false,
+  "development_project_targeted": false,
+  "steps": [
+    {
+      "name": "docker_ready",
+      "started_at_utc": "2026-11-12T18:38:19.462Z",
+      "status": "passed",
+      "elapsed_ms": 192,
+      "finished_at_utc": "2026-11-12T18:38:19.654Z"
+    },
+    {
+      "name": "clone_published_revision",
+      "started_at_utc": "2026-11-12T18:38:19.654Z",
+      "status": "failed",
+      "error": "See the private log for this stage; raw errors are not published.",
+      "elapsed_ms": 1,
+      "finished_at_utc": "2026-11-12T18:38:19.655Z"
+    },
+    {
+      "name": "isolated_environment_cleanup",
+      "started_at_utc": "2026-11-12T18:38:19.655Z",
+      "status": "passed",
+      "result": {
+        "new_release_volumes_removed": true,
+        "development_project_preserved": true
+      },
+      "elapsed_ms": 166,
+      "finished_at_utc": "2026-11-12T18:38:19.821Z"
+    }
+  ],
+  "cleanup_completed": true,
+  "orchestrator_sha256": "9871b8b3184762adc1d7f7875baf55f29f65f89db61621ebc69ce758721f9c88",
+  "environment": {
+    "platform": "win32",
+    "os_release": "10.0.26200",
+    "node": "v26.13.0",
+    "docker": "29.9.2"
+  },
+  "original_development_container_ids": [
+    "027de8bb73f0",
+    "07ff2f43b405",
+    "a15a3fd86d7d",
+    "bfe0c11a2871"
+  ],
+  "failure": "A stage failed. Inspect its private log; no raw error/credential material is included in this report.",
+  "original_development_container_ids_unchanged": true,
+  "finished_at_utc": "2026-11-12T18:38:19.822Z"
+}

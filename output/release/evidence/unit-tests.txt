@@ -1,0 +1,27 @@
+$ node --test tests/api/canonical.test.mjs tests/api/read-queries.test.mjs tests/api/security-events.test.mjs
+✔ canonicalization preserves exact decimals and ignores object order/whitespace (1.6295ms)
+✔ duplicate keys rejected at every object level (0.4589ms)
+✔ strict JSON, resource bounds and special keys (0.4071ms)
+✔ drafts permit missing data while validating every supplied field (1.6027ms)
+✔ arrays, strings, omission and null have distinct fingerprints (0.2469ms)
+✔ exact submission validation never rounds away excess precision (0.8166ms)
+✔ read query parameters are bounded and reject ambiguous or unknown filters (1.2212ms)
+✔ review filters validate identity, field and millisecond timestamp ranges (1.9142ms)
+✔ cursor pages expose continuation only when another row exists (0.4934ms)
+✔ CSV retains null/false/zero and quotes data while neutralizing formula-like cells (0.264ms)
+✔ request context discards raw paths, queries, spoofed correlation IDs and headers (15.8814ms)
+✔ parallel handled requests retain their own actor and failure context (17.0015ms)
+✔ SQL failure maps to a safe response and an independently supplied event writer (0.8015ms)
+✔ failure of the logging boundary never changes the original denial (0.416ms)
+✔ fallback uses closed fields and safe JSON encoding without input or session material (6.4434ms)
+✔ concurrent SQL-writer failures produce complete persistent fallback records (14.8796ms)
+✔ fallback capacity is bounded without overwriting earlier records (3.336ms)
+✔ stream reader counts actual UTF-8 bytes despite false content length and chunk boundaries (1.5898ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 213.2138

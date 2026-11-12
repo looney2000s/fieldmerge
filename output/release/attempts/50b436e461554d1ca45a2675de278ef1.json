@@ -1,0 +1,219 @@
+{
+  "started_at_utc": "2026-11-12T18:54:21.404Z",
+  "status": "failed",
+  "repository": "https://github.com/looney2000s/fieldmerge.git",
+  "requested_ref": "codex/design-report",
+  "expected_commit": "62236a28927ae8e02b8c4adf651621cdea71be5f",
+  "compose_project": "fieldmerge-release-50b436e461554d1ca45a2675de278ef1",
+  "private_checkout": "tmp/fieldmerge-release-50b436e461554d1ca45a2675de278ef1/checkout",
+  "fresh_credentials": true,
+  "development_env_loaded": false,
+  "development_project_targeted": false,
+  "steps": [
+    {
+      "name": "docker_ready",
+      "started_at_utc": "2026-11-12T18:54:21.407Z",
+      "status": "passed",
+      "elapsed_ms": 169,
+      "finished_at_utc": "2026-11-12T18:54:21.576Z"
+    },
+    {
+      "name": "clone_published_revision",
+      "started_at_utc": "2026-11-12T18:54:21.577Z",
+      "status": "passed",
+      "result": {
+        "commit": "62236a28927ae8e02b8c4adf651621cdea71be5f"
+      },
+      "elapsed_ms": 2389,
+      "finished_at_utc": "2026-11-12T18:54:23.966Z"
+    },
+    {
+      "name": "install_frozen_dependencies",
+      "started_at_utc": "2026-11-12T18:54:23.967Z",
+      "status": "passed",
+      "result": {
+        "lockfile_unchanged": true,
+        "project_node_modules_reused": false
+      },
+      "elapsed_ms": 5032,
+      "finished_at_utc": "2026-11-12T18:54:28.999Z"
+    },
+    {
+      "name": "generate_private_configuration",
+      "started_at_utc": "2026-11-12T18:54:29.000Z",
+      "status": "passed",
+      "elapsed_ms": 420,
+      "finished_at_utc": "2026-11-12T18:54:29.420Z"
+    },
+    {
+      "name": "database_setup_and_verification",
+      "started_at_utc": "2026-11-12T18:54:29.421Z",
+      "status": "passed",
+      "result": {
+        "assertions": 231,
+        "actual_commit_cases": 4,
+        "concurrent_sql_cases": 6,
+        "form_hashes_match": true
+      },
+      "elapsed_ms": 49240,
+      "finished_at_utc": "2026-11-12T18:55:18.661Z"
+    },
+    {
+      "name": "restricted_backend_configuration",
+      "started_at_utc": "2026-11-12T18:55:18.664Z",
+      "status": "passed",
+      "result": {
+        "new_restricted_api_and_worker_credentials": true
+      },
+      "elapsed_ms": 1706,
+      "finished_at_utc": "2026-11-12T18:55:20.370Z"
+    },
+    {
+      "name": "unit_tests",
+      "started_at_utc": "2026-11-12T18:55:20.370Z",
+      "status": "passed",
+      "result": {
+        "groups": 18
+      },
+      "elapsed_ms": 707,
+      "finished_at_utc": "2026-11-12T18:55:21.077Z"
+    },
+    {
+      "name": "production_build",
+      "started_at_utc": "2026-11-12T18:55:21.078Z",
+      "status": "passed",
+      "result": {
+        "build_id": "62qgea31D59w0KKi7_bwo"
+      },
+      "elapsed_ms": 39525,
+      "finished_at_utc": "2026-11-12T18:56:00.603Z"
+    },
+    {
+      "name": "install_chromium",
+      "started_at_utc": "2026-11-12T18:56:00.604Z",
+      "status": "passed",
+      "result": {
+        "browser_cache_from_development_reused": false
+      },
+      "elapsed_ms": 48060,
+      "finished_at_utc": "2026-11-12T18:56:48.664Z"
+    },
+    {
+      "name": "api_integration",
+      "started_at_utc": "2026-11-12T18:56:48.665Z",
+      "status": "passed",
+      "result": {
+        "groups": 33
+      },
+      "elapsed_ms": 21573,
+      "finished_at_utc": "2026-11-12T18:57:10.238Z"
+    },
+    {
+      "name": "functional_acceptance",
+      "started_at_utc": "2026-11-12T18:57:10.239Z",
+      "status": "passed",
+      "result": {
+        "scenarios": 35,
+        "disposable_cleanup": true
+      },
+      "elapsed_ms": 27523,
+      "finished_at_utc": "2026-11-12T18:57:37.762Z"
+    },
+    {
+      "name": "transport_and_security",
+      "started_at_utc": "2026-11-12T18:57:37.763Z",
+      "status": "passed",
+      "result": {
+        "api_groups": 23,
+        "browser_checks": 5
+      },
+      "elapsed_ms": 14255,
+      "finished_at_utc": "2026-11-12T18:57:52.018Z"
+    },
+    {
+      "name": "browser_workflows",
+      "started_at_utc": "2026-11-12T18:57:52.019Z",
+      "status": "passed",
+      "result": {
+        "workflows": 15,
+        "representative_accessibility_pages": 9,
+        "reported_violations": 0
+      },
+      "elapsed_ms": 21491,
+      "finished_at_utc": "2026-11-12T18:58:13.510Z"
+    },
+    {
+      "name": "query_and_performance_evidence",
+      "started_at_utc": "2026-11-12T18:58:13.510Z",
+      "status": "passed",
+      "result": {
+        "status": "passed",
+        "disposable_cleanup": true
+      },
+      "elapsed_ms": 42909,
+      "finished_at_utc": "2026-11-12T18:58:56.419Z"
+    },
+    {
+      "name": "schema_dictionary_reconciliation",
+      "started_at_utc": "2026-11-12T18:58:56.419Z",
+      "status": "passed",
+      "result": {
+        "sql_tables": 17,
+        "columns": 146,
+        "foreign_keys": 29,
+        "mongodb_collections": 3
+      },
+      "elapsed_ms": 978,
+      "finished_at_utc": "2026-11-12T18:58:57.397Z"
+    },
+    {
+      "name": "source_integrity_and_public_evidence",
+      "started_at_utc": "2026-11-12T18:58:57.398Z",
+      "status": "failed",
+      "error": "See the private log for this stage; raw errors are not published.",
+      "error_code": "ERR_ASSERTION",
+      "elapsed_ms": 224,
+      "finished_at_utc": "2026-11-12T18:58:57.622Z"
+    },
+    {
+      "name": "isolated_environment_cleanup",
+      "started_at_utc": "2026-11-12T18:58:57.623Z",
+      "status": "passed",
+      "result": {
+        "new_release_volumes_removed": true,
+        "development_project_preserved": true
+      },
+      "elapsed_ms": 1577,
+      "finished_at_utc": "2026-11-12T18:58:59.200Z"
+    }
+  ],
+  "cleanup_completed": true,
+  "orchestrator_sha256": "f8778bf09f30203be8896bafb13bc5fe618df3fd92efd18f4053c096d628942b",
+  "environment": {
+    "platform": "win32",
+    "os_release": "10.0.26200",
+    "node": "v26.13.0",
+    "docker": "29.9.2",
+    "pnpm": "11.28.11",
+    "next": "16.4.5",
+    "playwright": "1.65.0"
+  },
+  "original_development_container_ids": [
+    "027de8bb73f0",
+    "07ff2f43b405",
+    "a15a3fd86d7d",
+    "bfe0c11a2871"
+  ],
+  "tested_commit": "62236a28927ae8e02b8c4adf651621cdea71be5f",
+  "initial_checkout_clean": true,
+  "initial_build_and_private_inputs_absent": true,
+  "lockfile_sha256": "b3ae01146673cc7b353d6f26f10191b6ac6f133226a947d2c0bf2a04b3fb9444",
+  "database_ports": {
+    "postgres": 59241,
+    "mongodb": 59242
+  },
+  "compose_isolation_validated": true,
+  "failure": "A stage failed. Inspect its private log; no raw error/credential material is included in this report.",
+  "original_development_container_ids_unchanged": true,
+  "finished_at_utc": "2026-11-12T18:58:59.201Z"
+}
