@@ -18,6 +18,8 @@ The [complete project checklist](docs/FieldMerge_Project_Checklist.md) tracks co
 
 **Verified interface milestone:** fifteen browser workflow checks and nine representative axe WCAG A/AA page checks, with no reported violations or browser runtime errors. Coverage includes both roles, actual SQL/MongoDB outcomes, stale review handling, lost-response retries, exports, keyboard access, and a 390px mobile layout. See [browser results](output/browser/checks.json).
 
+**Query/performance evidence:** twelve SQL demonstrations, four MongoDB query patterns, guarded workflow/draft and disposable DDL/DML demonstrations, and measured plans on 10,003 synthetic accepted records, 14,308 snapshots and 4,504 sealed source documents. Twenty-one evidence checks pass. Read the [measurement report](output/performance/README.md) and [query/viva guide](docs/FieldMerge_Query_Demonstrations.md). These are warmed local database-call measurements, not website capacity or production response-time claims.
+
 ```mermaid
 flowchart LR
     S[Surveyor] --> UI[Next.js role-aware interface and API]
@@ -32,7 +34,7 @@ flowchart LR
 
 The development databases, SQL reconciliation, reviewer decisions, authenticated API, and Next.js interface are implemented. PostgreSQL has nine business tables, four read views, and guarded workflow/read functions. Migrations 001–007 implement core structures, sessions, drafts, integrity, and recovery; migration 008 adds filtered reads, reports/exports, and two internal transport-batch tables. Migration 009 adds guarded interface read models without adding tables. There are 16 SQL tables including internal authentication/operational metadata and the migration registry. MongoDB has three validated collections and separate restricted API/worker credentials.
 
-Login, accepted-record browsing, drafts/finalization, batch upload, per-field outcomes, reviewer comparisons/decisions, history/provenance, reports/exports, and recovery inspection are available in the interface. [Commit-time integrity](docs/FieldMerge_Workflow_Integrity.md) and [automatic recovery](docs/FieldMerge_Recovery.md) remain enforced by the backend. All 35 functional acceptance scenarios now pass with an explicit [evidence map](docs/FieldMerge_Acceptance.md). Remaining work includes transport/security hardening coverage, performance/query evidence, and final design/report/demo deliverables. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [query/export/batch behavior](docs/FieldMerge_Queries_Exports_Batches.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
+Login, accepted-record browsing, drafts/finalization, batch upload, per-field outcomes, reviewer comparisons/decisions, history/provenance, reports/exports, and recovery inspection are available in the interface. [Commit-time integrity](docs/FieldMerge_Workflow_Integrity.md) and [automatic recovery](docs/FieldMerge_Recovery.md) remain enforced by the backend. All 35 functional acceptance scenarios now pass with an explicit [evidence map](docs/FieldMerge_Acceptance.md). Query demonstrations and local measurement evidence are also prepared. Remaining work includes transport/security boundary coverage, final design/report integration, release rehearsal and demonstration/submission deliverables. See [drafts](docs/FieldMerge_Drafts.md), [the API guide](docs/FieldMerge_API.md), [query/export/batch behavior](docs/FieldMerge_Queries_Exports_Batches.md), and [reviewer decisions](docs/FieldMerge_Reviewer_Decisions.md).
 
 ## Prerequisites
 
@@ -76,6 +78,15 @@ pnpm test:browser
 ```
 
 test:api and test:browser each start a temporary production server on 127.0.0.1:3100 against unique isolated databases on the existing development database services. Run them sequentially after building. Those services must be running, and Setup must have generated the fixtures. They leave development records untouched and stop their temporary server afterward. They use administrative credentials only to provision test databases, while actual HTTP requests use restricted API accounts. Evidence is in [output/api/verification.json](output/api/verification.json) and [output/browser/verification.json](output/browser/verification.json); workflow/accessibility details and screenshots accompany the browser report. These remain representative browser/API checks. The separate pnpm test:acceptance suite closes AC01–AC35 on disposable services, including an actual MongoDB service-unavailability check; see the [acceptance guide](docs/FieldMerge_Acceptance.md).
+
+Run the independent database demonstration/measurement suite with Docker Desktop running:
+
+```powershell
+pnpm db:evidence
+pnpm db:evidence:summary
+```
+
+It creates a separate temporary Compose project, generates real synthetic workflow history through guarded functions, measures warmed reads and index alternatives, then removes that project's services. It does not need a Next.js server/build or modify development data. The summary command formats the saved JSON as Markdown and CSV. Use `pnpm run db:evidence --keep` only when you want to retain the temporary databases for inspection; the [query guide](docs/FieldMerge_Query_Demonstrations.md) explains access and cleanup.
 
 Setup generates an ignored .env only if absent, with random database credentials. It generates consistent synthetic fixtures, starts local development containers, runs checks against separate test services/databases, then applies the verified migration and seed to development. Re-running Setup checks the migration checksum and preserves existing seeded records rather than resetting the database.
 

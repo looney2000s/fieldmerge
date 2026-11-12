@@ -1,0 +1,135 @@
+{
+  "checks": [
+    "Reversal creates an intervening-edit conflict",
+    "Duplicate intake returns its original receipt",
+    "Draft read returns owner document",
+    "Another surveyor cannot read the draft",
+    "Draft update increments its revision",
+    "Only the editable draft is deleted",
+    "Finalized draft cannot be edited",
+    "History immutability trigger denies an UPDATE",
+    "DDL staging INSERT/UPDATE retains zero and false",
+    "DDL staging DELETE affects one disposable row",
+    "CREATE/ALTER/DROP sandbox leaves business counts unchanged",
+    "SQL source count equals sealed MongoDB source count",
+    "Independent observation count matches MongoDB aggregate",
+    "Both controlled forms and first-intake batches are represented",
+    "Baseline population includes the three existing synthetic seed records",
+    "SQL function validates typed zero/false and rejects string false",
+    "Scoped provenance rewrite equals the implemented view for all four fields",
+    "Recursive query reaches the seven-version baseline",
+    "SQL index A/B returns identical rows and restores the original index",
+    "MongoDB index and natural scans return identical source references",
+    "MongoDB A/B uses the existing record/time index; no production index changed"
+  ],
+  "dml": [
+    {
+      "id": "MCRUD",
+      "created": true,
+      "read": true,
+      "owner_denial": true,
+      "updated_revision": 2,
+      "editable_deleted": true,
+      "sealed_source_preserved": true
+    },
+    {
+      "demo": "DDL_DML",
+      "inserted": 2,
+      "zero_false_rows": 1,
+      "updated_rows": 1
+    },
+    {
+      "demo": "DELETE_STAGING",
+      "remaining": 1
+    }
+  ],
+  "source_evidence_counts": {
+    "available": true,
+    "as_of": "2026-11-12T06:06:54.939Z",
+    "source_count": 4504,
+    "with_observations": 3501,
+    "observation_count": 5501,
+    "observation_coverage_pct": 77.73090586145648,
+    "by_form": [
+      {
+        "form_version": "tree-v1",
+        "source_count": 1000,
+        "with_observations": 0,
+        "observation_count": 0
+      },
+      {
+        "form_version": "tree-v2",
+        "source_count": 3504,
+        "with_observations": 3501,
+        "observation_count": 5501
+      }
+    ],
+    "by_first_batch": [
+      {
+        "batch_id": null,
+        "source_count": 4404
+      },
+      {
+        "batch_id": "1c71f6f1-79d1-4967-8905-a6706a5b5ebd",
+        "source_count": 20
+      },
+      {
+        "batch_id": "63f6de65-c0c9-4af5-9b7b-0be3b4f4acce",
+        "source_count": 20
+      },
+      {
+        "batch_id": "6bd6ce28-bd56-4c2d-8da4-0259bc08092a",
+        "source_count": 20
+      },
+      {
+        "batch_id": "8c45651b-8baf-4023-8201-89e64e3a5e98",
+        "source_count": 20
+      },
+      {
+        "batch_id": "aaddb9a3-a1a5-4f64-b36e-c1c59cececa2",
+        "source_count": 20
+      }
+    ],
+    "batch_groups_truncated": false,
+    "observation_categories": [
+      {
+        "category": "guard",
+        "count": 2000
+      },
+      {
+        "category": "other",
+        "count": 500
+      },
+      {
+        "category": "root",
+        "count": 2001
+      },
+      {
+        "category": "trunk",
+        "count": 1000
+      }
+    ],
+    "patch_field_presence": [
+      {
+        "field": "diameter_cm",
+        "count": 4001,
+        "explicit_nulls": 0
+      },
+      {
+        "field": "guard_damage",
+        "count": 2001,
+        "explicit_nulls": 0
+      },
+      {
+        "field": "health",
+        "count": 2004,
+        "explicit_nulls": 1
+      },
+      {
+        "field": "species",
+        "count": 4000,
+        "explicit_nulls": 0
+      }
+    ]
+  }
+}

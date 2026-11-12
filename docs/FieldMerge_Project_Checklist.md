@@ -183,9 +183,9 @@ Migration 004 connects the workflow functions to authenticated sessions through 
 - [ ] Extend transport-boundary and adversarial checks beyond the currently covered functional/security cases; do not treat targeted checks as an exhaustive security audit.
 - [x] Test browser-submitted lost-response retries for review/finalization, review reload/resume, unchanged batch replay, and stale reviewer actions without changing intent automatically.
 - [x] Independently reconcile SQL accepted/workflow totals and MongoDB form/batch/observation aggregates in integrated tests.
-- [ ] Prepare meaningful DML, JOIN, nested/correlated, recursive/CTE, aggregate, GROUP BY, HAVING, and ORDER BY demonstrations where applicable.
-- [ ] Demonstrate CREATE/ALTER and safe DROP using disposable objects; preserve final evidence/history.
-- [ ] Record representative query plans and measured performance on a documented dataset.
+- [x] Prepare and execute meaningful DML, JOIN, nested/correlated, recursive/CTE, window, aggregate, GROUP BY, HAVING, and ORDER BY demonstrations, plus MongoDB evidence queries/aggregations.
+- [x] Demonstrate CREATE/ALTER, INSERT/UPDATE/DELETE and explicit DROP using disposable staging objects; preserve accepted history and sealed evidence.
+- [x] Record full query plans, raw samples and index comparisons on 10,003 synthetic records, 14,308 snapshots and 4,504 source documents, with environment/method/limits documented in output/performance and docs/FieldMerge_Query_Demonstrations.md.
 - [ ] Verify a clean rebuild and full test run using the final code/configuration.
 
 The latest saved database milestone has 231 assertions (39 SQL structure + 32 reconciliation + 34 reviewer + 52 integrity + 21 recovery + 22 query/export/batch + 31 MongoDB), four actual COMMIT scenarios, six concurrent SQL scenarios, and matching form hashes. These database assertions remain separate evidence. All 35 functional acceptance scenarios additionally pass in the dedicated production-API/disposable-service suite, including actual MongoDB unavailability and rollback/retry.
@@ -197,8 +197,8 @@ The milestone additionally passes ten unit groups, thirty-three API/worker/query
 - [x] Maintain the project overview, requirements, schema models, implementation guides, and database README.
 - [ ] Reconcile the final ER diagram, relational schema, document model, dictionary, and implementation.
 - [ ] Add the implemented system architecture and authentication/data-flow explanation.
-- [ ] Add important queries and explain how advanced database features solve the problem.
-- [ ] Add actual application screenshots, completed tests, performance results, and source attribution.
+- [x] Document important queries and explain the roles of functions, transactions, locks, constraints, triggers, views and document aggregation in the query/viva guide; integrate these into the final report separately.
+- [ ] Integrate application screenshots, test evidence, measured performance and source attribution into the final report.
 - [ ] State verified results, known limitations, conclusion, and future enhancements accurately.
 - [ ] Document final setup, demo accounts/configuration, execution, verification, and recovery instructions.
 - [ ] Finalize the report/DOCX and visually inspect its layout.
@@ -219,4 +219,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Collect reproducible query demonstrations and measured performance evidence, then reconcile final design/report/demo deliverables. The 35 functional acceptance cases now pass. The latest branch is codex/acceptance-audit, building on the earlier backend/interface branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.
+Complete the remaining transport/security boundary checks and safe failed-attempt logging, then reconcile final ER/schema/report deliverables and rehearse a clean release/demo. All 35 functional acceptance cases pass, and query/performance evidence is prepared. The latest branch is codex/query-performance, building on the earlier backend/interface/audit branches. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. main contains the earlier database milestone until feature work is merged.

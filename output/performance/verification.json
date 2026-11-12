@@ -1,0 +1,10 @@
+{
+  "started_at_utc": "2026-11-12T06:06:17.659Z",
+  "status": "passed",
+  "project": "fieldmerge-performance-50a0be07644e44bd9b58600e08002bc9",
+  "database": "fieldmerge_test_8546706dd2db4ebfb41c0ffce1e455b2",
+  "development_data_modified": false,
+  "kept_for_inspection": false,
+  "cleanup_completed": true,
+  "finished_at_utc": "2026-11-12T06:06:57.133Z"
+}
