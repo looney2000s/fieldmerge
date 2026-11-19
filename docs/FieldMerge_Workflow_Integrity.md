@@ -1,6 +1,6 @@
 # Commit-time workflow integrity
 
-Implemented 10 November 2026 in migration 006. This closes the previously documented gap between individually valid foreign keys and a consistent publication/review transaction. No business entity or table was added.
+Implemented in migration 006. This closes the previously documented gap between individually valid foreign keys and a consistent publication/review transaction. No business entity or table was added.
 
 ## What the database now enforces
 

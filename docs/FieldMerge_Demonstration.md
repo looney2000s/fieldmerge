@@ -15,7 +15,7 @@ pnpm dev
 
 Open http://localhost:3000, matching APP_ORIGIN in the private .env. In a second terminal run `pnpm worker`. Keep both running during the demonstration. Open the ignored `tmp/database-fixtures/demo-accounts.json` privately for credentials; do not project that file. Use a normal browser context for the surveyor and a private/incognito context for the reviewer. Keep passwords and cookies out of screenshots and submission materials.
 
-Initial Setup downloads database images and needs network access. Rehearse before the assessment. Existing fixtures are dated for the 2026 campaign. For a later year, explicitly prepare a matching campaign fixture; do not silently change a clock/campaign-warning assertion. Regenerating the account fixture does not rotate existing stored password hashes.
+Initial Setup downloads database images and needs network access. Rehearse before the assessment. Existing fixtures use the configured campaign window. For another campaign, explicitly prepare a matching fixture; do not silently change a clock/campaign-warning assertion. Regenerating the account fixture does not rotate existing stored password hashes.
 
 ## Demonstrate the core problem in about ten minutes
 

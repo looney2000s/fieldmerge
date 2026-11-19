@@ -1,8 +1,10 @@
 # FieldMerge Implementation Report
 
+**Submission report:** [Final PDF](../output/pdf/FieldMerge_Project_Report.pdf), including the author-supplied Chen diagram. This Markdown file remains a technical companion.
+
 Conflict safe reconciliation of delayed urban tree survey updates
 
-DBMS Level 3 project | Solo implementation | 12 November 2026
+DBMS Level 3 project | Solo implementation
 
 Implementation baseline 7588773 on codex/security-boundaries. PostgreSQL migrations 001 through 010 and the matching MongoDB model are implemented. The report documents the working local system, its design and the limits of its recorded evidence.
 
@@ -84,7 +86,7 @@ Source intake reserves an SQL identity, stores/verifies a sealed document, then 
 
 # Relational design and schema inventory
 
-The conceptual business design has nine entities. ACCEPTED_VERSION is identified by its owner TREE_RECORD and the partial key version_no; the SQL primary key is (record_id, version_no). Campaigns contain records, users author submissions, submissions contain field changes, and a field change has at most one terminal decision. The completed Chen diagram is maintained separately.
+The conceptual business design has nine entities. ACCEPTED_VERSION is identified by its owner TREE_RECORD and the partial key version_no; the SQL primary key is (record_id, version_no). Campaigns contain records, users author submissions, submissions contain field changes, and a field change has at most one terminal decision. The author-supplied Chen diagram is included in the final PDF.
 
 | Schema | Relation | Responsibility |
 |---|---|---|
@@ -329,11 +331,11 @@ The implemented system demonstrates that delayed proposals can preserve independ
 
 ## Public references
 
-[1] ODK Documentation. Managing Entities in Central, sections on parallel updates and conflicts. https://docs.getodk.org/central-entities/ (consulted 12 November 2026).
+[1] ODK Documentation. Managing Entities in Central, sections on parallel updates and conflicts. https://docs.getodk.org/central-entities/.
 
-[2] ODK Documentation. Form Audit Log. https://docs.getodk.org/form-audit-log/ (consulted 12 November 2026).
+[2] ODK Documentation. Form Audit Log. https://docs.getodk.org/form-audit-log/.
 
-Implementation references: ordered SQL migrations, database/mongodb/model.js, the complete schema catalog/dictionary, and the recorded acceptance, browser, security and performance artifacts identified in this report. The conceptual ER diagram is a separate project deliverable.
+Implementation references: ordered SQL migrations, database/mongodb/model.js, the complete schema catalog/dictionary, and the recorded acceptance, browser, security and performance artifacts identified in this report. The conceptual ER diagram is included in the final PDF.
 
 # Appendix 1 SQL data dictionary
 

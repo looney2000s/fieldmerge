@@ -1,6 +1,6 @@
 # Filtered queries, downloads, summaries, exports, and batches
 
-Implemented 10 November 2026 in migration 008 and the Next.js API. These endpoints supply the data operations required by the upcoming interface. All require an active session; read handlers are noncached and use guarded SQL functions.
+Implemented in migration 008 and the Next.js API. These endpoints supply the data operations required by the upcoming interface. All require an active session; read handlers are noncached and use guarded SQL functions.
 
 ## Accepted records and snapshots
 

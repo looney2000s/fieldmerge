@@ -1,6 +1,6 @@
 # FieldMerge project checklist
 
-Status baseline: 13 November 2026. Checked means completed within the scope stated; unchecked means remaining or not yet verified. A completed database function does not imply a working API or web interface. This checklist covers FieldMerge only.
+Checked means completed within the scope stated; unchecked means remaining or not yet verified. A completed database function does not imply a working API or web interface. This checklist covers FieldMerge only.
 
 ## Step 0 Understand the assignment
 
@@ -202,7 +202,7 @@ The milestone additionally passes eighteen unit groups, thirty-three API/worker/
 - [x] Integrate genuine application screenshots, recorded test evidence, measured query results and public-source attribution into the implementation report.
 - [x] State verified results, limits, conclusion and concrete future enhancements without deployment, uniqueness or adoption overclaims.
 - [x] Document local setup, private demo-account location, execution, verification, recovery and demonstration instructions.
-- [x] Prepare the 25-page implementation DOCX with the full typed SQL appendix and visually verify every page; instructor-specific formatting/author identifiers remain part of final packaging.
+- [x] Prepare and visually verify the 34-page final PDF with author/instructor details, the supplied Chen diagram, the complete typed SQL appendix and all foreign-key relationships.
 - [ ] Remove secrets, generated credential files, and unnecessary temporary artifacts from submission materials.
 
 ## Step 15 Rehearse and submit
@@ -220,4 +220,4 @@ Hosted deployment is not explicitly mandated by the supplied project requirement
 
 ## Immediate next milestone
 
-Rehearse the author's demonstration/query explanation and prepare the final submission package with the existing ER diagram. The verified implementation has been reviewed and integrated into main; the integration record is in docs/FieldMerge_Main_Integration.md. A clean GitHub checkout of 62236a2 passed all 17 release-verification stages; fresh runtime evidence and cleanup results are in output/release. The reconciled catalog/dictionary, architecture, 25-page implementation report, demonstration guide and rubric evidence map are prepared. All 35 functional acceptance cases, targeted security checks and query/performance evidence retain their recorded successful results. Main now includes the complete implementation and all earlier backend/interface/audit/release milestones; the feature branches remain as contribution history. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. The repository's default main branch now contains the full project rather than only the database foundation.
+Rehearse the author's demonstration/query explanation and prepare the final submission package with the existing ER diagram. The verified implementation has been reviewed and integrated into main; the integration record is in docs/FieldMerge_Main_Integration.md. A clean GitHub checkout of 62236a2 passed all 17 release-verification stages; fresh runtime evidence and cleanup results are in output/release. The reconciled catalog/dictionary, architecture, 34-page final PDF report, demonstration guide and rubric evidence map are prepared. All 35 functional acceptance cases, targeted security checks and query/performance evidence retain their recorded successful results. Main now includes the complete implementation and all earlier backend/interface/audit/release milestones; the feature branches remain as contribution history. The interface is ready for a local demonstration; startup, generated-account locations, workflows, and current limitations are documented in docs/FieldMerge_Interface.md. Query examples and measurements are in docs/FieldMerge_Query_Demonstrations.md and output/performance. Keep pnpm worker running for unattended recovery and restart it after code updates. The repository's default main branch now contains the full project rather than only the database foundation.

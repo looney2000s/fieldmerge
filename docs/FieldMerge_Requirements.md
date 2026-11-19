@@ -1,12 +1,12 @@
 # FieldMerge requirements specification
 
-Version 1.0 · 1 November 2026 · Solo DBMS project
+Version 1.0 · Solo DBMS project
 
 ## 1 Purpose and authority
 
 FieldMerge reconciles delayed proposals against shared urban tree survey records. It publishes compatible changes, holds disagreements for review, and preserves the provenance of accepted values. This specification fixes the minimum viable behavior before ER modeling and schema implementation.
 
-This is the requirements baseline for implementation. Where its rules differ from the preliminary Word proposal, this specification takes precedence. In particular, it adds detection of intervening field changes, defines complete submission states, and removes the undefined coupled-conflict category. The Word proposal remains the project overview; it is not changed by this document.
+This is the requirements baseline for implementation. Where its rules differ from the preliminary Word proposal, this specification takes precedence. In particular, it adds detection of intervening field changes, defines complete submission states, and removes the undefined coupled-conflict category. The [final PDF report](../output/pdf/FieldMerge_Project_Report.pdf) provides the published project overview; this specification defines its behavioral baseline.
 
 No implementation or completed testing is claimed here. All examples are synthetic fixtures with specified expected outcomes.
 

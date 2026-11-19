@@ -1,6 +1,6 @@
 # FieldMerge MongoDB document model
 
-Implementation reconciliation · 12 November 2026 · baseline 7588773
+Implementation reconciliation · baseline 7588773
 
 The three live collection validators and indexes were captured in output/design/schema-catalog.json alongside the SQL catalog. The [complete dictionary](FieldMerge_Data_Dictionary.md) includes actual top-level requirements and index definitions; the [architecture](FieldMerge_Architecture.md) explains cross-store verification.
 
@@ -12,7 +12,7 @@ PostgreSQL owns publication and reviewer outcomes. MongoDB owns source envelopes
 
 Use canonical lowercase UUID strings for logical identifiers in MongoDB, mapped to PostgreSQL uuid columns at the server boundary. This project choice avoids UUID binary-subtype inconsistencies between clients. Store persisted timestamps as BSON dates and diameter values as Decimal128, not binary floating-point values. JSON wire envelopes use timestamps with explicit offsets and numeric diameter literals; the server validates their precision before BSON conversion.
 
-JSON examples below show wire-shaped values for readability. They are not BSON dumps, executable validators, real observations, or already verified SQL references.
+JSON examples below show wire-shaped values for readability. Named timestamp placeholders must be replaced with valid values before executable use. They are not BSON dumps, executable validators, real observations, or already verified SQL references.
 
 ## 2 submission_documents
 
@@ -26,17 +26,17 @@ One sealed source envelope per finalized SQL submission. Its _id is the same log
   "record_id": "30000000-0000-4000-8000-000000000001",
   "form_version": "tree-v2",
   "batch_id": "60000000-0000-4000-8000-000000000001",
-  "received_at": "2026-11-02T10:05:00Z",
+  "received_at": "<server receipt timestamp>",
   "payload_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "payload": {
     "client_submission_id": "70000000-0000-4000-8000-000000000001",
     "record_id": "30000000-0000-4000-8000-000000000001",
     "base_version_no": 5,
     "form_version": "tree-v2",
-    "observed_at": "2026-11-02T09:30:00Z",
+    "observed_at": "<valid in-campaign observation timestamp>",
     "patch": {"diameter_cm": 32.25, "guard_damage": null},
     "observations": [
-      {"category": "guard", "note": "Guard condition could not be assessed.", "observed_at": "2026-11-02T09:30:00Z"}
+      {"category": "guard", "note": "Guard condition could not be assessed.", "observed_at": "<valid in-campaign observation timestamp>"}
     ],
     "client_metadata": {"app_version": "demo-v1"}
   }
@@ -87,7 +87,7 @@ One published, immutable definition per registered form version. _id corresponds
   "_id": "50000000-0000-4000-8000-000000000002",
   "form_version": "tree-v2",
   "schema_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-  "published_at": "2026-11-02T08:00:00Z",
+  "published_at": "<form publication timestamp>",
   "canonical_fields": [
     {"name": "species", "type": "string", "nullable": true, "max_length": 120},
     {"name": "health", "type": "enum", "nullable": true, "values": ["Good", "Fair", "Poor"]},
@@ -119,8 +119,8 @@ Drafts are owner-scoped editable documents and the normal target for MongoDB upd
   "revision_no": 1,
   "state": "editable",
   "payload": {"patch": {"health": "Fair"}},
-  "created_at": "2026-11-02T09:00:00Z",
-  "updated_at": "2026-11-02T09:10:00Z",
+  "created_at": "<draft creation timestamp>",
+  "updated_at": "<draft update timestamp>",
   "final_submission_id": null
 }
 ```
@@ -156,4 +156,4 @@ Read: source comparison, versioned form retrieval, owner draft lists. Update: re
 
 ## 7 Technical reference
 
-[1] [MongoDB schema validation](https://www.mongodb.com/docs/manual/core/schema-validation/), consulted 2 November 2026. FieldMerge's collection boundaries, fingerprinting protocol, and recovery behavior are project design choices.
+[1] [MongoDB schema validation](https://www.mongodb.com/docs/manual/core/schema-validation/). FieldMerge's collection boundaries, fingerprinting protocol, and recovery behavior are project design choices.

@@ -1,6 +1,6 @@
 # FieldMerge transport boundaries and failure evidence
 
-Verified 12 November 2026. This milestone adds targeted transport/security tests and persistent safe failure logging. It does not establish that the application is free of vulnerabilities or cover administrator/backend credential compromise.
+This milestone adds targeted transport/security tests and persistent safe failure logging. It does not establish that the application is free of vulnerabilities or cover administrator/backend credential compromise.
 
 ## Implemented boundary
 

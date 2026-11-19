@@ -1,6 +1,6 @@
 # FieldMerge implementation data dictionary
 
-Captured 2026-11-12T19:05:07.245Z from the development catalogs after migrations 001–010. Implementation baseline: 62236a28927ae8e02b8c4adf651621cdea71be5f. This is metadata, not an export of application records. Generate with `node scripts/export-design.mjs` then `node scripts/render-design.mjs`.
+Captured from the development catalogs after migrations 001–010. Implementation baseline: 62236a28927ae8e02b8c4adf651621cdea71be5f. This is metadata, not an export of application records. Generate with `node scripts/export-design.mjs` then `node scripts/render-design.mjs`.
 
 There are **17 SQL tables, 146 columns, 29 foreign keys, four views, 43 indexes (including constraint indexes), 26 explicit noninternal triggers, 60 functions and three MongoDB collections**. Counts describe physical objects, not independent business features or Chen relationships. Nine SQL tables form the business model; the others provide authentication, recovery, transport, safe failure events and migration tracking.
 

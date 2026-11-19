@@ -1,6 +1,6 @@
 # Reviewer decision implementation
 
-Implemented 10 November 2026 in migration 003. This extends the automatic reconciliation path without changing migrations 001 or 002.
+Implemented in migration 003. This extends the automatic reconciliation path without changing migrations 001 or 002.
 
 ## Entry point
 

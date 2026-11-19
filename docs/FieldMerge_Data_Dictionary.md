@@ -1,10 +1,10 @@
 # FieldMerge implementation data dictionary
 
-Captured 2026-11-12T12:26:24.591Z from the development catalogs after migrations 001–010. Implementation baseline: 758877305245420092ec24b10be6f23b55bc2bcd. This is metadata, not an export of application records. Generate with `node scripts/export-design.mjs` then `node scripts/render-design.mjs`.
+Captured from the development catalogs after migrations 001–010. Implementation baseline: 758877305245420092ec24b10be6f23b55bc2bcd. This is metadata, not an export of application records. Generate with `node scripts/export-design.mjs` then `node scripts/render-design.mjs`.
 
 There are **17 SQL tables, 146 columns, 29 foreign keys, four views, 43 indexes (including constraint indexes), 26 explicit noninternal triggers, 60 functions and three MongoDB collections**. Counts describe physical objects, not independent business features or Chen relationships. Nine SQL tables form the business model; the others provide authentication, recovery, transport, safe failure events and migration tracking.
 
-The conceptual ER diagram is maintained separately by the project author. [Relational design](FieldMerge_Relational_Schema.md) explains its mapping and normalization. Composite key membership below does not imply that one component alone is unique. A nullable FK and a JSON null scalar have different meanings. Exact executable definitions remain in ordered migrations and the MongoDB model.
+The author-supplied conceptual ER diagram is included in the [final PDF report](../output/pdf/FieldMerge_Project_Report.pdf). [Relational design](FieldMerge_Relational_Schema.md) explains its mapping and normalization. Composite key membership below does not imply that one component alone is unique. A nullable FK and a JSON null scalar have different meanings. Exact executable definitions remain in ordered migrations and the MongoDB model.
 
 ## fieldmerge.accepted_versions
 

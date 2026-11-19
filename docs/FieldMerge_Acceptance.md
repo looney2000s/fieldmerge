@@ -1,10 +1,10 @@
 # FieldMerge acceptance verification
 
-Verified 12 November 2026: all 35 scenarios in the unchanged [requirements baseline](FieldMerge_Requirements.md#13-acceptance-scenarios) passed. This closes the enumerated functional acceptance cases, rather than treating the earlier database assertion count as proof of complete application coverage.
+All 35 scenarios in the unchanged [requirements baseline](FieldMerge_Requirements.md#13-acceptance-scenarios) passed. This closes the enumerated functional acceptance cases, rather than treating the earlier database assertion count as proof of complete application coverage.
 
 The executable mapping is [tests/acceptance/scenarios.test.mjs](../tests/acceptance/scenarios.test.mjs). Each test is named AC01–AC35 and asserts its stored outcomes. The module checks its registered IDs against the actual requirements table, so adding/removing a required scenario without matching tests fails the suite. Every scenario uses a new fixture except AC34, which intentionally revisits a seeded baseline record in the disposable database.
 
-The latest run completed at 2026-11-12T04:11:47.941Z. Evidence: [individual results](../output/acceptance/scenarios.json), [runner output and cleanup](../output/acceptance/verification.json), and [selected source/migration checksums](../output/acceptance/source-checksums.json). Checksums identify the tested baseline, test harness and critical implementation files; they are not a signed attestation or a substitute for reviewing the tests.
+Evidence: [individual results](../output/acceptance/scenarios.json), [runner output and cleanup](../output/acceptance/verification.json), and [selected source/migration checksums](../output/acceptance/source-checksums.json). Checksums identify the tested baseline, test harness and critical implementation files; they are not a signed attestation or a substitute for reviewing the tests.
 
 ## Scenario-to-test map
 
@@ -54,7 +54,7 @@ The latest run completed at 2026-11-12T04:11:47.941Z. Evidence: [individual resu
 - AC23 and the lost-response half of AC24 use internal dependency-injection hooks at real intake boundaries. AC24 also causes an actual late SQL audit-write error and checks complete rollback before retry. These hooks are not HTTP inputs. The existing recovery suite independently kills/restarts a real worker process.
 - AC25 and AC26 exercise server ownership/role checks and actual restricted database credentials. They do not model a compromised backend, stolen administrator credentials, or all possible security attacks.
 - AC27–AC28 retain categorized notes and their timestamps. Form observations do not have an arbitrary scalar value property; competing measurements are represented by separate valid scalar proposals and supporting notes. Both arrival/timestamp orderings preserve evidence and leave the competing value pending.
-- AC29 uses the real database clock plus ten minutes within the seeded 2026 campaign. Fixtures will need their campaign dates updated before rerunning in a later campaign/year; a campaign-window warning must not be relabelled as a clock warning merely to pass a test.
+- AC29 uses the real database clock plus ten minutes within the configured campaign. Fixtures will need their campaign dates updated before rerunning in a later campaign/year; a campaign-window warning must not be relabelled as a clock warning merely to pass a test.
 - AC34 reruns the actual generated synthetic baseline seed after an accepted edit, checking identities and complete history. It does not certify a general public-dataset import pipeline or arbitrary source mappings.
 - AC35 tests a defensive branch that correct parent-chain constraints normally make unreachable. Only inside a disposable administrator transaction, the test disables the immutable-update trigger and removes the parent-chain CHECK, then makes a broken parent link. Reconciliation raises the expected history-integrity error without publication. The entire fault transaction, including DDL, is rolled back; healthy retry remains a pending conflict. No migration or development constraint is weakened.
 

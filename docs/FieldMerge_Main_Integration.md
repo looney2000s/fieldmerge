@@ -1,6 +1,6 @@
 # FieldMerge main integration
 
-Reviewed 13 November 2026. The full application and its verification/documentation milestones are integrated into main by a fast-forward from the earlier database foundation. Existing milestone commits and feature branches are retained. No application logic, migration or test was changed to perform this integration.
+Integration review. The full application and its verification/documentation milestones are integrated into main by a fast-forward from the earlier database foundation. Existing milestone commits and feature branches are retained. No application logic, migration or test was changed to perform this integration.
 
 ## Reviewed revisions
 

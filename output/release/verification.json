@@ -238,5 +238,14 @@
         "reason": "Committed development smoke evidence was not reexecuted; current browser evidence is checks.json and verification.json."
       }
     ]
+  },
+  "documentation_publication": {
+    "calendar_labels_removed_from_markdown": [
+      "evidence/performance/README.md",
+      "evidence/design/FieldMerge_Data_Dictionary.md"
+    ],
+    "artifact_digests_refreshed": true,
+    "raw_results_timestamps_plans_and_test_outcomes_unchanged": true,
+    "meaning": "Presentation-only documentation cleanup; not a new application verification run."
   }
 }

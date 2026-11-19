@@ -1,16 +1,16 @@
 # FieldMerge relational schema
 
-Implementation reconciliation · 12 November 2026 · baseline 7588773
+Implementation reconciliation · baseline 7588773
 
-The live catalog and all ten applied migration checksums were reconciled against source. The complete [implementation dictionary](FieldMerge_Data_Dictionary.md) covers all 17 tables and 146 columns, including internal tables and later receipt/projection columns. The [architecture](FieldMerge_Architecture.md) explains trusted access and cross-store behavior. The author's completed Chen diagram is accepted as correct on their instruction and maintained separately; this milestone does not claim an independent inspection of that file.
+The live catalog and all ten applied migration checksums were reconciled against source. The complete [implementation dictionary](FieldMerge_Data_Dictionary.md) covers all 17 tables and 146 columns, including internal tables and later receipt/projection columns. The [architecture](FieldMerge_Architecture.md) explains trusted access and cross-store behavior. The author-supplied Chen diagram is reproduced on page 9 of the [final PDF report](../output/pdf/FieldMerge_Project_Report.pdf); its physical mapping is documented below.
 
 Migrations 007–008 update: fieldmerge_ops adds recovery_jobs/events and intake_batches/batch_items, with restricted recovery/read/export/transport functions. See [recovery](FieldMerge_Recovery.md) and [queries/exports/batch schema](FieldMerge_Queries_Exports_Batches.md). Migration 010 adds security_events and its guarded write/reviewer-read functions. There are 17 SQL tables: nine business, two authentication, five operational/transport, and one migration registry. The nine-entity business mapping below is unchanged.
 
-Implementation update 10 November 2026: migrations 004–005 add authenticated SQL wrappers, two internal authentication tables, and draft-target validation. Migration 006 implements [commit-time consistency and workflow mutation protection](FieldMerge_Workflow_Integrity.md). The nine business tables below remain unchanged. These updates supersede older planning language below; row-level security is not claimed.
+Implementation update: migrations 004–005 add authenticated SQL wrappers, two internal authentication tables, and draft-target validation. Migration 006 implements [commit-time consistency and workflow mutation protection](FieldMerge_Workflow_Integrity.md). The nine business tables below remain unchanged. These updates supersede older planning language below; row-level security is not claimed.
 
 Implementation update for migration 003: review_decisions now has a nullable decision_result JSONB column for the immutable original response. The trusted review_change entry point implements terminal decisions, version/revision checks, retries, and atomic publication. See [reviewer decisions](FieldMerge_Reviewer_Decisions.md). Nullable legacy owner-inserted rows are supported structurally but need a receipt backfill before API-style replay.
 
-Implementation update 10 November 2026: migration 002 now adds submissions.verified_patch and submissions.reconciliation_result, protects sealed input/initial receipts, implements automatic reconciliation, and creates field_value_provenance. The automatic SQL path has live assertions and concurrent-session verification; reviewer and backend guarantees remain as described in [the reconciliation guide](FieldMerge_Reconciliation.md). This update supersedes older future-tense statements below about the automatic function and provenance view.
+Implementation update: migration 002 now adds submissions.verified_patch and submissions.reconciliation_result, protects sealed input/initial receipts, implements automatic reconciliation, and creates field_value_provenance. The automatic SQL path has live assertions and concurrent-session verification; reviewer and backend guarantees remain as described in [the reconciliation guide](FieldMerge_Reconciliation.md). This update supersedes older future-tense statements below about the automatic function and provenance view.
 
 ## 1 Design status and conventions
 
@@ -288,7 +288,7 @@ Disposable database tests verify weak composite keys, same-tree FK rejection, ve
 1. [PostgreSQL constraints](https://www.postgresql.org/docs/current/ddl-constraints.html) — composite keys, foreign keys, optional references, null behavior, and CHECK limitations.
 2. [PostgreSQL JSON types](https://www.postgresql.org/docs/current/datatype-json.html) — JSONB representation and distinction between JSON null and SQL NULL.
 
-These references support database mechanics. The table/column choices and enforcement plan are FieldMerge design decisions. Consulted 2 November 2026.
+These references support database mechanics. The table/column choices and enforcement plan are FieldMerge design decisions.
 
 ## 10 Internal security-event dictionary (migration 010)
 

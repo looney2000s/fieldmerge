@@ -18,3 +18,7 @@ __pycache__/
 Thumbs.db
 .next/
 *.tsbuildinfo
+
+# Superseded Word drafts are retained locally; publish the final PDF report.
+output/documents/FieldMerge_Implementation_Report.docx
+output/documents/FieldMerge_Project_Proposal.docx

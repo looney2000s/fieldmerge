@@ -1,6 +1,6 @@
 # Owner-scoped drafts and safe finalization
 
-Implemented 10 November 2026. Drafts live in MongoDB; finalization uses the existing verified SQL/source intake. No business table was added. Migration 005 adds a session-aware function validating a draft's active tree, existing base version, and supported form.
+Drafts live in MongoDB; finalization uses the existing verified SQL/source intake. No business table was added. Migration 005 adds a session-aware function validating a draft's active tree, existing base version, and supported form.
 
 ## Access and lifecycle
 

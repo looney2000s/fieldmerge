@@ -4,6 +4,8 @@ Solo DBMS project for conflict-safe reconciliation of delayed urban tree survey 
 
 Repository: [looney2000s/fieldmerge](https://github.com/looney2000s/fieldmerge).
 
+**Project report:** [Read the final PDF](output/pdf/FieldMerge_Project_Report.pdf). The 34-page report includes the author-supplied Chen ER diagram on page 9, database design, implementation, queries, screenshots, testing, the full data dictionary and foreign-key relationships.
+
 Surveyors submit changes based on accepted record versions. FieldMerge combines compatible updates, holds competing values, and records reviewer decisions and value provenance. The authenticated Next.js interface now supports the surveyor and reviewer workflows. See the [interface guide](docs/FieldMerge_Interface.md) for startup, usage, retries, and verification.
 
 **Stack:** Next.js, PostgreSQL, MongoDB, and Docker Compose.
@@ -14,7 +16,7 @@ Surveyors submit changes based on accepted record versions. FieldMerge combines 
 
 **Verified acceptance milestone:** all 35 requirements-baseline scenarios pass against real PostgreSQL/MongoDB services and a production Next.js API, including lock-controlled races, service unavailability, rollback/retry, both forms, re-import, and provenance. [Results and limits](docs/FieldMerge_Acceptance.md).
 
-**Design and report:** the [complete physical dictionary](docs/FieldMerge_Data_Dictionary.md) reconciles 17 tables, 146 columns and 29 foreign keys against the live catalog. Read the [architecture](docs/FieldMerge_Architecture.md), [implementation report](output/documents/FieldMerge_Implementation_Report.docx), [demonstration guide](docs/FieldMerge_Demonstration.md) and [rubric evidence map](docs/FieldMerge_Rubric_Evidence.md). The author maintains the completed Chen diagram separately.
+**Design and report:** the [complete physical dictionary](docs/FieldMerge_Data_Dictionary.md) reconciles 17 tables, 146 columns and 29 foreign keys against the live catalog. Read the [architecture](docs/FieldMerge_Architecture.md), [implementation report](output/pdf/FieldMerge_Project_Report.pdf), [demonstration guide](docs/FieldMerge_Demonstration.md) and [rubric evidence map](docs/FieldMerge_Rubric_Evidence.md). The report includes the author-supplied Chen diagram.
 
 **Clean checkout verification:** published commit 62236a2 passed a fresh frozen install, production build, all database/API/acceptance/security/browser/query suites, and catalog reconciliation against newly generated isolated databases. All 17 stages and cleanup passed. See [release results](output/release/README.md) and [the reproduction guide](docs/FieldMerge_Release_Verification.md). The verified implementation is integrated into main; see the [integration record](docs/FieldMerge_Main_Integration.md). The author's demonstration and final submission remain.
 
@@ -152,7 +154,7 @@ The database suite exercises automatic reconciliation and reviewer decisions wit
 - output/design/schema-catalog.json — metadata-only SQL/MongoDB snapshot.
 - docs/FieldMerge_Architecture.md — trusted access, publication and recovery flow.
 - docs/FieldMerge_Demonstration.md — repeatable UI/query demonstration and viva preparation.
-- output/documents/FieldMerge_Implementation_Report.docx — implementation report and full SQL column appendix.
+- output/pdf/FieldMerge_Project_Report.pdf — implementation report and full SQL column appendix.
 - docs/FieldMerge_MongoDB_Model.md — collection model and application boundary.
 - database/postgres/migrations/001_structure.sql — transactional initial schema.
 - database/mongodb/ — strict model, initialization, and form seeds.

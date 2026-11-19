@@ -1,6 +1,6 @@
 # Automatic recovery and operational inspection
 
-Implemented 10 November 2026 in migration 007 and the local Node.js recovery worker. The worker resumes SQL intake and sealed finalizing drafts without a browser session. It does not mint sessions or impersonate a logged-in user; publication remains attributed to the original SQL author.
+Implemented in migration 007 and the local Node.js recovery worker. The worker resumes SQL intake and sealed finalizing drafts without a browser session. It does not mint sessions or impersonate a logged-in user; publication remains attributed to the original SQL author.
 
 ## Run locally
 

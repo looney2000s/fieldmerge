@@ -1,6 +1,6 @@
 # Automatic reconciliation implementation
 
-Implemented 10 November 2026 in [migration 002](../database/postgres/migrations/002_reconciliation.sql). Migration 001 remains unchanged. This milestone implements the automatic SQL path; reviewer approvals follow separately.
+Implemented in [migration 002](../database/postgres/migrations/002_reconciliation.sql). Migration 001 remains unchanged. This milestone implements the automatic SQL path; reviewer approvals follow separately.
 
 Update: reviewer decisions are now implemented in migration 003. See [the reviewer guide](FieldMerge_Reviewer_Decisions.md); older future-tense references below refer to the automatic milestone's original boundary.
 

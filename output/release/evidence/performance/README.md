@@ -1,6 +1,6 @@
 # FieldMerge measured database evidence
 
-Recorded 2026-11-12T19:05:04.913Z. The runner passed 21 evidence checks. The disposable project was removed after the run. Development data and application migrations were unchanged.
+The runner passed 21 evidence checks. The disposable project was removed after the run. Development data and application migrations were unchanged.
 
 ## Data and machine
 

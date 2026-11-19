@@ -1,6 +1,6 @@
 # FieldMerge clean published checkout results
 
-Verified 13 November 2026: all 17 verification stages passed for published commit **62236a28927ae8e02b8c4adf651621cdea71be5f** from **codex/design-report**. The fresh production build and all application/database suites passed without changing implementation source or the lockfile. This is a local rebuild/test rehearsal; main integration and the author's live demonstration remain separate.
+All 17 verification stages passed for published commit **62236a28927ae8e02b8c4adf651621cdea71be5f** from **codex/design-report**. The fresh production build and all application/database suites passed without changing implementation source or the lockfile. This is a local rebuild/test rehearsal; main integration and the author's live demonstration remain separate.
 
 ## Recorded results
 
@@ -53,7 +53,7 @@ Setup and execution used only process-local environment adjustments for Windows 
 
 3 earlier verification-driver attempts remain in attempts/. They caught Windows PATH casing, native Windows PowerShell module-path inheritance, and a Git stderr warning incorrectly parsed as a changed filename. The last of these occurred after all application suites had passed. The source-integrity predicate was retained; stdout/stderr separation was corrected, then a completely fresh full run passed. No application requirement was weakened and no application code was patched to obtain these results.
 
-The successful run started at 2026-11-12T19:00:47.118Z and finished at 2026-11-12T19:05:09.382Z. No old committed runtime report was accepted in place of its fresh suite output. The published packet has 43 artifacts. An inherited development-smoke JSON file, not reexecuted here, was excluded during publication; current browser evidence is checks.json and verification.json. Earlier design-report layout evidence was not copied as a new layout inspection.
+The successful run is identified by its tested revision and raw evidence. No old committed runtime report was accepted in place of its fresh suite output. The published packet has 43 artifacts. An inherited development-smoke JSON file, not reexecuted here, was excluded during publication; current browser evidence is checks.json and verification.json. Earlier design-report layout evidence was not copied as a new layout inspection.
 
 ## Remaining release work
 

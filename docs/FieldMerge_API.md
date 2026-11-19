@@ -1,6 +1,6 @@
 # Authenticated API milestone
 
-Implemented 10 November 2026 and extended through codex/workflow-interface. The Next.js App Router API now supports a complete surveyor/reviewer workspace; see the [interface guide](FieldMerge_Interface.md) for browser usage and interface read endpoints. [Drafts/finalization](FieldMerge_Drafts.md) and [automatic recovery and reviewer operational inspection](FieldMerge_Recovery.md) remain available through the API as described here.
+Implemented and extended through codex/workflow-interface. The Next.js App Router API now supports a complete surveyor/reviewer workspace; see the [interface guide](FieldMerge_Interface.md) for browser usage and interface read endpoints. [Drafts/finalization](FieldMerge_Drafts.md) and [automatic recovery and reviewer operational inspection](FieldMerge_Recovery.md) remain available through the API as described here.
 
 ## Start locally
 
@@ -51,7 +51,7 @@ $receipt = Invoke-RestMethod "$base/api/submissions" -Method Post -Headers $head
 $receipt
 ```
 
-The seeded campaign covers 2026. Observations outside its reference window are rejected or held according to the requirements. All demonstration data is synthetic. Submitting a value already represented may return no_change rather than create a version.
+The seeded campaign has a fixed reference window. Observations outside its reference window are rejected or held according to the requirements. All demonstration data is synthetic. Submitting a value already represented may return no_change rather than create a version.
 
 Send `$body` unchanged again to verify idempotency. A changed body with the same client_submission_id returns a conflict. An actual correction requires a new client submission ID and a considered base snapshot.
 

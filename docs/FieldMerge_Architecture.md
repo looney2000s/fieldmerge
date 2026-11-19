@@ -42,6 +42,6 @@ Handled failures receive a new server correlation UUID. Their safe event writes 
 
 ## Evidence and deployment boundary
 
-The design is backed by [35 acceptance cases](FieldMerge_Acceptance.md), representative browser flows, targeted security tests and [local query measurements](FieldMerge_Query_Demonstrations.md). The [catalog and complete dictionary](FieldMerge_Data_Dictionary.md) reconcile the physical implementation. The conceptual ER diagram is maintained separately and accepted as complete on the author's instruction.
+The design is backed by [35 acceptance cases](FieldMerge_Acceptance.md), representative browser flows, targeted security tests and [local query measurements](FieldMerge_Query_Demonstrations.md). The [catalog and complete dictionary](FieldMerge_Data_Dictionary.md) reconcile the physical implementation. The author-supplied conceptual ER diagram is included on page 9 of the [final PDF report](../output/pdf/FieldMerge_Project_Report.pdf).
 
 Local Docker volumes preserve development data. Test services/databases isolate assertions and deliberate faults. Hosted deployment, supervised worker operations, backup/restore rehearsal, production HTTP headers/TLS and disaster recovery are separate work. Do not infer those guarantees from the local test results.
