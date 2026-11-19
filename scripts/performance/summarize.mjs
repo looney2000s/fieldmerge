@@ -27,7 +27,7 @@ writeFileSync(
   dir + "/README.md",
   `# FieldMerge measured database evidence
 
-Recorded ${r.verified_at_utc}. The runner passed ${r.checks.length} evidence checks. The disposable project was ${v.cleanup_completed ? "removed after the run" : "explicitly kept for inspection"}. Development data and application migrations were unchanged.
+The runner passed ${r.checks.length} evidence checks. The disposable project was ${v.cleanup_completed ? "removed after the run" : "explicitly kept for inspection"}. Development data and application migrations were unchanged.
 
 ## Data and machine
 
@@ -102,7 +102,7 @@ The [demonstration checks](demonstrations.json) also record owner-scoped MongoDB
 
 ## Reproduce and inspect
 
-Run pnpm db:evidence followed by pnpm db:evidence:summary with Docker Desktop running and local fixtures/dependencies prepared. Use pnpm run db:evidence --keep to retain the unique project for interactive inspection; otherwise all measurement services are removed. [Query/viva guide](../../docs/FieldMerge_Query_Demonstrations.md) explains the catalogue, parameters and cleanup. A rerun replaces these outputs with new measurements. [Source hashes](source-checksums.json) and [verification](verification.json) identify the run; no performance guarantee is implied.
+Run pnpm db:evidence followed by pnpm db:evidence:summary with Docker Desktop running and local fixtures/dependencies prepared. Use pnpm run db:evidence --keep to retain the unique project for interactive inspection; otherwise all measurement services are removed. [SQL catalogue](../../database/demonstrations/postgres.sql) contains the measured statements. Use --keep to inspect the retained databases; stop and remove only that disposable Compose project when finished. A rerun replaces these outputs with new measurements. [Source hashes](source-checksums.json) and [verification](verification.json) identify the run; no performance guarantee is implied.
 `,
 );
 const csv = [

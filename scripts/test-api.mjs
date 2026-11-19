@@ -237,7 +237,7 @@ try {
           : {}),
         output: output.join(""),
         remaining:
-          "Final ER/schema/report reconciliation, clean release rehearsal and submission deliverables remain; see docs/FieldMerge_Project_Checklist.md for current scope.",
+          "Recorded verification results for this run; see output/pdf/FieldMerge_Project_Report.pdf for the implemented scope and limitations.",
       },
       null,
       2,

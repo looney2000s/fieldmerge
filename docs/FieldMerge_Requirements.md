@@ -6,9 +6,7 @@ Version 1.0 · Solo DBMS project
 
 FieldMerge reconciles delayed proposals against shared urban tree survey records. It publishes compatible changes, holds disagreements for review, and preserves the provenance of accepted values. This specification fixes the minimum viable behavior before ER modeling and schema implementation.
 
-This is the requirements baseline for implementation. Where its rules differ from the preliminary Word proposal, this specification takes precedence. In particular, it adds detection of intervening field changes, defines complete submission states, and removes the undefined coupled-conflict category. The [final PDF report](../output/pdf/FieldMerge_Project_Report.pdf) provides the published project overview; this specification defines its behavioral baseline.
-
-No implementation or completed testing is claimed here. All examples are synthetic fixtures with specified expected outcomes.
+This specification defines the application behavior and acceptance baseline. The [final PDF report](../output/pdf/FieldMerge_Project_Report.pdf) describes the implemented system. Expected outcomes use synthetic fixtures; executable acceptance checks are in `tests/acceptance/scenarios.test.mjs`.
 
 ## 2 Scope and operating assumptions
 

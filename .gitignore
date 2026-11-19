@@ -22,3 +22,24 @@ Thumbs.db
 # Superseded Word drafts are retained locally; publish the final PDF report.
 output/documents/FieldMerge_Implementation_Report.docx
 output/documents/FieldMerge_Project_Proposal.docx
+
+# Keep preparation notes and generated evidence local to the workstation.
+/docs/*
+!/docs/FieldMerge_Requirements.md
+!/docs/FieldMerge_Architecture.md
+!/docs/FieldMerge_Relational_Schema.md
+!/docs/FieldMerge_Data_Dictionary.md
+!/docs/FieldMerge_MongoDB_Model.md
+/output/*
+!/output/pdf/
+/output/pdf/*
+!/output/pdf/FieldMerge_Project_Report.pdf
+!/output/design/
+/output/design/*
+!/output/design/schema-catalog.json
+!/output/design/architecture.svg
+!/output/design/verification.json
+/scripts/build-report.py
+/scripts/build-pdf-report.py
+/scripts/render-report.ps1
+/scripts/verify-release.mjs

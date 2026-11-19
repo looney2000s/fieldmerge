@@ -4,15 +4,9 @@ Implementation reconciliation · baseline 7588773
 
 The live catalog and all ten applied migration checksums were reconciled against source. The complete [implementation dictionary](FieldMerge_Data_Dictionary.md) covers all 17 tables and 146 columns, including internal tables and later receipt/projection columns. The [architecture](FieldMerge_Architecture.md) explains trusted access and cross-store behavior. The author-supplied Chen diagram is reproduced on page 9 of the [final PDF report](../output/pdf/FieldMerge_Project_Report.pdf); its physical mapping is documented below.
 
-Migrations 007–008 update: fieldmerge_ops adds recovery_jobs/events and intake_batches/batch_items, with restricted recovery/read/export/transport functions. See [recovery](FieldMerge_Recovery.md) and [queries/exports/batch schema](FieldMerge_Queries_Exports_Batches.md). Migration 010 adds security_events and its guarded write/reviewer-read functions. There are 17 SQL tables: nine business, two authentication, five operational/transport, and one migration registry. The nine-entity business mapping below is unchanged.
+The implementation has nine business tables, two authentication tables, five operational/transport tables and one migration registry. Migrations 001-010 define the structures, reconciliation, review, authenticated access, commit-time consistency, recovery, query/batch support and safe failure events. Submission and decision receipts retain the original result for unchanged retries. The following mapping describes the implemented schema; PostgreSQL row-level security is not claimed.
 
-Implementation update: migrations 004–005 add authenticated SQL wrappers, two internal authentication tables, and draft-target validation. Migration 006 implements [commit-time consistency and workflow mutation protection](FieldMerge_Workflow_Integrity.md). The nine business tables below remain unchanged. These updates supersede older planning language below; row-level security is not claimed.
-
-Implementation update for migration 003: review_decisions now has a nullable decision_result JSONB column for the immutable original response. The trusted review_change entry point implements terminal decisions, version/revision checks, retries, and atomic publication. See [reviewer decisions](FieldMerge_Reviewer_Decisions.md). Nullable legacy owner-inserted rows are supported structurally but need a receipt backfill before API-style replay.
-
-Implementation update: migration 002 now adds submissions.verified_patch and submissions.reconciliation_result, protects sealed input/initial receipts, implements automatic reconciliation, and creates field_value_provenance. The automatic SQL path has live assertions and concurrent-session verification; reviewer and backend guarantees remain as described in [the reconciliation guide](FieldMerge_Reconciliation.md). This update supersedes older future-tense statements below about the automatic function and provenance view.
-
-## 1 Design status and conventions
+## 1 Design conventions
 
 This maps the agreed Chen business design to the implemented PostgreSQL schema using [FieldMerge Requirements](FieldMerge_Requirements.md) as its behavioral baseline. Structural migrations, reconciliation/review functions, deferred consistency triggers, and session-aware wrapper access are implemented and tested. Functional acceptance, representative browser workflows, operational recovery, query evidence, and targeted security boundaries are verified. See [database setup](../README.md) for commands and the complete catalog-backed dictionary for physical details.
 
@@ -273,7 +267,7 @@ PK/UQ constraints supply their own supporting indexes. Plan additional indexes o
 - review_decisions(reviewer_id, created_at).
 - audit_events(record_id, created_at) and (submission_id, created_at).
 
-The saved query/performance suite measures selected existing index alternatives on representative synthetic history; see [query evidence](FieldMerge_Query_Demonstrations.md). The catalog-backed dictionary lists the actual 43 indexes, including PK/UQ indexes. The list above describes access intentions rather than asserting that every candidate became a separate index.
+The saved query/performance suite measures selected existing index alternatives on representative synthetic history; see [query evidence](../output/pdf/FieldMerge_Project_Report.pdf). The catalog-backed dictionary lists the actual 43 indexes, including PK/UQ indexes. The list above describes access intentions rather than asserting that every candidate became a separate index.
 
 Views: latest_accepted_records; pending_field_reviews with actual current snapshot; submission_outcomes; field_value_provenance. A pending comparison stored on a change may be stale, so the reviewer view must also show the latest accepted version and require a fresh approval token.
 
@@ -281,7 +275,7 @@ Views: latest_accepted_records; pending_field_reviews with actual current snapsh
 
 Create users/campaign/forms, records, versions without its origin FK, submissions, the deferred origin FK, field_changes, review_decisions, then audit_events. Add indexes and read views, then validation helpers, protected functions, consistency triggers, and role grants. Initial DDL alone does not implement the full workflow or access-control guarantees.
 
-Disposable database tests verify weak composite keys, same-tree FK rejection, version-1 participation, linear parent chains, null/false/zero distinctions, retry uniqueness, one terminal decision per change, JSON scalar validation, provenance links and denied direct mutation. All 35 functional acceptance scenarios also pass through the implemented API/workflows, including concurrency and failure recovery; see [acceptance evidence](FieldMerge_Acceptance.md).
+Disposable database tests verify weak composite keys, same-tree FK rejection, version-1 participation, linear parent chains, null/false/zero distinctions, retry uniqueness, one terminal decision per change, JSON scalar validation, provenance links and denied direct mutation. All 35 functional acceptance scenarios also pass through the implemented API/workflows, including concurrency and failure recovery; see [acceptance evidence](../output/pdf/FieldMerge_Project_Report.pdf).
 
 ## 9 Technical references
 
@@ -292,7 +286,7 @@ These references support database mechanics. The table/column choices and enforc
 
 ## 10 Internal security-event dictionary (migration 010)
 
-This operational relation supplements the nine-entity business ER model. See [security behavior and limits](FieldMerge_Security.md).
+This operational relation supplements the nine-entity business ER model. See [security behavior and limits](../output/pdf/FieldMerge_Project_Report.pdf).
 
 | Column | Type / nullability | Meaning and constraint |
 |---|---|---|
